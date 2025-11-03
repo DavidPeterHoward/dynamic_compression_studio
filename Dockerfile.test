@@ -1,0 +1,68 @@
+# Multi-stage Dockerfile for comprehensive testing
+FROM python:3.11-slim as backend-test
+
+WORKDIR /app/backend
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+COPY backend/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Install test dependencies
+RUN pip install --no-cache-dir pytest pytest-cov pytest-asyncio httpx requests
+
+# Copy backend code
+COPY backend/ .
+
+# Run backend tests
+RUN pytest tests/ -v --cov=app --cov-report=html --cov-report=term || true
+
+FROM node:18-slim as frontend-test
+
+WORKDIR /app/frontend
+
+# Install system dependencies for Playwright
+RUN apt-get update && apt-get install -y \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Node dependencies
+COPY frontend/package*.json ./
+RUN npm ci
+
+# Install Playwright
+RUN npx playwright install chromium --with-deps || true
+
+# Copy frontend code
+COPY frontend/ .
+
+# Copy Playwright config
+COPY frontend/playwright.config.ts .
+COPY frontend/tests ./tests
+
+# Final stage - test orchestrator
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install test orchestrator dependencies
+RUN pip install --no-cache-dir asyncio httpx requests
+
+# Copy test scripts
+COPY scripts/comprehensive_test_suite.py ./scripts/
+COPY scripts/test_full_system_integration.py ./scripts/
+
+# Copy test results from previous stages
+COPY --from=backend-test /app/backend/htmlcov ./backend/htmlcov
+COPY --from=backend-test /app/backend/.pytest_cache ./backend/.pytest_cache
+
+# Create results directory
+RUN mkdir -p test-results playwright-report
+
+# Default command
+CMD ["python", "scripts/comprehensive_test_suite.py"]

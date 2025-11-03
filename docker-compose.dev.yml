@@ -1,0 +1,199 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database (Development)
+  postgres-dev:
+    image: postgres:15-alpine
+    container_name: compression_postgres_dev
+    environment:
+      POSTGRES_DB: compression_db_dev
+      POSTGRES_USER: compression_user
+      POSTGRES_PASSWORD: compression_password
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+      - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U compression_user -d compression_db_dev"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - compression_dev_network
+
+  # Redis Cache (Development)
+  redis-dev:
+    image: redis:7-alpine
+    container_name: compression_redis_dev
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_dev_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - compression_dev_network
+
+  # Backend API (Development with Hot Reload)
+  backend-dev:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    container_name: compression_backend_dev
+    environment:
+      - POSTGRES_SERVER=postgres-dev
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=compression_user
+      - POSTGRES_PASSWORD=compression_password
+      - POSTGRES_DB=compression_db_dev
+      - REDIS_HOST=redis-dev
+      - REDIS_PORT=6379
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - DEBUG=true
+      - DATABASE_URL=postgresql://compression_user:compression_password@postgres-dev:5432/compression_db_dev
+      - ENVIRONMENT=development
+      - LOG_LEVEL=DEBUG
+      - ENABLE_CORS=true
+      - CORS_ORIGINS=http://localhost:3000,http://localhost:8447,http://127.0.0.1:3000
+    ports:
+      - "8443:8000"
+    volumes:
+      - ./backend:/app
+      - backend_dev_logs:/app/logs
+      - backend_dev_uploads:/app/uploads
+      - backend_dev_temp:/app/temp
+    depends_on:
+      postgres-dev:
+        condition: service_healthy
+      redis-dev:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - compression_dev_network
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload", "--reload-dir", "/app"]
+
+  # Frontend Application (Development with Hot Reload)
+  frontend-dev:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: compression_frontend_dev
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8443
+      - NODE_ENV=development
+      - PORT=3000
+      - WATCHPACK_POLLING=true
+      - FAST_REFRESH=true
+      - NEXT_TELEMETRY_DISABLED=1
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - backend-dev
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - compression_dev_network
+    command: ["npm", "run", "dev"]
+
+  # Test Runner Service
+  test-runner:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    container_name: compression_test_runner
+    environment:
+      - POSTGRES_SERVER=postgres-dev
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=compression_user
+      - POSTGRES_PASSWORD=compression_password
+      - POSTGRES_DB=compression_db_test
+      - REDIS_HOST=redis-dev
+      - REDIS_PORT=6379
+      - TESTING=true
+      - PYTHONPATH=/app
+    volumes:
+      - ./backend:/app
+      - test_results:/app/test_results
+      - test_coverage:/app/htmlcov
+    depends_on:
+      postgres-dev:
+        condition: service_healthy
+      redis-dev:
+        condition: service_healthy
+    networks:
+      - compression_dev_network
+    command: ["tail", "-f", "/dev/null"]  # Keep container running for test execution
+
+  # Database Migration Service
+  db-migrate:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    container_name: compression_db_migrate
+    environment:
+      - POSTGRES_SERVER=postgres-dev
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=compression_user
+      - POSTGRES_PASSWORD=compression_password
+      - POSTGRES_DB=compression_db_dev
+      - PYTHONPATH=/app
+    volumes:
+      - ./backend:/app
+    depends_on:
+      postgres-dev:
+        condition: service_healthy
+    networks:
+      - compression_dev_network
+    command: ["python", "-m", "alembic", "upgrade", "head"]
+
+  # Development Tools Service
+  dev-tools:
+    image: node:18-alpine
+    container_name: compression_dev_tools
+    working_dir: /app
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "9229:9229"  # Node.js debug port
+    networks:
+      - compression_dev_network
+    command: ["tail", "-f", "/dev/null"]  # Keep container running for development tools
+
+volumes:
+  postgres_dev_data:
+    driver: local
+  redis_dev_data:
+    driver: local
+  backend_dev_logs:
+    driver: local
+  backend_dev_uploads:
+    driver: local
+  backend_dev_temp:
+    driver: local
+  test_results:
+    driver: local
+  test_coverage:
+    driver: local
+
+networks:
+  compression_dev_network:
+    driver: bridge

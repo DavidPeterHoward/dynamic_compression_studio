@@ -1,0 +1,972 @@
+
+Running 9 tests using 6 workers
+
+Navigating to page...
+>> GET http://127.0.0.1:8449/
+Navigating to page...
+>> GET http://127.0.0.1:8449/
+Navigating to page...
+>> GET http://127.0.0.1:8449/
+<< [33m200[39m http://127.0.0.1:8449/
+<< [33m200[39m http://127.0.0.1:8449/
+<< [33m200[39m http://127.0.0.1:8449/
+>> GET http://127.0.0.1:8449/_next/static/media/e4af272ccee01ff0-s.p.woff2
+>> GET http://127.0.0.1:8449/_next/static/css/app/layout.css?v=1760697578843
+>> GET http://127.0.0.1:8449/_next/static/chunks/webpack.js?v=1760697578843
+>> GET http://127.0.0.1:8449/_next/static/chunks/main-app.js?v=1760697578843
+>> GET http://127.0.0.1:8449/_next/static/chunks/app-pages-internals.js
+>> GET http://127.0.0.1:8449/_next/static/chunks/app/page.js
+>> GET http://127.0.0.1:8449/_next/static/chunks/app/layout.js
+>> GET http://127.0.0.1:8449/_next/static/media/e4af272ccee01ff0-s.p.woff2
+>> GET http://127.0.0.1:8449/_next/static/css/app/layout.css?v=1760697578847
+>> GET http://127.0.0.1:8449/_next/static/media/e4af272ccee01ff0-s.p.woff2
+>> GET http://127.0.0.1:8449/_next/static/css/app/layout.css?v=1760697578848
+>> GET http://127.0.0.1:8449/_next/static/chunks/webpack.js?v=1760697578847
+>> GET http://127.0.0.1:8449/_next/static/chunks/webpack.js?v=1760697578848
+>> GET http://127.0.0.1:8449/_next/static/chunks/main-app.js?v=1760697578847
+>> GET http://127.0.0.1:8449/_next/static/chunks/main-app.js?v=1760697578848
+>> GET http://127.0.0.1:8449/_next/static/chunks/app-pages-internals.js
+>> GET http://127.0.0.1:8449/_next/static/chunks/app-pages-internals.js
+>> GET http://127.0.0.1:8449/_next/static/chunks/app/page.js
+>> GET http://127.0.0.1:8449/_next/static/chunks/app/page.js
+>> GET http://127.0.0.1:8449/_next/static/chunks/app/layout.js
+>> GET http://127.0.0.1:8449/_next/static/chunks/app/layout.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/css/app/layout.css?v=1760697578843
+<< [33m200[39m http://127.0.0.1:8449/_next/static/media/e4af272ccee01ff0-s.p.woff2
+<< [33m200[39m http://127.0.0.1:8449/_next/static/media/e4af272ccee01ff0-s.p.woff2
+<< [33m200[39m http://127.0.0.1:8449/_next/static/media/e4af272ccee01ff0-s.p.woff2
+<< [33m200[39m http://127.0.0.1:8449/_next/static/css/app/layout.css?v=1760697578847
+<< [33m200[39m http://127.0.0.1:8449/_next/static/css/app/layout.css?v=1760697578848
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/webpack.js?v=1760697578843
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/webpack.js?v=1760697578847
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/webpack.js?v=1760697578848
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app-pages-internals.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app-pages-internals.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app-pages-internals.js
+Navigating to page...
+>> GET http://127.0.0.1:8449/
+Navigating to page...
+>> GET http://127.0.0.1:8449/
+Navigating to page...
+>> GET http://127.0.0.1:8449/
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app/layout.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app/layout.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app/layout.js
+<< [33m200[39m http://127.0.0.1:8449/
+<< [33m200[39m http://127.0.0.1:8449/
+>> GET http://127.0.0.1:8449/_next/static/media/e4af272ccee01ff0-s.p.woff2
+>> GET http://127.0.0.1:8449/_next/static/css/app/layout.css?v=1760697584562
+>> GET http://127.0.0.1:8449/_next/static/chunks/webpack.js?v=1760697584562
+>> GET http://127.0.0.1:8449/_next/static/chunks/main-app.js?v=1760697584562
+>> GET http://127.0.0.1:8449/_next/static/chunks/app-pages-internals.js
+>> GET http://127.0.0.1:8449/_next/static/chunks/app/page.js
+>> GET http://127.0.0.1:8449/_next/static/chunks/app/layout.js
+<< [33m200[39m http://127.0.0.1:8449/
+>> GET http://127.0.0.1:8449/_next/static/media/e4af272ccee01ff0-s.p.woff2
+>> GET http://127.0.0.1:8449/_next/static/css/app/layout.css?v=1760697584620
+>> GET http://127.0.0.1:8449/_next/static/chunks/webpack.js?v=1760697584620
+>> GET http://127.0.0.1:8449/_next/static/chunks/main-app.js?v=1760697584620
+>> GET http://127.0.0.1:8449/_next/static/chunks/app-pages-internals.js
+>> GET http://127.0.0.1:8449/_next/static/chunks/app/page.js
+>> GET http://127.0.0.1:8449/_next/static/chunks/app/layout.js
+>> GET http://127.0.0.1:8449/_next/static/media/e4af272ccee01ff0-s.p.woff2
+>> GET http://127.0.0.1:8449/_next/static/css/app/layout.css?v=1760697584640
+>> GET http://127.0.0.1:8449/_next/static/chunks/webpack.js?v=1760697584640
+>> GET http://127.0.0.1:8449/_next/static/chunks/main-app.js?v=1760697584640
+>> GET http://127.0.0.1:8449/_next/static/chunks/app-pages-internals.js
+>> GET http://127.0.0.1:8449/_next/static/chunks/app/page.js
+>> GET http://127.0.0.1:8449/_next/static/chunks/app/layout.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/media/e4af272ccee01ff0-s.p.woff2
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app-pages-internals.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/webpack.js?v=1760697584562
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/main-app.js?v=1760697584562
+<< [33m200[39m http://127.0.0.1:8449/_next/static/css/app/layout.css?v=1760697584562
+<< [33m200[39m http://127.0.0.1:8449/_next/static/media/e4af272ccee01ff0-s.p.woff2
+<< [33m200[39m http://127.0.0.1:8449/_next/static/css/app/layout.css?v=1760697584620
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/webpack.js?v=1760697584620
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/main-app.js?v=1760697584620
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app-pages-internals.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/media/e4af272ccee01ff0-s.p.woff2
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app/page.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/webpack.js?v=1760697584640
+<< [33m200[39m http://127.0.0.1:8449/_next/static/css/app/layout.css?v=1760697584640
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/main-app.js?v=1760697584640
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app-pages-internals.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app/layout.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app/page.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app/layout.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app/page.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app/layout.js
+=== TEST: Content input interaction ===
+Clicking Compression/Decompression tab
+=== TEST: Display compression screen ===
+✓ Main heading visible
+Found Compression/Decompression tab, clicking...
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app/page.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app/page.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app/page.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/main-app.js?v=1760697578847
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/main-app.js?v=1760697578848
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/main-app.js?v=1760697578843
+CONSOLE: info %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold
+CONSOLE: info %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold
+CONSOLE: info %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold
+>> GET http://127.0.0.1:8449/api/health/detailed
+>> GET http://127.0.0.1:8449/api/health/detailed
+>> GET http://127.0.0.1:8449/api/health/detailed
+>> GET http://127.0.0.1:8449/api/health/detailed
+>> GET http://127.0.0.1:8449/api/health/detailed
+>> GET http://127.0.0.1:8449/api/health/detailed
+CONSOLE: info Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+<< [33m500[39m http://127.0.0.1:8449/api/health/detailed
+CONSOLE: error Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+<< [33m500[39m http://127.0.0.1:8449/api/health/detailed
+CONSOLE: error Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+<< [33m500[39m http://127.0.0.1:8449/api/health/detailed
+CONSOLE: error Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+<< [33m500[39m http://127.0.0.1:8449/api/health/detailed
+CONSOLE: error Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+<< [33m500[39m http://127.0.0.1:8449/api/health/detailed
+CONSOLE: error Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+<< [33m500[39m http://127.0.0.1:8449/api/health/detailed
+CONSOLE: error Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+CONSOLE: info Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+CONSOLE: info Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+>> GET http://127.0.0.1:8449/api/health/detailed
+>> GET http://127.0.0.1:8449/api/health/detailed
+>> GET http://127.0.0.1:8449/_next/webpack-hmr
+<< [33m101[39m http://127.0.0.1:8449/_next/webpack-hmr
+<< [33m500[39m http://127.0.0.1:8449/api/health/detailed
+<< [33m500[39m http://127.0.0.1:8449/api/health/detailed
+CONSOLE: error Warning: Extra attributes from the server: style
+textarea
+div
+div
+div
+div
+EnhancedCompressionTabImproved@webpack-internal:///(app-pages-browser)/./src/components/EnhancedCompressionTabImproved.tsx:35:82
+PresenceChild@webpack-internal:///(app-pages-browser)/./node_modules/framer-motion/dist/es/components/AnimatePresence/PresenceChild.mjs:15:23
+AnimatePresence@webpack-internal:///(app-pages-browser)/./node_modules/framer-motion/dist/es/components/AnimatePresence/index.mjs:72:25
+main
+div
+HomePage@webpack-internal:///(app-pages-browser)/./src/app/page.tsx:43:195
+StaticGenerationSearchParamsBailoutProvider@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/static-generation-searchparams-bailout-provider.js:15:64
+InnerLayoutRouter@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:241:18
+RedirectErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:72:9
+RedirectBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:80:24
+NotFoundErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:54:9
+NotFoundBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:62:62
+LoadingBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:315:76
+ErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:130:67
+InnerScrollAndFocusHandler@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:151:9
+ScrollAndFocusHandler@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:226:37
+RenderFromTemplateContext@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/render-from-template-context.js:15:44
+OuterLayoutRouter@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:325:209
+div
+QueryClientProvider@webpack-internal:///(app-pages-browser)/./node_modules/react-query/es/react/QueryClientProvider.js:39:16
+Providers@webpack-internal:///(app-pages-browser)/./src/components/providers.tsx:65:24
+body
+html
+RedirectErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:72:9
+RedirectBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:80:24
+NotFoundErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:54:9
+NotFoundBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:62:62
+DevRootNotFoundBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/dev-root-not-found-boundary.js:32:24
+ReactDevOverlay@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/internal/ReactDevOverlay.js:66:9
+HotReload@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/hot-reloader-client.js:295:37
+Router@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:159:100
+ErrorBoundaryHandler@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:100:9
+ErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:130:67
+AppRouter@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:436:47
+ServerRoot@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:128:24
+RSCComponent
+Root@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:144:24
+CONSOLE: error Warning: Extra attributes from the server: style
+textarea
+div
+div
+div
+div
+EnhancedCompressionTabImproved@webpack-internal:///(app-pages-browser)/./src/components/EnhancedCompressionTabImproved.tsx:35:82
+PresenceChild@webpack-internal:///(app-pages-browser)/./node_modules/framer-motion/dist/es/components/AnimatePresence/PresenceChild.mjs:15:23
+AnimatePresence@webpack-internal:///(app-pages-browser)/./node_modules/framer-motion/dist/es/components/AnimatePresence/index.mjs:72:25
+main
+div
+HomePage@webpack-internal:///(app-pages-browser)/./src/app/page.tsx:43:195
+StaticGenerationSearchParamsBailoutProvider@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/static-generation-searchparams-bailout-provider.js:15:64
+InnerLayoutRouter@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:241:18
+RedirectErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:72:9
+RedirectBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:80:24
+NotFoundErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:54:9
+NotFoundBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:62:62
+LoadingBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:315:76
+ErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:130:67
+InnerScrollAndFocusHandler@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:151:9
+ScrollAndFocusHandler@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:226:37
+RenderFromTemplateContext@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/render-from-template-context.js:15:44
+OuterLayoutRouter@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:325:209
+div
+QueryClientProvider@webpack-internal:///(app-pages-browser)/./node_modules/react-query/es/react/QueryClientProvider.js:39:16
+Providers@webpack-internal:///(app-pages-browser)/./src/components/providers.tsx:65:24
+body
+html
+RedirectErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:72:9
+RedirectBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:80:24
+NotFoundErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:54:9
+NotFoundBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:62:62
+DevRootNotFoundBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/dev-root-not-found-boundary.js:32:24
+ReactDevOverlay@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/internal/ReactDevOverlay.js:66:9
+HotReload@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/hot-reloader-client.js:295:37
+Router@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:159:100
+ErrorBoundaryHandler@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:100:9
+ErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:130:67
+AppRouter@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:436:47
+ServerRoot@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:128:24
+RSCComponent
+Root@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:144:24
+>> GET http://127.0.0.1:8449/api/health/detailed
+>> GET http://127.0.0.1:8449/api/health/detailed
+>> GET http://127.0.0.1:8449/_next/webpack-hmr
+<< [33m101[39m http://127.0.0.1:8449/_next/webpack-hmr
+>> GET http://127.0.0.1:8449/api/health/detailed
+>> GET http://127.0.0.1:8449/api/health/detailed
+>> GET http://127.0.0.1:8449/_next/webpack-hmr
+<< [33m101[39m http://127.0.0.1:8449/_next/webpack-hmr
+<< [33m500[39m http://127.0.0.1:8449/api/health/detailed
+<< [33m500[39m http://127.0.0.1:8449/api/health/detailed
+<< [33m500[39m http://127.0.0.1:8449/api/health/detailed
+<< [33m500[39m http://127.0.0.1:8449/api/health/detailed
+=== TEST: Display compression screen ===
+=== TEST: Content input interaction ===
+=== TEST: Find compress button ===
+Clicking Compression/Decompression tab
+=== TEST: Find compress button ===
+Clicking Compression/Decompression tab
+Clicking Compression/Decompression tab
+✓ Main heading visible
+Found Compression/Decompression tab, clicking...
+Trying selector: [data-testid="content-input"]
+✓ Found textarea with: [data-testid="content-input"]
+Headers on page: [
+  [32m'Dynamic Compression Algorithms'[39m,
+  [32m'System: healthy'[39m,
+  [32m'Start Meta-Learning'[39m,
+  [32m'Compression/Decompression'[39m,
+  [32m'Experiments'[39m,
+  [32m'System Metrics'[39m,
+  [32m'Synthetic Data'[39m,
+  [32m'LLM/Agent'[39m,
+  [32m'Evaluation'[39m,
+  [32m'Compression'[39m,
+  [32m'System: healthy'[39m,
+  [32m'Input & Analysis'[39m,
+  [32m'Results & Metrics'[39m,
+  [32m'Content Input'[39m,
+  [32m'Content Input'[39m,
+  [32m'0 characters (0 Bytes)'[39m,
+  [32m'Select Compression Algorithm'[39m,
+  [32m'Select Compression Algorithm'[39m,
+  [32m'gzip'[39m,
+  [32m'traditional'[39m,
+  [32m'brotli'[39m,
+  [32m'traditional'[39m,
+  [32m'lz4'[39m,
+  [32m'traditional'[39m,
+  [32m'zstd'[39m,
+  [32m'traditional'[39m,
+  [32m'bzip2'[39m,
+  [32m'traditional'[39m,
+  [32m'lzma'[39m,
+  [32m'traditional'[39m,
+  [32m'content_aware'[39m,
+  [32m'advanced'[39m,
+  [32m'quantum_biological'[39m,
+  [32m'experimental'[39m,
+  [32m'neuromorphic'[39m,
+  [32m'experimental'[39m,
+  [32m'topological'[39m,
+  [32m'experimental'[39m,
+  [32m'Auto-Optimization'[39m,
+  [32m'OFF'[39m,
+  [32m''[39m,
+  [32m'Compress Content'[39m,
+  [32m'Meta-Learning'[39m,
+  [32m'Meta-Learning'[39m,
+  [32m'Learning Status'[39m,
+  [32m'Active'[39m,
+  [32m'Progress'[39m,
+  [32m'0%'[39m,
+  [32m'Real-time Metrics'[39m,
+  [32m'Real-time Metrics'[39m,
+  [32m'Throughput'[39m,
+  [32m'0.0 MB/s'[39m,
+  [32m'Success Rate'[39m,
+  [32m'0.0%'[39m,
+  [32m'Queue Length'[39m,
+  [32m'0'[39m,
+  [32m'Active'[39m,
+  [32m'0'[39m,
+  [32m'fresh (0) fetching (0) stale (0) inactive (0)'[39m,
+  [32m'fresh (0)'[39m,
+  [32m'fetching (0)'[39m,
+  [32m'stale (0)'[39m,
+  [32m'inactive (0)'[39m
+]
+Content Input visible: [33mfalse[39m
+Meta-Learning visible: [33mtrue[39m
+Real-time Metrics visible: [33mtrue[39m
+  ✓  1 [chromium] › tests\mock-e2e-debug.spec.ts:181:7 › Compression Screen - Mock Testing with Network Debug › should display compression screen with all components (17.0s)
+>> GET http://127.0.0.1:8449/api/v1/compression/analyze?content=Test%20content
+Mocking analyze endpoint
+<< [33m200[39m http://127.0.0.1:8449/api/v1/compression/analyze?content=Test%20content
+>> GET http://127.0.0.1:8449/api/v1/compression/analyze?content=
+Mocking analyze endpoint
+CONSOLE: error Warning: Cannot update a component (`%s`) while rendering a different component (`%s`). To locate the bad setState() call inside `%s`, follow the stack trace as described in https://reactjs.org/link/setstate-in-render%s HotReload EnhancedCompressionTabImproved EnhancedCompressionTabImproved 
+    at EnhancedCompressionTabImproved (webpack-internal:///(app-pages-browser)/./src/components/EnhancedCompressionTabImproved.tsx:35:82)
+    at PresenceChild (webpack-internal:///(app-pages-browser)/./node_modules/framer-motion/dist/es/components/AnimatePresence/PresenceChild.mjs:15:26)
+    at AnimatePresence (webpack-internal:///(app-pages-browser)/./node_modules/framer-motion/dist/es/components/AnimatePresence/index.mjs:72:28)
+    at main
+    at div
+    at HomePage (webpack-internal:///(app-pages-browser)/./src/app/page.tsx:43:195)
+    at StaticGenerationSearchParamsBailoutProvider (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/static-generation-searchparams-bailout-provider.js:15:11)
+    at InnerLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:240:11)
+    at RedirectErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:72:9)
+    at RedirectBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:80:11)
+    at NotFoundErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:54:9)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:62:11)
+    at LoadingBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:315:11)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:130:11)
+    at InnerScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:151:9)
+    at ScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:226:11)
+    at RenderFromTemplateContext (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/render-from-template-context.js:15:44)
+    at OuterLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:325:11)
+    at div
+    at QueryClientProvider (webpack-internal:///(app-pages-browser)/./node_modules/react-query/es/react/QueryClientProvider.js:39:21)
+    at Providers (webpack-internal:///(app-pages-browser)/./src/components/providers.tsx:65:11)
+    at body
+    at html
+    at RedirectErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:72:9)
+    at RedirectBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:80:11)
+    at NotFoundErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:54:9)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:62:11)
+    at DevRootNotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/dev-root-not-found-boundary.js:32:11)
+    at ReactDevOverlay (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/internal/ReactDevOverlay.js:66:9)
+    at HotReload (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/hot-reloader-client.js:295:11)
+    at Router (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:159:11)
+    at ErrorBoundaryHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:100:9)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:130:11)
+    at AppRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:436:13)
+    at ServerRoot (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:128:11)
+    at RSCComponent
+    at Root (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:144:11)
+CONSOLE: error The above error occurred in the <NotFoundErrorBoundary> component:
+
+    at NotFoundErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:54:9)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:62:11)
+    at DevRootNotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/dev-root-not-found-boundary.js:32:11)
+    at ReactDevOverlay (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/internal/ReactDevOverlay.js:66:9)
+    at HotReload (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/hot-reloader-client.js:295:11)
+    at Router (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:159:11)
+    at ErrorBoundaryHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:100:9)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:130:11)
+    at AppRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:436:13)
+    at ServerRoot (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:128:11)
+    at RSCComponent
+    at Root (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:144:11)
+
+React will try to recreate this component tree from scratch using the error boundary you provided, ReactDevOverlay.
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fsrc%2Fcomponents%2FEnhancedCompressionTabImproved.tsx&methodName=EnhancedCompressionTabImproved&arguments=&lineNumber=824&column=95
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=renderWithHooks&arguments=&lineNumber=11009&column=18
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=updateFunctionComponent&arguments=&lineNumber=16163&column=20
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=beginWork%241&arguments=&lineNumber=18359&column=16
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=beginWork&arguments=&lineNumber=26741&column=14
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=performUnitOfWork&arguments=&lineNumber=25587&column=12
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=workLoopSync&arguments=&lineNumber=25303&column=5
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=renderRootSync&arguments=&lineNumber=25258&column=7
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=recoverFromConcurrentError&arguments=&lineNumber=24475&column=20
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=performConcurrentWorkOnRoot&arguments=&lineNumber=24420&column=26
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Fcjs%2Fscheduler.development.js&methodName=workLoop&arguments=&lineNumber=261&column=34
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Fcjs%2Fscheduler.development.js&methodName=flushWork&arguments=&lineNumber=230&column=14
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Fcjs%2Fscheduler.development.js&methodName=MessagePort.performWorkUntilDeadline&arguments=&lineNumber=534&column=21
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fsrc%2Fcomponents%2FEnhancedCompressionTabImproved.tsx&methodName=EnhancedCompressionTabImproved&arguments=&lineNumber=824&column=95
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=renderWithHooks&arguments=&lineNumber=11009&column=18
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=updateFunctionComponent&arguments=&lineNumber=16163&column=20
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=beginWork%241&arguments=&lineNumber=18359&column=16
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=beginWork&arguments=&lineNumber=26741&column=14
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=performUnitOfWork&arguments=&lineNumber=25587&column=12
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=workLoopSync&arguments=&lineNumber=25303&column=5
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=renderRootSync&arguments=&lineNumber=25258&column=7
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=recoverFromConcurrentError&arguments=&lineNumber=24475&column=20
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=performConcurrentWorkOnRoot&arguments=&lineNumber=24420&column=26
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Fcjs%2Fscheduler.development.js&methodName=workLoop&arguments=&lineNumber=261&column=34
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Fcjs%2Fscheduler.development.js&methodName=flushWork&arguments=&lineNumber=230&column=14
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Fcjs%2Fscheduler.development.js&methodName=MessagePort.performWorkUntilDeadline&arguments=&lineNumber=534&column=21
+<< [33m200[39m http://127.0.0.1:8449/api/v1/compression/analyze?content=
+CONSOLE: error Failed to get recommendations: TypeError: Cannot read properties of undefined (reading 'length')
+    at eval (webpack-internal:///(app-pages-browser)/./src/components/EnhancedCompressionTabImproved.tsx:187:44)
+    at async eval (webpack-internal:///(app-pages-browser)/./src/components/EnhancedCompressionTabImproved.tsx:83:17)
+>> GET http://127.0.0.1:8449/api/v1/compression/analyze?content=Test%20content
+Mocking analyze endpoint
+<< [33m200[39m http://127.0.0.1:8449/api/v1/compression/analyze?content=Test%20content
+>> GET http://127.0.0.1:8449/api/v1/compression/analyze?content=
+Mocking analyze endpoint
+<< [33m200[39m http://127.0.0.1:8449/api/v1/compression/analyze?content=
+CONSOLE: error Warning: Cannot update a component (`HotReload`) while rendering a different component (`EnhancedCompressionTabImproved`). To locate the bad setState() call inside `EnhancedCompressionTabImproved`, follow the stack trace as described in https://reactjs.org/link/setstate-in-render
+EnhancedCompressionTabImproved@webpack-internal:///(app-pages-browser)/./src/components/EnhancedCompressionTabImproved.tsx:35:82
+PresenceChild@webpack-internal:///(app-pages-browser)/./node_modules/framer-motion/dist/es/components/AnimatePresence/PresenceChild.mjs:15:23
+AnimatePresence@webpack-internal:///(app-pages-browser)/./node_modules/framer-motion/dist/es/components/AnimatePresence/index.mjs:72:25
+main
+div
+HomePage@webpack-internal:///(app-pages-browser)/./src/app/page.tsx:43:195
+StaticGenerationSearchParamsBailoutProvider@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/static-generation-searchparams-bailout-provider.js:15:64
+InnerLayoutRouter@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:241:18
+RedirectErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:72:9
+RedirectBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:80:24
+NotFoundErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:54:9
+NotFoundBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:62:62
+LoadingBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:315:76
+ErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:130:67
+InnerScrollAndFocusHandler@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:151:9
+ScrollAndFocusHandler@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:226:37
+RenderFromTemplateContext@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/render-from-template-context.js:15:44
+OuterLayoutRouter@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:325:209
+div
+QueryClientProvider@webpack-internal:///(app-pages-browser)/./node_modules/react-query/es/react/QueryClientProvider.js:39:16
+Providers@webpack-internal:///(app-pages-browser)/./src/components/providers.tsx:65:24
+body
+html
+RedirectErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:72:9
+RedirectBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:80:24
+NotFoundErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:54:9
+NotFoundBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:62:62
+DevRootNotFoundBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/dev-root-not-found-boundary.js:32:24
+ReactDevOverlay@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/internal/ReactDevOverlay.js:66:9
+HotReload@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/hot-reloader-client.js:295:37
+Router@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:159:100
+ErrorBoundaryHandler@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:100:9
+ErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:130:67
+AppRouter@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:436:47
+ServerRoot@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:128:24
+RSCComponent
+Root@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:144:24
+Textarea value length: 260
+CONSOLE: error The above error occurred in the <NotFoundErrorBoundary> component:
+
+NotFoundErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:54:9
+NotFoundBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:62:62
+DevRootNotFoundBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/dev-root-not-found-boundary.js:32:24
+ReactDevOverlay@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/internal/ReactDevOverlay.js:66:9
+HotReload@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/hot-reloader-client.js:295:37
+Router@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:159:100
+ErrorBoundaryHandler@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:100:9
+ErrorBoundary@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:130:67
+AppRouter@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:436:47
+ServerRoot@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:128:24
+RSCComponent
+Root@webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:144:24
+
+React will try to recreate this component tree from scratch using the error boundary you provided, ReactDevOverlay.
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fsrc%2Fcomponents%2FEnhancedCompressionTabImproved.tsx&methodName=EnhancedCompressionTabImproved&arguments=&lineNumber=824&column=57
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=renderWithHooks&arguments=&lineNumber=11009&column=27
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=updateFunctionComponent&arguments=&lineNumber=16163&column=20
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=beginWork%241&arguments=&lineNumber=18359&column=16
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=beginWork&arguments=&lineNumber=26741&column=14
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=performUnitOfWork&arguments=&lineNumber=25587&column=12
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=workLoopSync&arguments=&lineNumber=25303&column=22
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=renderRootSync&arguments=&lineNumber=25258&column=7
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=recoverFromConcurrentError&arguments=&lineNumber=24475&column=34
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=performConcurrentWorkOnRoot&arguments=&lineNumber=24420&column=26
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Fcjs%2Fscheduler.development.js&methodName=workLoop&arguments=&lineNumber=261&column=42
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Fcjs%2Fscheduler.development.js&methodName=flushWork&arguments=&lineNumber=230&column=14
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Fcjs%2Fscheduler.development.js&methodName=performWorkUntilDeadline&arguments=&lineNumber=534&column=21
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Fcjs%2Fscheduler.development.js&methodName=EventHandlerNonNull*&arguments=&lineNumber=569&column=3
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Fcjs%2Fscheduler.development.js&methodName=%3Cunknown%3E&arguments=&lineNumber=630&column=5
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fmain-app.js&methodName=%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Fcjs%2Fscheduler.development.js&arguments=&lineNumber=1685&column=1
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=options.factory&arguments=&lineNumber=716&column=31
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=__webpack_require__&arguments=&lineNumber=37&column=33
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=fn&arguments=&lineNumber=371&column=21
+  ✓  5 [chromium] › tests\mock-e2e-debug.spec.ts:223:7 › Compression Screen - Mock Testing with Network Debug › should find and interact with content input (17.5s)
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Findex.js&methodName=%3Cunknown%3E&arguments=&lineNumber=4&column=20
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fmain-app.js&methodName=%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Findex.js&arguments=&lineNumber=1696&column=1
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=options.factory&arguments=&lineNumber=716&column=31
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=__webpack_require__&arguments=&lineNumber=37&column=33
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=fn&arguments=&lineNumber=371&column=21
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=%3Cunknown%3E&arguments=&lineNumber=27&column=36
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=%3Cunknown%3E&arguments=&lineNumber=38376&column=5
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fmain-app.js&methodName=%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&arguments=&lineNumber=1575&column=1
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=options.factory&arguments=&lineNumber=716&column=31
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=__webpack_require__&arguments=&lineNumber=37&column=33
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=fn&arguments=&lineNumber=371&column=21
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Findex.js&methodName=%3Cunknown%3E&arguments=&lineNumber=32&column=20
+CONSOLE: error Failed to get recommendations: Error
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fmain-app.js&methodName=%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Findex.js&arguments=&lineNumber=1597&column=1
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=options.factory&arguments=&lineNumber=716&column=31
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=__webpack_require__&arguments=&lineNumber=37&column=33
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=fn&arguments=&lineNumber=371&column=21
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fclient.js&methodName=%3Cunknown%3E&arguments=&lineNumber=3&column=28
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fmain-app.js&methodName=%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fclient.js&arguments=&lineNumber=1586&column=1
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=options.factory&arguments=&lineNumber=716&column=31
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=__webpack_require__&arguments=&lineNumber=37&column=33
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=fn&arguments=&lineNumber=371&column=21
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fclient%2Fapp-index.js&methodName=%3Cunknown%3E&arguments=&lineNumber=16&column=58
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fmain-app.js&methodName=%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fclient%2Fapp-index.js&arguments=&lineNumber=83&column=1
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=options.factory&arguments=&lineNumber=716&column=31
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=__webpack_require__&arguments=&lineNumber=37&column=33
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=fn&arguments=&lineNumber=371&column=21
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fclient%2Fapp-next-dev.js&methodName=%3Cunknown%3E&arguments=&lineNumber=9&column=44
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fclient%2Fapp-bootstrap.js&methodName=appBootstrap%2F%3C&arguments=&lineNumber=57&column=9
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fclient%2Fapp-bootstrap.js&methodName=loadScriptsInSequence&arguments=&lineNumber=23&column=16
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fclient%2Fapp-bootstrap.js&methodName=appBootstrap&arguments=&lineNumber=56&column=26
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fclient%2Fapp-next-dev.js&methodName=%3Cunknown%3E&arguments=&lineNumber=8&column=32
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fmain-app.js&methodName=%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fclient%2Fapp-next-dev.js&arguments=&lineNumber=105&column=1
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=options.factory&arguments=&lineNumber=716&column=31
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=__webpack_require__&arguments=&lineNumber=37&column=33
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fmain-app.js&methodName=__webpack_exec__&arguments=&lineNumber=1800&column=61
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fmain-app.js&methodName=%3Cunknown%3E&arguments=&lineNumber=1801&column=154
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fmain-app.js&methodName=%3Cunknown%3E&arguments=&lineNumber=9&column=61
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fsrc%2Fcomponents%2FEnhancedCompressionTabImproved.tsx&methodName=EnhancedCompressionTabImproved&arguments=&lineNumber=824&column=57
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=renderWithHooks&arguments=&lineNumber=11009&column=27
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=updateFunctionComponent&arguments=&lineNumber=16163&column=20
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=beginWork%241&arguments=&lineNumber=18359&column=16
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=beginWork&arguments=&lineNumber=26741&column=14
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=performUnitOfWork&arguments=&lineNumber=25587&column=12
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=workLoopSync&arguments=&lineNumber=25303&column=22
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=renderRootSync&arguments=&lineNumber=25258&column=7
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=recoverFromConcurrentError&arguments=&lineNumber=24475&column=34
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=performConcurrentWorkOnRoot&arguments=&lineNumber=24420&column=26
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Fcjs%2Fscheduler.development.js&methodName=workLoop&arguments=&lineNumber=261&column=42
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Fcjs%2Fscheduler.development.js&methodName=flushWork&arguments=&lineNumber=230&column=14
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Fcjs%2Fscheduler.development.js&methodName=performWorkUntilDeadline&arguments=&lineNumber=534&column=21
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Fcjs%2Fscheduler.development.js&methodName=EventHandlerNonNull*&arguments=&lineNumber=569&column=3
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Fcjs%2Fscheduler.development.js&methodName=%3Cunknown%3E&arguments=&lineNumber=630&column=5
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fmain-app.js&methodName=%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Fcjs%2Fscheduler.development.js&arguments=&lineNumber=1685&column=1
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=options.factory&arguments=&lineNumber=716&column=31
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=__webpack_require__&arguments=&lineNumber=37&column=33
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=fn&arguments=&lineNumber=371&column=21
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Findex.js&methodName=%3Cunknown%3E&arguments=&lineNumber=4&column=20
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fmain-app.js&methodName=%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Findex.js&arguments=&lineNumber=1696&column=1
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=options.factory&arguments=&lineNumber=716&column=31
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=__webpack_require__&arguments=&lineNumber=37&column=33
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=fn&arguments=&lineNumber=371&column=21
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=%3Cunknown%3E&arguments=&lineNumber=27&column=36
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=%3Cunknown%3E&arguments=&lineNumber=38376&column=5
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fmain-app.js&methodName=%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&arguments=&lineNumber=1575&column=1
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=options.factory&arguments=&lineNumber=716&column=31
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=__webpack_require__&arguments=&lineNumber=37&column=33
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=fn&arguments=&lineNumber=371&column=21
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Findex.js&methodName=%3Cunknown%3E&arguments=&lineNumber=32&column=20
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fmain-app.js&methodName=%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Findex.js&arguments=&lineNumber=1597&column=1
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=options.factory&arguments=&lineNumber=716&column=31
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=__webpack_require__&arguments=&lineNumber=37&column=33
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=fn&arguments=&lineNumber=371&column=21
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fclient.js&methodName=%3Cunknown%3E&arguments=&lineNumber=3&column=28
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fmain-app.js&methodName=%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fclient.js&arguments=&lineNumber=1586&column=1
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=options.factory&arguments=&lineNumber=716&column=31
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=__webpack_require__&arguments=&lineNumber=37&column=33
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=fn&arguments=&lineNumber=371&column=21
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fclient%2Fapp-index.js&methodName=%3Cunknown%3E&arguments=&lineNumber=16&column=58
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fmain-app.js&methodName=%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fclient%2Fapp-index.js&arguments=&lineNumber=83&column=1
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=options.factory&arguments=&lineNumber=716&column=31
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=__webpack_require__&arguments=&lineNumber=37&column=33
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=fn&arguments=&lineNumber=371&column=21
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fclient%2Fapp-next-dev.js&methodName=%3Cunknown%3E&arguments=&lineNumber=9&column=44
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fclient%2Fapp-bootstrap.js&methodName=appBootstrap%2F%3C&arguments=&lineNumber=57&column=9
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fclient%2Fapp-bootstrap.js&methodName=loadScriptsInSequence&arguments=&lineNumber=23&column=16
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fclient%2Fapp-bootstrap.js&methodName=appBootstrap&arguments=&lineNumber=56&column=26
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fclient%2Fapp-next-dev.js&methodName=%3Cunknown%3E&arguments=&lineNumber=8&column=32
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fmain-app.js&methodName=%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fclient%2Fapp-next-dev.js&arguments=&lineNumber=105&column=1
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=options.factory&arguments=&lineNumber=716&column=31
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fwebpack.js&methodName=__webpack_require__&arguments=&lineNumber=37&column=33
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fmain-app.js&methodName=__webpack_exec__&arguments=&lineNumber=1800&column=61
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fmain-app.js&methodName=%3Cunknown%3E&arguments=&lineNumber=1801&column=154
+>> GET http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=file%3A%2F%2F%2Fapp%2F.next%2Fstatic%2Fchunks%2Fmain-app.js&methodName=%3Cunknown%3E&arguments=&lineNumber=9&column=61
+<< [33m200[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fsrc%2Fcomponents%2FEnhancedCompressionTabImproved.tsx&methodName=EnhancedCompressionTabImproved&arguments=&lineNumber=824&column=95
+<< [33m200[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=renderWithHooks&arguments=&lineNumber=11009&column=18
+<< [33m204[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fsrc%2Fcomponents%2FEnhancedCompressionTabImproved.tsx&methodName=EnhancedCompressionTabImproved&arguments=&lineNumber=824&column=57
+<< [33m200[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=renderWithHooks&arguments=&lineNumber=11009&column=27
+<< [33m200[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=beginWork%241&arguments=&lineNumber=18359&column=16
+<< [33m200[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=updateFunctionComponent&arguments=&lineNumber=16163&column=20
+<< [33m200[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=beginWork&arguments=&lineNumber=26741&column=14
+<< [33m200[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=updateFunctionComponent&arguments=&lineNumber=16163&column=20
+<< [33m200[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=performUnitOfWork&arguments=&lineNumber=25587&column=12
+<< [33m200[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=beginWork%241&arguments=&lineNumber=18359&column=16
+<< [33m200[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=beginWork&arguments=&lineNumber=26741&column=14
+<< [33m200[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=performUnitOfWork&arguments=&lineNumber=25587&column=12
+<< [33m200[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=workLoopSync&arguments=&lineNumber=25303&column=22
+<< [33m200[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=renderRootSync&arguments=&lineNumber=25258&column=7
+<< [33m200[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=workLoopSync&arguments=&lineNumber=25303&column=5
+<< [33m200[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=renderRootSync&arguments=&lineNumber=25258&column=7
+<< [33m200[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=performConcurrentWorkOnRoot&arguments=&lineNumber=24420&column=26
+<< [33m200[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=recoverFromConcurrentError&arguments=&lineNumber=24475&column=20
+<< [33m200[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Fcjs%2Fscheduler.development.js&methodName=flushWork&arguments=&lineNumber=230&column=14
+<< [33m200[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=recoverFromConcurrentError&arguments=&lineNumber=24475&column=34
+<< [33m200[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+Cannot+read+properties+of+undefined+%28reading+%27primary%27%29&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Fcjs%2Fscheduler.development.js&methodName=workLoop&arguments=&lineNumber=261&column=34
+<< [33m200[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Fcjs%2Fscheduler.development.js&methodName=workLoop&arguments=&lineNumber=261&column=42
+<< [33m200[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Fcjs%2Fscheduler.development.js&methodName=flushWork&arguments=&lineNumber=230&column=14
+<< [33m200[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Freact-dom%2Fcjs%2Freact-dom.development.js&methodName=performConcurrentWorkOnRoot&arguments=&lineNumber=24420&column=26
+Trying button selector: [data-testid="compress-button"]
+<< [33m200[39m http://127.0.0.1:8449/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=TypeError%3A+can%27t+access+property+%22primary%22%2C+contentAnalysis.contentType+is+undefined&file=webpack-internal%3A%2F%2F%2F%28app-pages-browser%29%2F.%2Fnode_modules%2Fnext%2Fdist%2Fcompiled%2Fscheduler%2Fcjs%2Fscheduler.development.js&methodName=performWorkUntilDeadline&arguments=&lineNumber=534&column=21
+Trying button selector: button:has-text("Compress Content")
+Trying button selector: button:has-text("Compress")
+Trying button selector: button:has-text("Analyze")
+❌ Could not find compress button
+All buttons on page: []
+Trying button selector: [data-testid="compress-button"]
+Trying button selector: button:has-text("Compress Content")
+Trying button selector: button:has-text("Compress")
+Trying button selector: button:has-text("Analyze")
+❌ Could not find compress button
+All buttons on page: []
+  ✘  3 [chromium] › tests\mock-e2e-debug.spec.ts:276:7 › Compression Screen - Mock Testing with Network Debug › should find compress button (18.6s)
+Navigating to page...
+>> GET http://127.0.0.1:8449/
+>> GET http://127.0.0.1:8449/api/v1/metrics/performance
+Mocking metrics/performance endpoint
+<< [33m200[39m http://127.0.0.1:8449/api/v1/metrics/performance
+>> GET http://127.0.0.1:8449/api/v1/metrics/performance
+Mocking metrics/performance endpoint
+<< [33m200[39m http://127.0.0.1:8449/api/v1/metrics/performance
+  ✘  6 [firefox] › tests\mock-e2e-debug.spec.ts:276:7 › Compression Screen - Mock Testing with Network Debug › should find compress button (15.8s)
+Trying selector: [data-testid="content-input"]
+✓ Found textarea with: [data-testid="content-input"]
+Navigating to page...
+>> GET http://127.0.0.1:8449/
+Textarea value length: 260
+  ✓  4 [firefox] › tests\mock-e2e-debug.spec.ts:223:7 › Compression Screen - Mock Testing with Network Debug › should find and interact with content input (18.8s)
+Navigating to page...
+>> GET http://127.0.0.1:8449/
+<< [33m200[39m http://127.0.0.1:8449/
+>> GET http://127.0.0.1:8449/_next/static/media/e4af272ccee01ff0-s.p.woff2
+>> GET http://127.0.0.1:8449/_next/static/css/app/layout.css?v=1760697599810
+>> GET http://127.0.0.1:8449/_next/static/chunks/webpack.js?v=1760697599810
+>> GET http://127.0.0.1:8449/_next/static/chunks/main-app.js?v=1760697599810
+>> GET http://127.0.0.1:8449/_next/static/chunks/app-pages-internals.js
+>> GET http://127.0.0.1:8449/_next/static/chunks/app/page.js
+>> GET http://127.0.0.1:8449/_next/static/chunks/app/layout.js
+<< [33m200[39m http://127.0.0.1:8449/
+>> GET http://127.0.0.1:8449/_next/static/media/e4af272ccee01ff0-s.p.woff2
+>> GET http://127.0.0.1:8449/_next/static/css/app/layout.css?v=1760697599820
+>> GET http://127.0.0.1:8449/_next/static/chunks/webpack.js?v=1760697599820
+>> GET http://127.0.0.1:8449/_next/static/chunks/main-app.js?v=1760697599820
+>> GET http://127.0.0.1:8449/_next/static/chunks/app-pages-internals.js
+>> GET http://127.0.0.1:8449/_next/static/chunks/app/page.js
+>> GET http://127.0.0.1:8449/_next/static/chunks/app/layout.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/media/e4af272ccee01ff0-s.p.woff2
+<< [33m200[39m http://127.0.0.1:8449/_next/static/media/e4af272ccee01ff0-s.p.woff2
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/webpack.js?v=1760697599810
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/main-app.js?v=1760697599810
+<< [33m200[39m http://127.0.0.1:8449/_next/static/css/app/layout.css?v=1760697599810
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/webpack.js?v=1760697599820
+<< [33m200[39m http://127.0.0.1:8449/
+>> GET http://127.0.0.1:8449/_next/static/media/e4af272ccee01ff0-s.p.woff2
+>> GET http://127.0.0.1:8449/_next/static/css/app/layout.css?v=1760697600324
+>> GET http://127.0.0.1:8449/_next/static/chunks/webpack.js?v=1760697600324
+>> GET http://127.0.0.1:8449/_next/static/chunks/main-app.js?v=1760697600324
+>> GET http://127.0.0.1:8449/_next/static/chunks/app-pages-internals.js
+>> GET http://127.0.0.1:8449/_next/static/chunks/app/page.js
+>> GET http://127.0.0.1:8449/_next/static/chunks/app/layout.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/css/app/layout.css?v=1760697599820
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/main-app.js?v=1760697599820
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app-pages-internals.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app-pages-internals.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app/page.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app/page.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/media/e4af272ccee01ff0-s.p.woff2
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app/layout.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app/layout.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/webpack.js?v=1760697600324
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/main-app.js?v=1760697600324
+<< [33m200[39m http://127.0.0.1:8449/_next/static/css/app/layout.css?v=1760697600324
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app-pages-internals.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app/page.js
+<< [33m200[39m http://127.0.0.1:8449/_next/static/chunks/app/layout.js
+>> GET http://127.0.0.1:8449/api/health/detailed
+<< [33m500[39m http://127.0.0.1:8449/api/health/detailed
+>> GET http://127.0.0.1:8449/api/v1/metrics/performance
+Mocking metrics/performance endpoint
+<< [33m200[39m http://127.0.0.1:8449/api/v1/metrics/performance
+>> GET http://127.0.0.1:8449/api/health/detailed
+>> GET http://127.0.0.1:8449/api/health/detailed
+=== TEST: Content input interaction ===
+<< [33m500[39m http://127.0.0.1:8449/api/health/detailed
+CONSOLE: error Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+=== TEST: Display compression screen ===
+>> GET http://127.0.0.1:8449/api/health/detailed
+>> GET http://127.0.0.1:8449/api/health/detailed
+=== TEST: Find compress button ===
+>> GET http://127.0.0.1:8449/api/health/detailed
+>> GET http://127.0.0.1:8449/api/health/detailed
+Clicking Compression/Decompression tab
+<< [33m500[39m http://127.0.0.1:8449/api/health/detailed
+CONSOLE: error Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+Clicking Compression/Decompression tab
+<< [33m500[39m http://127.0.0.1:8449/api/health/detailed
+CONSOLE: error Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+<< [33m500[39m http://127.0.0.1:8449/api/health/detailed
+CONSOLE: error Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+<< [33m500[39m http://127.0.0.1:8449/api/health/detailed
+CONSOLE: error Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+<< [33m500[39m http://127.0.0.1:8449/api/health/detailed
+CONSOLE: error Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+✓ Main heading visible
+Found Compression/Decompression tab, clicking...
+  ✘  2 [firefox] › tests\mock-e2e-debug.spec.ts:181:7 › Compression Screen - Mock Testing with Network Debug › should display compression screen with all components (25.0s)
+Trying selector: [data-testid="content-input"]
+✓ Found textarea with: [data-testid="content-input"]
+>> GET http://127.0.0.1:8449/api/v1/compression/analyze?content=Test%20content
+Mocking analyze endpoint
+<< [33m200[39m http://127.0.0.1:8449/api/v1/compression/analyze?content=Test%20content
+>> GET http://127.0.0.1:8449/api/v1/compression/analyze?content=
+Mocking analyze endpoint
+<< [33m200[39m http://127.0.0.1:8449/api/v1/compression/analyze?content=
+CONSOLE: error Warning: Cannot update a component (`%s`) while rendering a different component (`%s`). To locate the bad setState() call inside `%s`, follow the stack trace as described in https://reactjs.org/link/setstate-in-render%s HotReload EnhancedCompressionTabImproved EnhancedCompressionTabImproved 
+EnhancedCompressionTabImproved
+PresenceChild
+AnimatePresence
+main
+div
+HomePage
+StaticGenerationSearchParamsBailoutProvider
+InnerLayoutRouter
+Component@
+RedirectBoundary
+Component@
+NotFoundBoundary
+LoadingBoundary
+ErrorBoundary
+Component@
+ScrollAndFocusHandler
+RenderFromTemplateContext
+OuterLayoutRouter
+div
+QueryClientProvider
+Providers
+body
+html
+Component@
+RedirectBoundary
+Component@
+NotFoundBoundary
+DevRootNotFoundBoundary
+PureComponent@
+HotReload
+Router
+Component@
+ErrorBoundary
+AppRouter
+ServerRoot
+RSCComponent
+Root
+CONSOLE: error The above error occurred in the <NotFoundErrorBoundary> component:
+
+Component@
+NotFoundBoundary
+DevRootNotFoundBoundary
+PureComponent@
+HotReload
+Router
+Component@
+ErrorBoundary
+AppRouter
+ServerRoot
+RSCComponent
+Root
+
+React will try to recreate this component tree from scratch using the error boundary you provided, ReactDevOverlay.
+CONSOLE: error Failed to get recommendations: TypeError: undefined is not an object (evaluating 'result.recommendations.length')
+Headers on page: [
+  [32m'Dynamic Compression Algorithms'[39m,
+  [32m'System: healthy'[39m,
+  [32m'Start Meta-Learning'[39m,
+  [32m'Compression/Decompression'[39m,
+  [32m'Experiments'[39m,
+  [32m'System Metrics'[39m,
+  [32m'Synthetic Data'[39m,
+  [32m'LLM/Agent'[39m,
+  [32m'Evaluation'[39m,
+  [32m'Compression'[39m,
+  [32m'System: healthy'[39m,
+  [32m'Input & Analysis'[39m,
+  [32m'Results & Metrics'[39m,
+  [32m'Content Input'[39m,
+  [32m'Content Input'[39m,
+  [32m'0 characters (0 Bytes)'[39m,
+  [32m'Select Compression Algorithm'[39m,
+  [32m'Select Compression Algorithm'[39m,
+  [32m'gzip'[39m,
+  [32m'traditional'[39m,
+  [32m'brotli'[39m,
+  [32m'traditional'[39m,
+  [32m'lz4'[39m,
+  [32m'traditional'[39m,
+  [32m'zstd'[39m,
+  [32m'traditional'[39m,
+  [32m'bzip2'[39m,
+  [32m'traditional'[39m,
+  [32m'lzma'[39m,
+  [32m'traditional'[39m,
+  [32m'content_aware'[39m,
+  [32m'advanced'[39m,
+  [32m'quantum_biological'[39m,
+  [32m'experimental'[39m,
+  [32m'neuromorphic'[39m,
+  [32m'experimental'[39m,
+  [32m'topological'[39m,
+  [32m'experimental'[39m,
+  [32m'Auto-Optimization'[39m,
+  [32m'OFF'[39m,
+  [32m''[39m,
+  [32m'Compress Content'[39m,
+  [32m'Meta-Learning'[39m,
+  [32m'Meta-Learning'[39m,
+  [32m'Learning Status'[39m,
+  [32m'Active'[39m,
+  [32m'Progress'[39m,
+  [32m'0%'[39m,
+  [32m'Real-time Metrics'[39m,
+  [32m'Real-time Metrics'[39m,
+  [32m'Throughput'[39m,
+  [32m'0.0 MB/s'[39m,
+  [32m'Success Rate'[39m,
+  [32m'0.0%'[39m,
+  [32m'Queue Length'[39m,
+  [32m'0'[39m,
+  [32m'Active'[39m,
+  [32m'0'[39m,
+  [32m'fresh (0) fetching (0) stale (0) inactive (0)'[39m,
+  [32m'fresh (0)'[39m,
+  [32m'fetching (0)'[39m,
+  [32m'stale (0)'[39m,
+  [32m'inactive (0)'[39m
+]
+Content Input visible: [33mfalse[39m
+Meta-Learning visible: [33mtrue[39m
+Real-time Metrics visible: [33mtrue[39m
+  ✓  7 [webkit] › tests\mock-e2e-debug.spec.ts:181:7 › Compression Screen - Mock Testing with Network Debug › should display compression screen with all components (9.8s)
+>> GET http://127.0.0.1:8449/api/v1/compression/analyze?content=Test%20compression%20content.%20Test%20compression%20content.%20Test%20compression%20content.%20Test%20compression%20content.%20Test%20compression%20content.%20Test%20compression%20content.%20Test%20compression%20content.%20Test%20compression%20content.%20Test%20compression%20content.%20Test%20compression%20content.%20
+Mocking analyze endpoint
+<< [33m200[39m http://127.0.0.1:8449/api/v1/compression/analyze?content=Test%20compression%20content.%20Test%20compression%20content.%20Test%20compression%20content.%20Test%20compression%20content.%20Test%20compression%20content.%20Test%20compression%20content.%20Test%20compression%20content.%20Test%20compression%20content.%20Test%20compression%20content.%20Test%20compression%20content.%20
+>> GET http://127.0.0.1:8449/api/v1/compression/analyze?content=
+Mocking analyze endpoint
+Textarea value length: 260
+<< [33m200[39m http://127.0.0.1:8449/api/v1/compression/analyze?content=
+CONSOLE: error Warning: Cannot update a component (`%s`) while rendering a different component (`%s`). To locate the bad setState() call inside `%s`, follow the stack trace as described in https://reactjs.org/link/setstate-in-render%s HotReload EnhancedCompressionTabImproved EnhancedCompressionTabImproved 
+EnhancedCompressionTabImproved
+PresenceChild
+AnimatePresence
+main
+div
+HomePage
+StaticGenerationSearchParamsBailoutProvider
+InnerLayoutRouter
+Component@
+RedirectBoundary
+Component@
+NotFoundBoundary
+LoadingBoundary
+ErrorBoundary
+Component@
+ScrollAndFocusHandler
+RenderFromTemplateContext
+OuterLayoutRouter
+div
+QueryClientProvider
+Providers
+body
+html
+Component@
+RedirectBoundary
+Component@
+NotFoundBoundary
+DevRootNotFoundBoundary
+PureComponent@
+HotReload
+Router
+Component@
+ErrorBoundary
+AppRouter
+ServerRoot
+RSCComponent
+Root
+  ✓  8 [webkit] › tests\mock-e2e-debug.spec.ts:223:7 › Compression Screen - Mock Testing with Network Debug › should find and interact with content input (9.7s)
+Trying button selector: [data-testid="compress-button"]
+Trying button selector: button:has-text("Compress Content")
+Trying button selector: button:has-text("Compress")
+Trying button selector: button:has-text("Analyze")
+❌ Could not find compress button
+All buttons on page: [ [32m'previous'[39m, [32m'next'[39m, [32m''[39m ]
+  ✘  9 [webkit] › tests\mock-e2e-debug.spec.ts:276:7 › Compression Screen - Mock Testing with Network Debug › should find compress button (9.6s)
+
+
+  1) [chromium] › tests\mock-e2e-debug.spec.ts:276:7 › Compression Screen - Mock Testing with Network Debug › should find compress button 
+
+    Error: Compress button not found
+
+      335 |
+      336 |       await page.screenshot({ path: 'test-results/debug-error-no-button.png', fullPage: true });
+    > 337 |       throw new Error('Compress button not found');
+          |             ^
+      338 |     }
+      339 |   });
+      340 | });
+        at D:\python_data\250812_dynamic_compression_algorithms\frontend\tests\mock-e2e-debug.spec.ts:337:13
+
+  2) [firefox] › tests\mock-e2e-debug.spec.ts:181:7 › Compression Screen - Mock Testing with Network Debug › should display compression screen with all components 
+
+    TimeoutError: locator.click: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('button:has-text("Compression/Decompression")')[22m
+    [2m    - locator resolved to <button class="flex items-center space-x-2 py-4 px-2 border-b-2 transition-all duration-200 border-blue-500 text-blue-400">…</button>[22m
+    [2m  - attempting click action[22m
+    [2m    - waiting for element to be visible, enabled and stable[22m
+    [2m    - element is visible, enabled and stable[22m
+    [2m    - scrolling into view if needed[22m
+    [2m    - done scrolling[22m
+    [2m    - performing click action[22m
+
+
+      197 |     if (await compressionTab.isVisible()) {
+      198 |       console.log('Found Compression/Decompression tab, clicking...');
+    > 199 |       await compressionTab.click();
+          |                            ^
+      200 |       await page.waitForTimeout(1000);
+      201 |       await page.screenshot({ path: 'test-results/debug-02-after-tab-click.png', fullPage: true });
+      202 |     }
+        at D:\python_data\250812_dynamic_compression_algorithms\frontend\tests\mock-e2e-debug.spec.ts:199:28
+
+    Error Context: test-results\mock-e2e-debug-Compression-68158--screen-with-all-components-firefox\error-context.md
+
+  3) [firefox] › tests\mock-e2e-debug.spec.ts:276:7 › Compression Screen - Mock Testing with Network Debug › should find compress button 
+
+    Error: Compress button not found
+
+      335 |
+      336 |       await page.screenshot({ path: 'test-results/debug-error-no-button.png', fullPage: true });
+    > 337 |       throw new Error('Compress button not found');
+          |             ^
+      338 |     }
+      339 |   });
+      340 | });
+        at D:\python_data\250812_dynamic_compression_algorithms\frontend\tests\mock-e2e-debug.spec.ts:337:13
+
+  4) [webkit] › tests\mock-e2e-debug.spec.ts:276:7 › Compression Screen - Mock Testing with Network Debug › should find compress button 
+
+    Error: Compress button not found
+
+      335 |
+      336 |       await page.screenshot({ path: 'test-results/debug-error-no-button.png', fullPage: true });
+    > 337 |       throw new Error('Compress button not found');
+          |             ^
+      338 |     }
+      339 |   });
+      340 | });
+        at D:\python_data\250812_dynamic_compression_algorithms\frontend\tests\mock-e2e-debug.spec.ts:337:13
+
+    Error Context: test-results\mock-e2e-debug-Compression-76bcd-should-find-compress-button-webkit\error-context.md
+
+  4 failed
+    [chromium] › tests\mock-e2e-debug.spec.ts:276:7 › Compression Screen - Mock Testing with Network Debug › should find compress button 
+    [firefox] › tests\mock-e2e-debug.spec.ts:181:7 › Compression Screen - Mock Testing with Network Debug › should display compression screen with all components 
+    [firefox] › tests\mock-e2e-debug.spec.ts:276:7 › Compression Screen - Mock Testing with Network Debug › should find compress button 
+    [webkit] › tests\mock-e2e-debug.spec.ts:276:7 › Compression Screen - Mock Testing with Network Debug › should find compress button 
+  5 passed (32.3s)

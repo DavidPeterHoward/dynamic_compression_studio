@@ -1,0 +1,100 @@
+# =============================================================================
+# Docker Compose Override for Development with Auto-Updates
+# This file extends the base docker-compose.yml with development-specific settings
+# =============================================================================
+
+services:
+  # Backend with auto-reload and volume mounting
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./backend:/app
+      - backend_logs:/app/logs
+      - backend_uploads:/app/uploads
+    environment:
+      - DEBUG=true
+      - RELOAD=true
+      - WATCH_FILES=true
+    command:
+      ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # Frontend with auto-reload and volume mounting
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - NEXT_TELEMETRY_DISABLED=1
+      - WATCHPACK_POLLING=true
+    command: ["npm", "run", "dev"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # Performance Testing Service
+  performance-testing:
+    build:
+      context: ./performance_testing
+      dockerfile: Dockerfile
+    volumes:
+      - ./performance_testing:/app
+      - ./test_results:/app/results
+    environment:
+      - PYTHONPATH=/app
+      - TEST_RESULTS_DIR=/app/results
+    command:
+      [
+        "python",
+        "-m",
+        "performance_testing.main",
+        "--url",
+        "http://frontend:3000",
+      ]
+    depends_on:
+      - frontend
+      - backend
+    profiles:
+      - testing
+
+  # Test Runner Service
+  test-runner:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    volumes:
+      - .:/workspace
+      - test_results:/workspace/test_results
+    environment:
+      - PYTHONPATH=/workspace
+      - TEST_RESULTS_DIR=/workspace/test_results
+    command:
+      ["python", "run_comprehensive_tests.py", "--project-root", "/workspace"]
+    depends_on:
+      - frontend
+      - backend
+    profiles:
+      - testing
+
+volumes:
+  backend_logs:
+    driver: local
+  backend_uploads:
+    driver: local
+  test_results:
+    driver: local

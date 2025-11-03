@@ -1,0 +1,117 @@
+version: "3.8"
+
+services:
+  # Backend for testing
+  backend-test:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: agent_system_backend_test
+    environment:
+      - DATABASE_URL=sqlite:///./data/test_compression.db
+      - ENVIRONMENT=test
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./backend:/app
+      - ./data:/app/data
+      - test_backend_coverage:/app/htmlcov
+    ports:
+      - "8000:8000"
+    networks:
+      - test_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    command: python -m uvicorn app.main:app --host 0.0.0.0 --port 8000
+
+  # Frontend for testing
+  frontend-test:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: agent_system_frontend_test
+    environment:
+      - NODE_ENV=test
+      - NEXT_PUBLIC_API_URL=http://backend-test:8000
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    ports:
+      - "8449:3000"
+    networks:
+      - test_network
+    depends_on:
+      backend-test:
+        condition: service_healthy
+    command: npm run dev
+
+  # Playwright test runner
+  playwright-test:
+    image: mcr.microsoft.com/playwright:v1.40.0-focal
+    container_name: agent_system_playwright_test
+    working_dir: /app
+    volumes:
+      - ./:/app
+      - playwright_cache:/root/.cache/ms-playwright
+      - test_results:/app/test-results
+      - playwright_report:/app/playwright-report
+    networks:
+      - test_network
+    depends_on:
+      - frontend-test
+      - backend-test
+    environment:
+      - BASE_URL=http://frontend-test:3000
+      - API_URL=http://backend-test:8000
+      - HEADLESS=${HEADLESS:-false}
+      - BROWSER=chromium
+      - DISPLAY=${DISPLAY:-:99.0}
+    ports:
+      - "9323:9323" # Playwright UI mode
+    command: >
+      sh -c "
+        echo '🧪 Starting Comprehensive Test Suite...' &&
+        cd /app/frontend &&
+        npm install -q &&
+        npx playwright install chromium --with-deps &&
+        echo '✅ Playwright dependencies installed' &&
+        npx playwright test --project=chromium --reporter=html,list,json --output-dir=/app/test-results &&
+        echo '✅ Playwright tests completed'
+      "
+
+  # Test orchestrator (runs all tests)
+  test-orchestrator:
+    image: python:3.11-slim
+    container_name: agent_system_test_orchestrator
+    working_dir: /app
+    volumes:
+      - ./:/app
+      - test_results:/app/test-results
+      - test_coverage:/app/coverage
+    networks:
+      - test_network
+    depends_on:
+      - backend-test
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: >
+      sh -c "
+        pip install -q pytest pytest-cov pytest-asyncio httpx requests &&
+        cd /app/backend &&
+        pytest tests/ -v --cov=app --cov-report=html --cov-report=term --tb=short &&
+        echo '✅ Backend tests complete'
+      "
+
+volumes:
+  test_results:
+  playwright_cache:
+  playwright_report:
+  test_backend_coverage:
+  test_coverage:
+
+networks:
+  test_network:
+    driver: bridge

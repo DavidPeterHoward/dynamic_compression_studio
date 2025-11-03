@@ -1,0 +1,59 @@
+# Test Suite Requirements
+# Install with: pip install -r requirements.txt
+
+# Core testing framework
+pytest>=7.4.0
+pytest-cov>=4.1.0
+pytest-asyncio>=0.21.0
+pytest-timeout>=2.1.0
+pytest-xdist>=3.3.0
+pytest-mock>=3.11.0
+
+# Property-based testing
+hypothesis>=6.82.0
+
+# API testing
+httpx>=0.24.1
+fastapi>=0.100.0
+starlette>=0.27.0
+
+# Performance monitoring
+psutil>=5.9.5
+memory-profiler>=0.61.0
+
+# Data validation
+pydantic>=2.0.0
+
+# Compression algorithms
+lz4>=4.3.2
+zstandard>=0.21.0
+brotli>=1.0.9
+
+# Database testing
+sqlalchemy>=2.0.0
+alembic>=1.11.0
+
+# Reporting
+pytest-html>=3.2.0
+pytest-json-report>=1.5.0
+coverage[toml]>=7.2.0
+
+# Code quality
+flake8>=6.0.0
+black>=23.7.0
+mypy>=1.4.0
+isort>=5.12.0
+
+# Utilities
+python-dateutil>=2.8.2
+pytz>=2023.3
+typing-extensions>=4.7.0
+
+# Optional performance tools
+py-spy>=0.3.14
+pytest-benchmark>=4.0.0
+
+# Development
+ipython>=8.14.0
+ipdb>=0.13.13
+

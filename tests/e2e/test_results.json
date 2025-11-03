@@ -1,0 +1,321 @@
+[
+  {
+    "algorithm": "gzip",
+    "test_case": "Short Text",
+    "success": true,
+    "original_size": 52,
+    "compressed_size": 66,
+    "compression_ratio": -26.923076923076916,
+    "compression_percentage": -26.923076923076916,
+    "compression_time": 0.0,
+    "compressed_content": "H4sIANuB5GgA/wvJyCxWAKJEheKM/KIShZLU4hKF4pKizLx0hb...",
+    "debug_info": {
+      "source": "compressed_content_field",
+      "compressed_content_type": "<class 'str'>",
+      "compressed_content_is_none": false,
+      "compressed_content_final": true,
+      "compressed_content_length": 88
+    },
+    "test_field": "BACKEND_CHANGES_APPLIED_V2"
+  },
+  {
+    "algorithm": "bzip2",
+    "test_case": "Short Text",
+    "success": false,
+    "error": "Invalid response format"
+  },
+  {
+    "algorithm": "lz4",
+    "test_case": "Short Text",
+    "success": true,
+    "original_size": 52,
+    "compressed_size": 79,
+    "compression_ratio": -51.92307692307692,
+    "compression_percentage": -51.92307692307692,
+    "compression_time": 0.0,
+    "compressed_content": "BCJNGGxANAAAAAAAAACrNAAAgFRoaXMgaXMgYSBzaG9ydCB0ZX...",
+    "debug_info": {
+      "source": "compressed_content_field",
+      "compressed_content_type": "<class 'str'>",
+      "compressed_content_is_none": false,
+      "compressed_content_final": true,
+      "compressed_content_length": 108
+    },
+    "test_field": "BACKEND_CHANGES_APPLIED_V2"
+  },
+  {
+    "algorithm": "zstd",
+    "test_case": "Short Text",
+    "success": true,
+    "original_size": 52,
+    "compressed_size": 61,
+    "compression_ratio": -17.307692307692314,
+    "compression_percentage": -17.307692307692314,
+    "compression_time": 0.0,
+    "compressed_content": "KLUv/SA0oQEAVGhpcyBpcyBhIHNob3J0IHRlc3Qgc3RyaW5nIG...",
+    "debug_info": {
+      "source": "compressed_content_field",
+      "compressed_content_type": "<class 'str'>",
+      "compressed_content_is_none": false,
+      "compressed_content_final": true,
+      "compressed_content_length": 84
+    },
+    "test_field": "BACKEND_CHANGES_APPLIED_V2"
+  },
+  {
+    "algorithm": "lzma",
+    "test_case": "Short Text",
+    "success": false,
+    "error": "Invalid response format"
+  },
+  {
+    "algorithm": "gzip",
+    "test_case": "Long Text",
+    "success": true,
+    "original_size": 2850,
+    "compressed_size": 90,
+    "compression_ratio": 96.84210526315789,
+    "compression_percentage": 96.84210526315789,
+    "compression_time": 0.0,
+    "compressed_content": "H4sIANuB5GgA/+3L0QnAIAwFwFXeAKWTuIRokIAaSeL+3aO8+7...",
+    "debug_info": {
+      "source": "compressed_content_field",
+      "compressed_content_type": "<class 'str'>",
+      "compressed_content_is_none": false,
+      "compressed_content_final": true,
+      "compressed_content_length": 120
+    },
+    "test_field": "BACKEND_CHANGES_APPLIED_V2"
+  },
+  {
+    "algorithm": "bzip2",
+    "test_case": "Long Text",
+    "success": false,
+    "error": "Invalid response format"
+  },
+  {
+    "algorithm": "lz4",
+    "test_case": "Long Text",
+    "success": false,
+    "error": "Invalid response format"
+  },
+  {
+    "algorithm": "zstd",
+    "test_case": "Long Text",
+    "success": true,
+    "original_size": 2850,
+    "compressed_size": 76,
+    "compression_ratio": 97.33333333333334,
+    "compression_percentage": 97.33333333333334,
+    "compression_time": 0.0,
+    "compressed_content": "KLUv/WAiChUCAJQDTG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZX...",
+    "debug_info": {
+      "source": "compressed_content_field",
+      "compressed_content_type": "<class 'str'>",
+      "compressed_content_is_none": false,
+      "compressed_content_final": true,
+      "compressed_content_length": 104
+    },
+    "test_field": "BACKEND_CHANGES_APPLIED_V2"
+  },
+  {
+    "algorithm": "lzma",
+    "test_case": "Long Text",
+    "success": false,
+    "error": "Invalid response format"
+  },
+  {
+    "algorithm": "gzip",
+    "test_case": "Repetitive Content",
+    "success": true,
+    "original_size": 1350,
+    "compressed_size": 77,
+    "compression_ratio": 94.2962962962963,
+    "compression_percentage": 94.2962962962963,
+    "compression_time": 0.0,
+    "compressed_content": "H4sIANuB5GgA/wvJSFUoLM1MzlZIKsovz1NIy69QyCrNLShWyC...",
+    "debug_info": {
+      "source": "compressed_content_field",
+      "compressed_content_type": "<class 'str'>",
+      "compressed_content_is_none": false,
+      "compressed_content_final": true,
+      "compressed_content_length": 104
+    },
+    "test_field": "BACKEND_CHANGES_APPLIED_V2"
+  },
+  {
+    "algorithm": "bzip2",
+    "test_case": "Repetitive Content",
+    "success": false,
+    "error": "Invalid response format"
+  },
+  {
+    "algorithm": "lz4",
+    "test_case": "Repetitive Content",
+    "success": false,
+    "error": "Invalid response format"
+  },
+  {
+    "algorithm": "zstd",
+    "test_case": "Repetitive Content",
+    "success": true,
+    "original_size": 1350,
+    "compressed_size": 64,
+    "compression_ratio": 95.25925925925925,
+    "compression_percentage": 95.25925925925925,
+    "compression_time": 0.0,
+    "compressed_content": "KLUv/WBGBLUBANQCVGhlIHF1aWNrIGJyb3duIGZveCBqdW1wcy...",
+    "debug_info": {
+      "source": "compressed_content_field",
+      "compressed_content_type": "<class 'str'>",
+      "compressed_content_is_none": false,
+      "compressed_content_final": true,
+      "compressed_content_length": 88
+    },
+    "test_field": "BACKEND_CHANGES_APPLIED_V2"
+  },
+  {
+    "algorithm": "lzma",
+    "test_case": "Repetitive Content",
+    "success": false,
+    "error": "Invalid response format"
+  },
+  {
+    "algorithm": "gzip",
+    "test_case": "JSON Data",
+    "success": true,
+    "original_size": 6181,
+    "compressed_size": 763,
+    "compression_ratio": 87.65571913929784,
+    "compression_percentage": 87.65571913929784,
+    "compression_time": 0.0,
+    "compressed_content": "H4sIANuB5GgA/3XYzWoUQRSG4VsJsw6SOv/lyptwJS6CziKQqB...",
+    "debug_info": {
+      "source": "compressed_content_field",
+      "compressed_content_type": "<class 'str'>",
+      "compressed_content_is_none": false,
+      "compressed_content_final": true,
+      "compressed_content_length": 1020
+    },
+    "test_field": "BACKEND_CHANGES_APPLIED_V2"
+  },
+  {
+    "algorithm": "bzip2",
+    "test_case": "JSON Data",
+    "success": false,
+    "error": "Invalid response format"
+  },
+  {
+    "algorithm": "lz4",
+    "test_case": "JSON Data",
+    "success": true,
+    "original_size": 6181,
+    "compressed_size": 1376,
+    "compression_ratio": 77.73823005986087,
+    "compression_percentage": 77.73823005986087,
+    "compression_time": 0.0,
+    "compressed_content": "BCJNGGxAJRgAAAAAAABZRQUAAPAeeyJ1c2VycyI6IFt7ImlkIj...",
+    "debug_info": {
+      "source": "compressed_content_field",
+      "compressed_content_type": "<class 'str'>",
+      "compressed_content_is_none": false,
+      "compressed_content_final": true,
+      "compressed_content_length": 1836
+    },
+    "test_field": "BACKEND_CHANGES_APPLIED_V2"
+  },
+  {
+    "algorithm": "zstd",
+    "test_case": "JSON Data",
+    "success": true,
+    "original_size": 6181,
+    "compressed_size": 404,
+    "compression_ratio": 93.46384080245915,
+    "compression_percentage": 93.46384080245915,
+    "compression_time": 0.0,
+    "compressed_content": "KLUv/WAlF1UMAGaWNxuAOenUwayIp/hx0MgmMoZWSilTSqmf0F...",
+    "debug_info": {
+      "source": "compressed_content_field",
+      "compressed_content_type": "<class 'str'>",
+      "compressed_content_is_none": false,
+      "compressed_content_final": true,
+      "compressed_content_length": 540
+    },
+    "test_field": "BACKEND_CHANGES_APPLIED_V2"
+  },
+  {
+    "algorithm": "lzma",
+    "test_case": "JSON Data",
+    "success": false,
+    "error": "Invalid response format"
+  },
+  {
+    "algorithm": "gzip",
+    "test_case": "Random Data",
+    "success": true,
+    "original_size": 1000,
+    "compressed_size": 55,
+    "compression_ratio": 94.5,
+    "compression_percentage": 94.5,
+    "compression_time": 0.0,
+    "compressed_content": "H4sIANuB5GgA/3N0cnZxdXP38PTy9vH18w8IDAoOCQ0Lj4iMch...",
+    "debug_info": {
+      "source": "compressed_content_field",
+      "compressed_content_type": "<class 'str'>",
+      "compressed_content_is_none": false,
+      "compressed_content_final": true,
+      "compressed_content_length": 76
+    },
+    "test_field": "BACKEND_CHANGES_APPLIED_V2"
+  },
+  {
+    "algorithm": "bzip2",
+    "test_case": "Random Data",
+    "success": false,
+    "error": "Invalid response format"
+  },
+  {
+    "algorithm": "lz4",
+    "test_case": "Random Data",
+    "success": true,
+    "original_size": 1000,
+    "compressed_size": 67,
+    "compression_ratio": 93.30000000000001,
+    "compression_percentage": 93.30000000000001,
+    "compression_time": 0.0,
+    "compressed_content": "BCJNGGxA6AMAAAAAAACWKAAAAP8LQUJDREVGR0hJSktMTU5PUF...",
+    "debug_info": {
+      "source": "compressed_content_field",
+      "compressed_content_type": "<class 'str'>",
+      "compressed_content_is_none": false,
+      "compressed_content_final": true,
+      "compressed_content_length": 92
+    },
+    "test_field": "BACKEND_CHANGES_APPLIED_V2"
+  },
+  {
+    "algorithm": "zstd",
+    "test_case": "Random Data",
+    "success": true,
+    "original_size": 1000,
+    "compressed_size": 44,
+    "compression_ratio": 95.6,
+    "compression_percentage": 95.6,
+    "compression_time": 0.0,
+    "compressed_content": "KLUv/WDoAhUBANBBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWg...",
+    "debug_info": {
+      "source": "compressed_content_field",
+      "compressed_content_type": "<class 'str'>",
+      "compressed_content_is_none": false,
+      "compressed_content_final": true,
+      "compressed_content_length": 60
+    },
+    "test_field": "BACKEND_CHANGES_APPLIED_V2"
+  },
+  {
+    "algorithm": "lzma",
+    "test_case": "Random Data",
+    "success": false,
+    "error": "Invalid response format"
+  }
+]

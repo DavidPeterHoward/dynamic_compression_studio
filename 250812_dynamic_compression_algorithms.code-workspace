@@ -1,0 +1,316 @@
+{
+	"folders": [
+		{
+			"name": "🎯 Dynamic Compression Algorithms",
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/__pycache__": true,
+			"**/*.pyc": true,
+			"**/.pytest_cache": true,
+			"**/node_modules": true,
+			"**/.next": true,
+			"**/venv": true,
+			"**/.coverage": true,
+			"**/htmlcov": true,
+			"**/coverage_reports": true,
+			"**/test_reports": true,
+			"**/temp": true,
+			"**/uploads": true,
+			"**/logs": true,
+			"**/private_documentation": true,
+			"**/archive_results": true,
+			"**/data": true,
+			"**/test-results": true,
+			"**/playwright-report": true
+		},
+		"python.defaultInterpreterPath": "./backend/venv/Scripts/python.exe",
+		"python.terminal.activateEnvironment": true,
+		"python.linting.enabled": true,
+		"python.linting.flake8Enabled": true,
+		"python.linting.mypyEnabled": true,
+		"python.formatting.provider": "black",
+		"python.testing.pytestEnabled": true,
+		"python.testing.pytestArgs": [
+			"backend/tests",
+			"--cov=backend/app",
+			"--cov-report=html:backend/coverage_reports/html",
+			"--cov-report=xml:backend/coverage_reports/coverage.xml",
+			"--cov-report=term-missing",
+			"-v"
+		],
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": "explicit",
+			"source.fixAll": "explicit"
+		},
+		"editor.rulers": [88, 100],
+		"editor.tabSize": 4,
+		"terminal.integrated.defaultProfile.windows": "Git Bash",
+		"terminal.integrated.env.windows": {
+			"PYTHONPATH": "${workspaceFolder}/backend"
+		},
+		"rest-client.environmentVariables": {
+			"$shared": {
+				"version": "1.0"
+			},
+			"local": {
+				"baseUrl": "http://localhost:8443",
+				"apiKey": "your-api-key-here"
+			},
+			"docker": {
+				"baseUrl": "http://localhost:8443",
+				"apiKey": "your-api-key-here"
+			}
+		},
+		"todo-tree.general.tags": [
+			"BUG",
+			"HACK",
+			"FIXME",
+			"TODO",
+			"XXX",
+			"[ ]",
+			"[x]"
+		],
+		"errorLens.enabled": true,
+		"bookmarks.saveBookmarksInProject": true
+	},
+	"extensions": {
+		"recommendations": [
+			"ms-python.python",
+			"ms-python.black-formatter",
+			"ms-python.flake8",
+			"ms-python.mypy-type-checker",
+			"ms-python.pytest-adapter",
+			"ms-python.vscode-pylance",
+			"ms-vscode.vscode-typescript-next",
+			"esbenp.prettier-vscode",
+			"dbaeumer.vscode-eslint",
+			"bradlc.vscode-tailwindcss",
+			"ms-azuretools.vscode-docker",
+			"redhat.vscode-yaml",
+			"eamodio.gitlens",
+			"gruntfuggly.todo-tree",
+			"usernamehw.errorlens",
+			"alefragnani.bookmarks",
+			"rangav.vscode-thunder-client",
+			"humao.rest-client",
+			"yzhang.markdown-all-in-one",
+			"pkief.material-icon-theme"
+		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "🐳 Docker: Start All Services",
+				"type": "shell",
+				"command": "docker-compose",
+				"args": ["up", "-d"],
+				"group": "build",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared",
+					"showReuseMessage": true,
+					"clear": false
+				},
+				"problemMatcher": []
+			},
+			{
+				"label": "🐳 Docker: Stop All Services",
+				"type": "shell",
+				"command": "docker-compose",
+				"args": ["down"],
+				"group": "build",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared",
+					"showReuseMessage": true,
+					"clear": false
+				},
+				"problemMatcher": []
+			},
+			{
+				"label": "🐍 Backend: Install Dependencies",
+				"type": "shell",
+				"command": "cd backend && pip install -r requirements.txt",
+				"group": "build",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared",
+					"showReuseMessage": true,
+					"clear": false
+				},
+				"problemMatcher": []
+			},
+			{
+				"label": "🐍 Backend: Start Development Server",
+				"type": "shell",
+				"command": "cd backend && python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000",
+				"group": "build",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared",
+					"showReuseMessage": true,
+					"clear": false
+				},
+				"problemMatcher": []
+			},
+			{
+				"label": "🐍 Backend: Run Tests",
+				"type": "shell",
+				"command": "cd backend && python -m pytest tests/ -v --cov=app --cov-report=html:coverage_reports/html --cov-report=xml:coverage_reports/coverage.xml",
+				"group": "test",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared",
+					"showReuseMessage": true,
+					"clear": false
+				},
+				"problemMatcher": []
+			},
+			{
+				"label": "🐍 Backend: Run Comprehensive Tests",
+				"type": "shell",
+				"command": "cd backend && python run_comprehensive_tests_rebuild.py --all --save-summary --save-results",
+				"group": "test",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared",
+					"showReuseMessage": true,
+					"clear": false
+				},
+				"problemMatcher": []
+			},
+			{
+				"label": "⚛️ Frontend: Install Dependencies",
+				"type": "shell",
+				"command": "cd frontend && npm install",
+				"group": "build",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared",
+					"showReuseMessage": true,
+					"clear": false
+				},
+				"problemMatcher": []
+			},
+			{
+				"label": "⚛️ Frontend: Start Development Server",
+				"type": "shell",
+				"command": "cd frontend && npm run dev",
+				"group": "build",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared",
+					"showReuseMessage": true,
+					"clear": false
+				},
+				"problemMatcher": []
+			},
+			{
+				"label": "🧪 Health Check",
+				"type": "shell",
+				"command": "bash scripts/health_check.sh",
+				"group": "test",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared",
+					"showReuseMessage": true,
+					"clear": false
+				},
+				"problemMatcher": []
+			},
+			{
+				"label": "🚀 Start Development Environment",
+				"dependsOrder": "parallel",
+				"dependsOn": [
+					"🐳 Docker: Start All Services",
+					"🐍 Backend: Start Development Server",
+					"⚛️ Frontend: Start Development Server"
+				],
+				"group": "build",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared",
+					"showReuseMessage": true,
+					"clear": false
+				},
+				"problemMatcher": []
+			}
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "🐍 Debug Backend API",
+				"type": "python",
+				"request": "launch",
+				"program": "${workspaceFolder}/backend/main.py",
+				"console": "integratedTerminal",
+				"cwd": "${workspaceFolder}/backend",
+				"env": {
+					"PYTHONPATH": "${workspaceFolder}/backend",
+					"DEBUG": "true"
+				},
+				"args": [],
+				"justMyCode": false
+			},
+			{
+				"name": "🐍 Debug Backend Tests",
+				"type": "python",
+				"request": "launch",
+				"module": "pytest",
+				"console": "integratedTerminal",
+				"cwd": "${workspaceFolder}/backend",
+				"env": {
+					"PYTHONPATH": "${workspaceFolder}/backend"
+				},
+				"args": [
+					"tests/",
+					"-v",
+					"--tb=short"
+				],
+				"justMyCode": false
+			},
+			{
+				"name": "⚛️ Debug Frontend",
+				"type": "node",
+				"request": "launch",
+				"program": "${workspaceFolder}/frontend/node_modules/.bin/next",
+				"args": ["dev"],
+				"cwd": "${workspaceFolder}/frontend",
+				"console": "integratedTerminal",
+				"env": {
+					"NODE_ENV": "development"
+				},
+				"skipFiles": [
+					"<node_internals>/**"
+				]
+			}
+		]
+	}
+}

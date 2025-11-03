@@ -1,0 +1,270 @@
+
+Running 18 tests using 6 workers
+
+[1A[2K[1/18] [chromium] › tests\mock-e2e.spec.ts:294:7 › Compression Screen - Mock Testing › should display meta-learning status
+[1A[2K[2/18] [chromium] › tests\mock-e2e.spec.ts:176:7 › Compression Screen - Mock Testing › should handle content analysis workflow
+[1A[2K[3/18] [chromium] › tests\mock-e2e.spec.ts:156:7 › Compression Screen - Mock Testing › should display compression screen with all components
+[1A[2K[4/18] [chromium] › tests\mock-e2e.spec.ts:202:7 › Compression Screen - Mock Testing › should display algorithm recommendations
+[1A[2K[5/18] [chromium] › tests\mock-e2e.spec.ts:230:7 › Compression Screen - Mock Testing › should perform compression and display results
+[1A[2K[6/18] [chromium] › tests\mock-e2e.spec.ts:286:7 › Compression Screen - Mock Testing › should display real-time metrics
+[1A[2K[chromium] › tests\mock-e2e.spec.ts:202:7 › Compression Screen - Mock Testing › should display algorithm recommendations
+Neither recommendations nor manual selection visible, checking for compress button
+
+[1A[2K[7/18] [firefox] › tests\mock-e2e.spec.ts:202:7 › Compression Screen - Mock Testing › should display algorithm recommendations
+[1A[2K[8/18] [firefox] › tests\mock-e2e.spec.ts:176:7 › Compression Screen - Mock Testing › should handle content analysis workflow
+[1A[2K[9/18] [firefox] › tests\mock-e2e.spec.ts:156:7 › Compression Screen - Mock Testing › should display compression screen with all components
+[1A[2K  1) [chromium] › tests\mock-e2e.spec.ts:230:7 › Compression Screen - Mock Testing › should perform compression and display results 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('[data-testid="compress-button"]') to be visible[22m
+
+
+      250 |
+      251 |     // Wait for button to appear
+    > 252 |     await compressButton.waitFor({ state: 'visible', timeout: 10000 });
+          |                          ^
+      253 |
+      254 |     // Click button (force if needed due to overlays)
+      255 |     await compressButton.click({ force: true });
+        at D:\python_data\250812_dynamic_compression_algorithms\frontend\tests\mock-e2e.spec.ts:252:26
+
+    Error Context: test-results\mock-e2e-Compression-Scree-11543-ression-and-display-results-chromium\error-context.md
+
+
+[1A[2K  2) [chromium] › tests\mock-e2e.spec.ts:202:7 › Compression Screen - Mock Testing › should display algorithm recommendations 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m()[22m failed
+
+    Locator:  locator('[data-testid="compress-button"]')
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  10000ms
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for locator('[data-testid="compress-button"]')[22m
+
+
+      224 |       console.log('Neither recommendations nor manual selection visible, checking for compress button');
+      225 |       const compressButton = page.locator('[data-testid="compress-button"]');
+    > 226 |       await expect(compressButton).toBeVisible();
+          |                                    ^
+      227 |     }
+      228 |   });
+      229 |
+        at D:\python_data\250812_dynamic_compression_algorithms\frontend\tests\mock-e2e.spec.ts:226:36
+
+    Error Context: test-results\mock-e2e-Compression-Scree-e7c8d-y-algorithm-recommendations-chromium\error-context.md
+
+
+[1A[2K  3) [chromium] › tests\mock-e2e.spec.ts:176:7 › Compression Screen - Mock Testing › should handle content analysis workflow 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveValue[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: locator('[data-testid="content-input"]')
+    Expected string: [32m"This is a sample text for compression testing. This is a sample text for compression testing. This is a sample text for compression testing. This is a sample text for compression testing. This is a sample text for compression testing. This is a sample text for compression testing. This is a sample text for compression testing. This is a sample text for compression testing. This is a sample text for compression testing. This is a sample text for compression testing. "[39m
+    Received: <element(s) not found>
+    Timeout: 10000ms
+
+    Call log:
+    [2m  - Expect "toHaveValue" with timeout 10000ms[22m
+    [2m  - waiting for locator('[data-testid="content-input"]')[22m
+
+
+      195 |     } else {
+      196 |       // If analysis panel not visible, at least verify content was entered
+    > 197 |       await expect(textarea).toHaveValue(testContent);
+          |                              ^
+      198 |       console.log('Content Analysis panel did not appear, but content was entered successfully');
+      199 |     }
+      200 |   });
+        at D:\python_data\250812_dynamic_compression_algorithms\frontend\tests\mock-e2e.spec.ts:197:30
+
+    Error Context: test-results\mock-e2e-Compression-Scree-a55be-e-content-analysis-workflow-chromium\error-context.md
+
+
+[1A[2K[10/18] [firefox] › tests\mock-e2e.spec.ts:230:7 › Compression Screen - Mock Testing › should perform compression and display results
+[1A[2K[11/18] [firefox] › tests\mock-e2e.spec.ts:286:7 › Compression Screen - Mock Testing › should display real-time metrics
+[1A[2K[12/18] [firefox] › tests\mock-e2e.spec.ts:294:7 › Compression Screen - Mock Testing › should display meta-learning status
+[1A[2K[firefox] › tests\mock-e2e.spec.ts:202:7 › Compression Screen - Mock Testing › should display algorithm recommendations
+Neither recommendations nor manual selection visible, checking for compress button
+
+[1A[2K[13/18] [webkit] › tests\mock-e2e.spec.ts:156:7 › Compression Screen - Mock Testing › should display compression screen with all components
+[1A[2K[14/18] [webkit] › tests\mock-e2e.spec.ts:176:7 › Compression Screen - Mock Testing › should handle content analysis workflow
+[1A[2K[15/18] [webkit] › tests\mock-e2e.spec.ts:202:7 › Compression Screen - Mock Testing › should display algorithm recommendations
+[1A[2K  4) [firefox] › tests\mock-e2e.spec.ts:176:7 › Compression Screen - Mock Testing › should handle content analysis workflow 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveValue[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: locator('[data-testid="content-input"]')
+    Expected string: [32m"This is a sample text for compression testing. This is a sample text for compression testing. This is a sample text for compression testing. This is a sample text for compression testing. This is a sample text for compression testing. This is a sample text for compression testing. This is a sample text for compression testing. This is a sample text for compression testing. This is a sample text for compression testing. This is a sample text for compression testing. "[39m
+    Received: <element(s) not found>
+    Timeout: 10000ms
+
+    Call log:
+    [2m  - Expect "toHaveValue" with timeout 10000ms[22m
+    [2m  - waiting for locator('[data-testid="content-input"]')[22m
+
+
+      195 |     } else {
+      196 |       // If analysis panel not visible, at least verify content was entered
+    > 197 |       await expect(textarea).toHaveValue(testContent);
+          |                              ^
+      198 |       console.log('Content Analysis panel did not appear, but content was entered successfully');
+      199 |     }
+      200 |   });
+        at D:\python_data\250812_dynamic_compression_algorithms\frontend\tests\mock-e2e.spec.ts:197:30
+
+    Error Context: test-results\mock-e2e-Compression-Scree-a55be-e-content-analysis-workflow-firefox\error-context.md
+
+
+[1A[2K  5) [firefox] › tests\mock-e2e.spec.ts:202:7 › Compression Screen - Mock Testing › should display algorithm recommendations 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m()[22m failed
+
+    Locator:  locator('[data-testid="compress-button"]')
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  10000ms
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for locator('[data-testid="compress-button"]')[22m
+
+
+      224 |       console.log('Neither recommendations nor manual selection visible, checking for compress button');
+      225 |       const compressButton = page.locator('[data-testid="compress-button"]');
+    > 226 |       await expect(compressButton).toBeVisible();
+          |                                    ^
+      227 |     }
+      228 |   });
+      229 |
+        at D:\python_data\250812_dynamic_compression_algorithms\frontend\tests\mock-e2e.spec.ts:226:36
+
+    Error Context: test-results\mock-e2e-Compression-Scree-e7c8d-y-algorithm-recommendations-firefox\error-context.md
+
+
+[1A[2K[16/18] [webkit] › tests\mock-e2e.spec.ts:230:7 › Compression Screen - Mock Testing › should perform compression and display results
+[1A[2K[17/18] [webkit] › tests\mock-e2e.spec.ts:286:7 › Compression Screen - Mock Testing › should display real-time metrics
+[1A[2K  6) [firefox] › tests\mock-e2e.spec.ts:230:7 › Compression Screen - Mock Testing › should perform compression and display results 
+
+    TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('[data-testid="compress-button"]') to be visible[22m
+
+
+      250 |
+      251 |     // Wait for button to appear
+    > 252 |     await compressButton.waitFor({ state: 'visible', timeout: 10000 });
+          |                          ^
+      253 |
+      254 |     // Click button (force if needed due to overlays)
+      255 |     await compressButton.click({ force: true });
+        at D:\python_data\250812_dynamic_compression_algorithms\frontend\tests\mock-e2e.spec.ts:252:26
+
+    Error Context: test-results\mock-e2e-Compression-Scree-11543-ression-and-display-results-firefox\error-context.md
+
+
+[1A[2K[18/18] [webkit] › tests\mock-e2e.spec.ts:294:7 › Compression Screen - Mock Testing › should display meta-learning status
+[1A[2K[webkit] › tests\mock-e2e.spec.ts:202:7 › Compression Screen - Mock Testing › should display algorithm recommendations
+Neither recommendations nor manual selection visible, checking for compress button
+
+[1A[2K  7) [webkit] › tests\mock-e2e.spec.ts:176:7 › Compression Screen - Mock Testing › should handle content analysis workflow 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveValue[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: locator('[data-testid="content-input"]')
+    Expected string: [32m"This is a sample text for compression testing. This is a sample text for compression testing. This is a sample text for compression testing. This is a sample text for compression testing. This is a sample text for compression testing. This is a sample text for compression testing. This is a sample text for compression testing. This is a sample text for compression testing. This is a sample text for compression testing. This is a sample text for compression testing. "[39m
+    Received: <element(s) not found>
+    Timeout: 10000ms
+
+    Call log:
+    [2m  - Expect "toHaveValue" with timeout 10000ms[22m
+    [2m  - waiting for locator('[data-testid="content-input"]')[22m
+
+
+      195 |     } else {
+      196 |       // If analysis panel not visible, at least verify content was entered
+    > 197 |       await expect(textarea).toHaveValue(testContent);
+          |                              ^
+      198 |       console.log('Content Analysis panel did not appear, but content was entered successfully');
+      199 |     }
+      200 |   });
+        at D:\python_data\250812_dynamic_compression_algorithms\frontend\tests\mock-e2e.spec.ts:197:30
+
+    Error Context: test-results\mock-e2e-Compression-Scree-a55be-e-content-analysis-workflow-webkit\error-context.md
+
+
+[1A[2K  8) [webkit] › tests\mock-e2e.spec.ts:202:7 › Compression Screen - Mock Testing › should display algorithm recommendations 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m()[22m failed
+
+    Locator:  locator('[data-testid="compress-button"]')
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  10000ms
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for locator('[data-testid="compress-button"]')[22m
+
+
+      224 |       console.log('Neither recommendations nor manual selection visible, checking for compress button');
+      225 |       const compressButton = page.locator('[data-testid="compress-button"]');
+    > 226 |       await expect(compressButton).toBeVisible();
+          |                                    ^
+      227 |     }
+      228 |   });
+      229 |
+        at D:\python_data\250812_dynamic_compression_algorithms\frontend\tests\mock-e2e.spec.ts:226:36
+
+    Error Context: test-results\mock-e2e-Compression-Scree-e7c8d-y-algorithm-recommendations-webkit\error-context.md
+
+
+[1A[2K  9) [webkit] › tests\mock-e2e.spec.ts:230:7 › Compression Screen - Mock Testing › should perform compression and display results 
+
+    TimeoutError: locator.click: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('button:has-text("Results")')[22m
+    [2m    - locator resolved to <button disabled class="flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 text-slate-400 hover:text-slate-300 hover:bg-slate-700">…</button>[22m
+    [2m  - attempting click action[22m
+    [2m    2 × waiting for element to be visible, enabled and stable[22m
+    [2m      - element is not enabled[22m
+    [2m    - retrying click action[22m
+    [2m    - waiting 20ms[22m
+    [2m    2 × waiting for element to be visible, enabled and stable[22m
+    [2m      - element is not enabled[22m
+    [2m    - retrying click action[22m
+    [2m      - waiting 100ms[22m
+    [2m    21 × waiting for element to be visible, enabled and stable[22m
+    [2m       - element is not enabled[22m
+    [2m     - retrying click action[22m
+    [2m       - waiting 500ms[22m
+
+
+      263 |
+      264 |     if (resultsTabVisible) {
+    > 265 |       await resultsTab.click();
+          |                        ^
+      266 |       await page.waitForTimeout(1000);
+      267 |     }
+      268 |
+        at D:\python_data\250812_dynamic_compression_algorithms\frontend\tests\mock-e2e.spec.ts:265:24
+
+    Error Context: test-results\mock-e2e-Compression-Scree-11543-ression-and-display-results-webkit\error-context.md
+
+
+[1A[2K  9 failed
+    [chromium] › tests\mock-e2e.spec.ts:176:7 › Compression Screen - Mock Testing › should handle content analysis workflow 
+    [chromium] › tests\mock-e2e.spec.ts:202:7 › Compression Screen - Mock Testing › should display algorithm recommendations 
+    [chromium] › tests\mock-e2e.spec.ts:230:7 › Compression Screen - Mock Testing › should perform compression and display results 
+    [firefox] › tests\mock-e2e.spec.ts:176:7 › Compression Screen - Mock Testing › should handle content analysis workflow 
+    [firefox] › tests\mock-e2e.spec.ts:202:7 › Compression Screen - Mock Testing › should display algorithm recommendations 
+    [firefox] › tests\mock-e2e.spec.ts:230:7 › Compression Screen - Mock Testing › should perform compression and display results 
+    [webkit] › tests\mock-e2e.spec.ts:176:7 › Compression Screen - Mock Testing › should handle content analysis workflow 
+    [webkit] › tests\mock-e2e.spec.ts:202:7 › Compression Screen - Mock Testing › should display algorithm recommendations 
+    [webkit] › tests\mock-e2e.spec.ts:230:7 › Compression Screen - Mock Testing › should perform compression and display results 
+  9 passed (1.5m)
+
+[36m  Serving HTML report at http://localhost:49719. Press Ctrl+C to quit.[39m

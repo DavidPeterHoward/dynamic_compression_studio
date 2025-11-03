@@ -1,0 +1,131 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: dca_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: compression_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - dca_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: dca_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - dca_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend/v1
+      dockerfile: Dockerfile
+    container_name: dca_backend
+    ports:
+      - "8441:8441"
+    environment:
+      DATABASE_URL: postgresql+asyncpg://postgres:postgres@postgres:5432/compression_db
+      DATABASE_SYNC_URL: postgresql://postgres:postgres@postgres:5432/compression_db
+      REDIS_URL: redis://redis:6379/0
+      CELERY_BROKER_URL: redis://redis:6379/1
+      CELERY_RESULT_BACKEND: redis://redis:6379/2
+      DEBUG: "true"
+    volumes:
+      - ./backend/v1:/app
+      - uploads_data:/app/uploads
+      - compressed_data:/app/compressed
+      - models_data:/app/models
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - dca_network
+    command: >
+      sh -c "
+        alembic upgrade head &&
+        uvicorn main:app --host 0.0.0.0 --port 8441 --reload
+      "
+
+  celery_worker:
+    build:
+      context: ./backend/v1
+      dockerfile: Dockerfile
+    container_name: dca_celery_worker
+    environment:
+      DATABASE_URL: postgresql+asyncpg://postgres:postgres@postgres:5432/compression_db
+      REDIS_URL: redis://redis:6379/0
+      CELERY_BROKER_URL: redis://redis:6379/1
+      CELERY_RESULT_BACKEND: redis://redis:6379/2
+    volumes:
+      - ./backend/v1:/app
+      - uploads_data:/app/uploads
+      - compressed_data:/app/compressed
+      - models_data:/app/models
+    depends_on:
+      - postgres
+      - redis
+      - backend
+    networks:
+      - dca_network
+    command: celery -A app.celery_app worker --loglevel=info
+
+  flower:
+    build:
+      context: ./backend/v1
+      dockerfile: Dockerfile
+    container_name: dca_flower
+    ports:
+      - "5555:5555"
+    environment:
+      CELERY_BROKER_URL: redis://redis:6379/1
+      CELERY_RESULT_BACKEND: redis://redis:6379/2
+    depends_on:
+      - redis
+      - celery_worker
+    networks:
+      - dca_network
+    command: celery -A app.celery_app flower --port=5555
+
+  nginx:
+    image: nginx:alpine
+    container_name: dca_nginx
+    ports:
+      - "8442:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - backend
+    networks:
+      - dca_network
+
+networks:
+  dca_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:
+  uploads_data:
+  compressed_data:
+  models_data:

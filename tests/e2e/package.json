@@ -1,0 +1,32 @@
+{
+  "name": "compression-algorithms-e2e-tests",
+  "version": "1.0.0",
+  "description": "End-to-end tests for compression algorithms",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report",
+    "test:install": "playwright install",
+    "test:compression": "playwright test compression_algorithms.spec.ts",
+    "test:pipeline": "playwright test data_pipeline_integrity.spec.ts",
+    "test:individual": "playwright test individual_algorithm_tests.spec.ts",
+    "test:all": "playwright test --reporter=html",
+    "test:ci": "playwright test --reporter=github"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "compression",
+    "algorithms",
+    "e2e",
+    "testing",
+    "playwright"
+  ],
+  "author": "Compression Algorithms Team",
+  "license": "MIT"
+}

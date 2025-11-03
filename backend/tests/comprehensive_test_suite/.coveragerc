@@ -1,0 +1,46 @@
+# Coverage configuration
+
+[run]
+source = ../../app
+branch = True
+parallel = True
+omit =
+    */tests/*
+    */test_*
+    */__pycache__/*
+    */venv/*
+    */env/*
+    */migrations/*
+    */alembic/*
+
+[report]
+precision = 2
+show_missing = True
+skip_covered = False
+skip_empty = True
+sort = Cover
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    def __str__
+    raise AssertionError
+    raise NotImplementedError
+    if __name__ == .__main__.:
+    if TYPE_CHECKING:
+    @abstractmethod
+    @overload
+    if False:
+    if 0:
+    class .*\bProtocol\):
+    pass
+
+[html]
+directory = coverage_html_report
+title = Comprehensive Test Suite Coverage Report
+
+[xml]
+output = coverage.xml
+
+[json]
+output = coverage.json
+
