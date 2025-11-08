@@ -1,6 +1,6 @@
 'use client'
 
-import AgentStatusDashboard from '@/components/AgentStatusDashboard'
+import AgentsTab from '@/components/AgentsTab'
 import EnhancedCompressionTab from '@/components/EnhancedCompressionTabImproved'
 import EvaluationTab from '@/components/EvaluationTab'
 import ExperimentsTab from '@/components/ExperimentsTab'
@@ -8,7 +8,6 @@ import MetricsTab from '@/components/MetricsTab'
 import PromptsTab from '@/components/PromptsTab'
 import { useApp } from '@/components/providers'
 import SyntheticContentTab from '@/components/SyntheticContentTab'
-import TaskSubmissionForm from '@/components/TaskSubmissionForm'
 import WorkflowPipelinesTab from '@/components/WorkflowPipelinesTab'
 import { motion } from 'framer-motion'
 import {
@@ -23,7 +22,8 @@ import {
     Loader2,
     MessageSquare,
     Settings,
-    TestTube
+    TestTube,
+    Zap
 } from 'lucide-react'
 import { useState } from 'react'
 
@@ -449,13 +449,7 @@ export default function HomePage() {
       {/* Main Content */}
       <main className="w-full px-6 py-6">
         {activeTab === 'agents' && (
-          <div className="space-y-6">
-            <AgentStatusDashboard />
-
-            <TaskSubmissionForm
-              agents={['01', '02', '03', '06']} // Available agents
-            />
-          </div>
+          <AgentsTab />
         )}
 
         {activeTab === 'compression' && (

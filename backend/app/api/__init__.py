@@ -7,7 +7,7 @@ file management, metrics, and health monitoring.
 
 from fastapi import APIRouter
 from . import compression, files, metrics, health, evaluation, sensors, enhanced_compression, synthetic_media_management, prompts, live_metrics, algorithm_viability, workflow_pipelines, compression_validation
-from .v1.endpoints import synthetic_media
+from .v1.endpoints import synthetic_media, debates
 
 # Create main API router
 api_router = APIRouter()
@@ -27,8 +27,9 @@ api_router.include_router(synthetic_media.router, tags=["Synthetic Media"])
 api_router.include_router(synthetic_media_management.router, tags=["Synthetic Media Management"])
 api_router.include_router(prompts.router, tags=["Prompts"])
 api_router.include_router(workflow_pipelines.router, tags=["Workflow Pipelines"])
+api_router.include_router(debates.router, prefix="/debates", tags=["Debates"])
 
-__all__ = ["api_router", "compression", "files", "metrics", "health", "evaluation", "workflow_pipelines", "compression_validation"]
+__all__ = ["api_router", "compression", "files", "metrics", "health", "evaluation", "workflow_pipelines", "compression_validation", "debates"]
 
 
 

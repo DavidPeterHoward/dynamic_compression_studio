@@ -1,0 +1,138 @@
+# Enhanced Prometheus Configuration for Multi-Agent System
+# Includes comprehensive monitoring of agents, debates, circuit breakers, and performance
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  scrape_timeout: 10s
+
+rule_files:
+  - "alert_rules.yml"
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093
+
+scrape_configs:
+  # Backend API Service
+  - job_name: 'backend'
+    static_configs:
+      - targets: ['backend:8000']
+    metrics_path: '/metrics'
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        replacement: 'backend'
+      - target_label: service
+        replacement: 'agent-backend'
+
+  # Ollama Service
+  - job_name: 'ollama'
+    static_configs:
+      - targets: ['ollama:11434']
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+    scrape_timeout: 10s
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        replacement: 'ollama'
+      - target_label: service
+        replacement: 'ollama-service'
+
+  # PostgreSQL Database
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['postgres-exporter:9187']
+    scrape_interval: 30s
+    scrape_timeout: 10s
+    relabel_configs:
+      - target_label: service
+        replacement: 'postgres-database'
+
+  # Redis Cache
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis-exporter:9121']
+    scrape_interval: 30s
+    scrape_timeout: 10s
+    relabel_configs:
+      - target_label: service
+        replacement: 'redis-cache'
+
+  # Node Exporter for system metrics
+  - job_name: 'node'
+    static_configs:
+      - targets:
+        - 'node-exporter:9100'
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    relabel_configs:
+      - target_label: service
+        replacement: 'system-metrics'
+
+  # Nginx Reverse Proxy
+  - job_name: 'nginx'
+    static_configs:
+      - targets: ['nginx-exporter:9113']
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    relabel_configs:
+      - target_label: service
+        replacement: 'nginx-proxy'
+
+  # Custom agent metrics collection
+  - job_name: 'agent-metrics'
+    static_configs:
+      - targets: ['backend:8000']
+    metrics_path: '/api/v1/metrics/agents'
+    scrape_interval: 30s
+    scrape_timeout: 15s
+    relabel_configs:
+      - target_label: service
+        replacement: 'agent-metrics'
+      - target_label: job
+        replacement: 'agent-health'
+
+  # Debate system metrics
+  - job_name: 'debate-metrics'
+    static_configs:
+      - targets: ['backend:8000']
+    metrics_path: '/api/v1/metrics/debates'
+    scrape_interval: 30s
+    scrape_timeout: 15s
+    relabel_configs:
+      - target_label: service
+        replacement: 'debate-metrics'
+      - target_label: job
+        replacement: 'debate-performance'
+
+  # Circuit breaker metrics
+  - job_name: 'circuit-breaker-metrics'
+    static_configs:
+      - targets: ['backend:8000']
+    metrics_path: '/api/v1/metrics/circuit-breakers'
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    relabel_configs:
+      - target_label: service
+        replacement: 'circuit-breaker'
+      - target_label: job
+        replacement: 'circuit-breaker-status'
+
+# Remote write for long-term storage (optional)
+# remote_write:
+#   - url: "http://victoriametrics:8428/api/v1/write"
+#   - remote_timeout: 30s
+#   - queue_config:
+#       capacity: 10000
+#       max_shards: 30
+#       min_shards: 1
+#       max_samples_per_send: 1000
+#       batch_send_deadline: 5s
+#       min_backoff: 30ms
+#       max_backoff: 5s

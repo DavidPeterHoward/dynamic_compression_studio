@@ -9,6 +9,7 @@ from .compression import *
 from .file import *
 from .prompts import *
 from .compression_validation import *
+from .debate import *
 
 # Core database models
 from .compression_algorithms import CompressionAlgorithm
@@ -42,5 +43,9 @@ __all__ = [
     # Compression validation models
     "CompressionTestResult", "ContentSample", "DimensionalMetric", "AlgorithmPerformanceBaseline",
     "DataIntegrityCheck", "ContentCategory", "DataOrigin", "ValidationStatus",
-    "ContentCharacteristics", "CompressionMetrics", "ValidationResult", "ComprehensiveTestRecord"
+    "ContentCharacteristics", "CompressionMetrics", "ValidationResult", "ComprehensiveTestRecord",
+
+    # Debate models
+    "DebateSession", "DebateParticipant", "DebateRound", "DebateArgument",
+    "DebateConclusion", "DebateAnalytics", "DebateStatus", "DebateMode"
 ]

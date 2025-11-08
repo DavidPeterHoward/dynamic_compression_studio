@@ -3,31 +3,31 @@
  * Handles data pipeline: Frontend → API → Backend → Response
  */
 
-import axios, { AxiosInstance, AxiosError } from 'axios';
 import {
-  VideoGenerationParams,
-  ImageGenerationParams,
-  AudioGenerationParams,
-  VideoGenerationResponse,
-  ImageBatchGenerationResponse,
-  AudioGenerationResponse,
-  MediaSchema,
-  SchemaValidator
+    AudioGenerationParams,
+    AudioGenerationResponse,
+    ImageBatchGenerationResponse,
+    ImageGenerationParams,
+    MediaSchema,
+    SchemaValidator,
+    VideoGenerationParams,
+    VideoGenerationResponse
 } from '@/types/synthetic-media';
+import axios, { AxiosError, AxiosInstance } from 'axios';
 
 // ============================================================================
 // API CLIENT CONFIGURATION
 // ============================================================================
 
 // CRITICAL: Browser vs Server API URL handling
-// - Browser (client-side): Must use localhost:8443 to reach backend from host
+// - Browser (client-side): Must use localhost:8441 to reach backend from host
 // - Server (SSR): Can use Docker network name 'backend:8000'
 // Next.js env vars are embedded at build time, so we need runtime detection
 const getApiBaseUrl = () => {
   // Check if running in browser
   if (typeof window !== 'undefined') {
     // Browser environment - use localhost
-    return 'http://localhost:8443';
+    return 'http://localhost:8441';
   }
   // Server environment (SSR/SSG) - use Docker network or fallback to localhost
   return process.env.NEXT_PUBLIC_API_URL || 'http://backend:8000';

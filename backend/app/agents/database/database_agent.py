@@ -111,7 +111,7 @@ class DatabaseAgent(BaseAgent, CommunicationMixin):
         """Check if database is accessible."""
         try:
             # Use the existing database connection check
-            return check_db_connection()
+            return await check_db_connection()
         except Exception as e:
             logger.error(f"Database connectivity check failed: {e}")
             return False
@@ -119,7 +119,7 @@ class DatabaseAgent(BaseAgent, CommunicationMixin):
     async def _check_db_health(self) -> bool:
         """Check database health metrics."""
         try:
-            health_data = check_db_health()
+            health_data = await check_db_health()
             # Basic health check - could be more sophisticated
             return health_data.get("status") == "healthy"
         except Exception as e:
@@ -150,30 +150,27 @@ class DatabaseAgent(BaseAgent, CommunicationMixin):
 
     async def _validate_core_tables(self) -> bool:
         """Validate that core tables exist."""
-        try:
-            db = next(get_db_session())
-            # Check for our core tables
-            core_tables = ["compression_algorithms", "compression_requests", "system_monitoring_metrics"]
-            existing_tables = db.execute("SELECT name FROM sqlite_master WHERE type='table';").fetchall()
-            existing_table_names = [row[0] for row in existing_tables]
+        async with get_db_session() as db:
+            try:
+                # Check for our core tables
+                core_tables = ["compression_algorithms", "compression_requests", "system_monitoring_metrics"]
+                existing_tables = await db.execute("SELECT name FROM sqlite_master WHERE type='table';")
+                existing_table_names = [row[0] for row in existing_tables.fetchall()]
 
-            missing_tables = [table for table in core_tables if table not in existing_table_names]
-            if missing_tables:
-                logger.warning(f"Missing core tables: {missing_tables}")
+                missing_tables = [table for table in core_tables if table not in existing_table_names]
+                if missing_tables:
+                    logger.warning(f"Missing core tables: {missing_tables}")
+                    return False
+
+                return True
+
+            except Exception as e:
+                logger.error(f"Core table validation failed: {e}")
                 return False
-
-            return True
-
-        except Exception as e:
-            logger.error(f"Core table validation failed: {e}")
-            return False
-        finally:
-            db.close()
 
     async def _test_basic_crud(self) -> bool:
         """Test basic CRUD operations on core tables."""
-        try:
-            db = next(get_db_session())
+        async with get_db_session() as db:
 
             # Test INSERT and SELECT on compression_algorithms
             from app.models.compression_algorithms import CompressionAlgorithm
@@ -203,8 +200,6 @@ class DatabaseAgent(BaseAgent, CommunicationMixin):
         except Exception as e:
             logger.error(f"CRUD test failed: {e}")
             return False
-        finally:
-            db.close()
 
     async def execute_task(self, task: Dict[str, Any]) -> Dict[str, Any]:
         """Execute database management tasks."""
@@ -283,8 +278,7 @@ class DatabaseAgent(BaseAgent, CommunicationMixin):
 
     async def _seed_initial_data(self) -> Dict[str, Any]:
         """Seed initial algorithm data."""
-        try:
-            db = next(get_db_session())
+        async with get_db_session() as db:
 
             from app.models.compression_algorithms import CompressionAlgorithm
 
@@ -343,13 +337,9 @@ class DatabaseAgent(BaseAgent, CommunicationMixin):
                 "status": "failed",
                 "error": f"Seeding error: {e}"
             }
-        finally:
-            db.close()
-
     async def _get_db_stats(self) -> Dict[str, Any]:
         """Get database statistics."""
-        try:
-            db = next(get_db_session())
+        async with get_db_session() as db:
 
             # Get table counts
             stats = {}
@@ -382,9 +372,6 @@ class DatabaseAgent(BaseAgent, CommunicationMixin):
                 "status": "failed",
                 "error": f"Stats retrieval error: {e}"
             }
-        finally:
-            db.close()
-
     async def _optimize_database_parameters(self, task: Dict[str, Any]) -> Dict[str, Any]:
         """Optimize database parameters through experimentation."""
         parameters = task.get("parameters", {})

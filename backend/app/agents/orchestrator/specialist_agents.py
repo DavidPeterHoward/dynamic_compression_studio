@@ -17,12 +17,7 @@ from typing import Dict, Any, Optional, List, Tuple
 from datetime import datetime
 import json
 
-from app.core.base_agent import BaseAgent, AgentCapability
-from app.core.message_bus import get_message_bus
-from app.models.messaging import (
-    TaskEnvelope, TaskResultEnvelope,
-    create_task_result_envelope
-)
+from app.core.base_agent import BaseAgent, AgentCapability, BootstrapResult, AgentStatus
 
 logger = logging.getLogger(__name__)
 
@@ -38,44 +33,105 @@ class NLPAgent(BaseAgent):
     def __init__(self, agent_id: Optional[str] = None, config: Optional[Dict[str, Any]] = None):
         super().__init__(agent_id=agent_id, agent_type="nlp_specialist", config=config)
         self.capabilities = [
-            AgentCapability.NLP_PROCESSING,
-            AgentCapability.TEXT_ANALYSIS,
-            AgentCapability.SENTIMENT_ANALYSIS,
-            AgentCapability.LANGUAGE_DETECTION
+            AgentCapability.ANALYSIS,  # NLP analysis
+            AgentCapability.LEARNING   # Can learn from text patterns
         ]
         self.supported_languages = ['en', 'es', 'fr', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko']
+        self.supported_operations = [
+            "text_analysis", "sentiment_analysis", "summarization",
+            "language_detection", "entity_extraction", "text_generation"
+        ]
 
-    async def execute(self, task_envelope: TaskEnvelope) -> TaskResultEnvelope:
-        """Execute NLP tasks."""
-        task_data = task_envelope.payload
-        operation = task_data.get("operation", "")
-
+    async def bootstrap_and_validate(self) -> BootstrapResult:
+        """Bootstrap and validate NLP agent."""
+        result = BootstrapResult()
+        
+        # Validate configuration
+        result.add_validation(
+            "configuration",
+            True,
+            "Configuration valid"
+        )
+        
+        # Validate capabilities
+        result.add_validation(
+            "capabilities",
+            len(self.capabilities) > 0,
+            f"Agent has {len(self.capabilities)} capabilities"
+        )
+        
+        # Validate supported operations
+        result.add_validation(
+            "operations",
+            len(self.supported_operations) > 0,
+            f"Agent supports {len(self.supported_operations)} operations"
+        )
+        
+        # Self-test: Try a simple analysis
         try:
-            if operation == "analyze_text":
-                result = await self._analyze_text(task_data)
-            elif operation == "sentiment_analysis":
-                result = await self._sentiment_analysis(task_data)
-            elif operation == "summarize_text":
-                result = await self._summarize_text(task_data)
-            elif operation == "detect_language":
-                result = await self._detect_language(task_data)
-            else:
-                result = {"error": f"Unsupported NLP operation: {operation}"}
-
-            return create_task_result_envelope(
-                task_id=task_envelope.task_id,
-                result=result,
-                status="completed"
+            test_text = "Hello world"
+            test_result = await self._analyze_text({"text": test_text})
+            result.add_validation(
+                "self_test",
+                test_result.get("word_count", 0) > 0,
+                "Self-test passed"
             )
-
         except Exception as e:
-            logger.error(f"NLP task failed: {e}")
-            return create_task_result_envelope(
-                task_id=task_envelope.task_id,
-                result=None,
-                status="failed",
-                error=str(e)
+            result.add_validation(
+                "self_test",
+                False,
+                f"Self-test failed: {e}"
             )
+        
+        if all(result.validations.values()):
+            result.success = True
+            self.status = AgentStatus.IDLE
+        else:
+            result.success = False
+            self.status = AgentStatus.ERROR
+        
+        return result
+
+    async def execute_task(self, task: Dict[str, Any]) -> Dict[str, Any]:
+        """Execute NLP task."""
+        task_id = task.get("task_id", "unknown")
+        operation = task.get("operation", "")
+        parameters = task.get("parameters", {})
+        
+        try:
+            if operation == "text_analysis" or operation == "analyze_text":
+                result_data = await self._analyze_text(parameters)
+            elif operation == "sentiment_analysis":
+                result_data = await self._sentiment_analysis(parameters)
+            elif operation == "summarization" or operation == "summarize_text":
+                result_data = await self._summarize_text(parameters)
+            elif operation == "language_detection" or operation == "detect_language":
+                result_data = await self._detect_language(parameters)
+            elif operation == "entity_extraction":
+                result_data = await self._extract_entities(parameters)
+            else:
+                return {
+                    "task_id": task_id,
+                    "status": "failed",
+                    "error": f"Unsupported NLP operation: {operation}",
+                    "supported_operations": self.supported_operations
+                }
+            
+            return {
+                "task_id": task_id,
+                "status": "completed",
+                "result": result_data,
+                "operation": operation
+            }
+            
+        except Exception as e:
+            logger.error(f"NLP task {task_id} failed: {e}")
+            return {
+                "task_id": task_id,
+                "status": "failed",
+                "error": str(e),
+                "operation": operation
+            }
 
     async def _analyze_text(self, task_data: Dict[str, Any]) -> Dict[str, Any]:
         """Analyze text for various metrics."""
@@ -196,6 +252,59 @@ class NLPAgent(BaseAgent):
         # Simple complexity formula
         complexity = (avg_word_length * 0.3) + (lexical_diversity * 0.7)
         return min(1.0, complexity)
+    
+    async def _extract_entities(self, task_data: Dict[str, Any]) -> Dict[str, Any]:
+        """Extract named entities from text."""
+        text = task_data.get("text", "")
+        
+        # Simple entity extraction (replace with NER model)
+        words = text.split()
+        entities = [
+            {"text": word, "type": "PROPER_NOUN", "confidence": 0.8}
+            for word in words
+            if word and word[0].isupper() and len(word) > 2
+        ]
+        
+        return {
+            "entities": entities,
+            "count": len(entities),
+            "text_length": len(text)
+        }
+    
+    async def self_evaluate(self) -> Dict[str, Any]:
+        """Evaluate NLP agent performance."""
+        metrics = await self.report_metrics()
+        
+        performance_score = metrics["success_rate"]
+        
+        strengths = []
+        if performance_score > 0.9:
+            strengths.append("High success rate")
+        if metrics["avg_task_duration"] < 1.0:
+            strengths.append("Fast text processing")
+        if len(self.supported_operations) >= 6:
+            strengths.append("Comprehensive operation support")
+        
+        weaknesses = []
+        if performance_score < 0.7:
+            weaknesses.append("Low success rate - needs improvement")
+        if metrics["error_count"] > 10:
+            weaknesses.append("High error count - review error handling")
+        
+        improvement_suggestions = []
+        if performance_score < 0.9:
+            improvement_suggestions.append("Integrate advanced NLP libraries (spaCy, NLTK)")
+        if "text_generation" not in self.supported_operations:
+            improvement_suggestions.append("Add text generation capability")
+        
+        return {
+            "agent_id": self.agent_id,
+            "performance_score": performance_score,
+            "strengths": strengths,
+            "weaknesses": weaknesses,
+            "improvement_suggestions": improvement_suggestions,
+            "metrics": metrics
+        }
 
 
 class CodeAgent(BaseAgent):
@@ -208,44 +317,79 @@ class CodeAgent(BaseAgent):
     def __init__(self, agent_id: Optional[str] = None, config: Optional[Dict[str, Any]] = None):
         super().__init__(agent_id=agent_id, agent_type="code_specialist", config=config)
         self.capabilities = [
-            AgentCapability.CODE_ANALYSIS,
             AgentCapability.CODE_GENERATION,
-            AgentCapability.CODE_OPTIMIZATION,
-            AgentCapability.CODE_REVIEW
+            AgentCapability.CODE_ANALYSIS,
+            AgentCapability.ANALYSIS  # Code analysis is a form of analysis
         ]
         self.supported_languages = ['python', 'javascript', 'typescript', 'java', 'c++', 'go', 'rust']
+        self.supported_operations = [
+            "code_generation", "code_analysis", "code_review",
+            "code_optimization", "code_refactoring"
+        ]
 
-    async def execute(self, task_envelope: TaskEnvelope) -> TaskResultEnvelope:
-        """Execute code-related tasks."""
-        task_data = task_envelope.payload
-        operation = task_data.get("operation", "")
-
+    async def bootstrap_and_validate(self) -> BootstrapResult:
+        """Bootstrap and validate Code agent."""
+        result = BootstrapResult()
+        
+        result.add_validation("configuration", True, "Configuration valid")
+        result.add_validation("capabilities", len(self.capabilities) > 0, f"Agent has {len(self.capabilities)} capabilities")
+        result.add_validation("languages", len(self.supported_languages) > 0, f"Supports {len(self.supported_languages)} languages")
+        
+        # Self-test: Try a simple code analysis
         try:
-            if operation == "analyze_code":
-                result = await self._analyze_code(task_data)
-            elif operation == "generate_code":
-                result = await self._generate_code(task_data)
-            elif operation == "optimize_code":
-                result = await self._optimize_code(task_data)
-            elif operation == "review_code":
-                result = await self._review_code(task_data)
-            else:
-                result = {"error": f"Unsupported code operation: {operation}"}
-
-            return create_task_result_envelope(
-                task_id=task_envelope.task_id,
-                result=result,
-                status="completed"
-            )
-
+            test_code = "def hello(): pass"
+            test_result = await self._analyze_code({"code": test_code, "language": "python"})
+            result.add_validation("self_test", test_result.get("total_lines", 0) > 0, "Self-test passed")
         except Exception as e:
-            logger.error(f"Code task failed: {e}")
-            return create_task_result_envelope(
-                task_id=task_envelope.task_id,
-                result=None,
-                status="failed",
-                error=str(e)
-            )
+            result.add_validation("self_test", False, f"Self-test failed: {e}")
+        
+        if all(result.validations.values()):
+            result.success = True
+            self.status = AgentStatus.IDLE
+        else:
+            result.success = False
+            self.status = AgentStatus.ERROR
+        
+        return result
+
+    async def execute_task(self, task: Dict[str, Any]) -> Dict[str, Any]:
+        """Execute code task."""
+        task_id = task.get("task_id", "unknown")
+        operation = task.get("operation", "")
+        parameters = task.get("parameters", {})
+        
+        try:
+            if operation == "code_analysis" or operation == "analyze_code":
+                result_data = await self._analyze_code(parameters)
+            elif operation == "code_generation" or operation == "generate_code":
+                result_data = await self._generate_code(parameters)
+            elif operation == "code_optimization" or operation == "optimize_code":
+                result_data = await self._optimize_code(parameters)
+            elif operation == "code_review" or operation == "review_code":
+                result_data = await self._review_code(parameters)
+            else:
+                return {
+                    "task_id": task_id,
+                    "status": "failed",
+                    "error": f"Unsupported code operation: {operation}",
+                    "supported_operations": self.supported_operations
+                }
+            
+            return {
+                "task_id": task_id,
+                "status": "completed",
+                "result": result_data,
+                "operation": operation
+            }
+            
+        except Exception as e:
+            logger.error(f"Code task {task_id} failed: {e}")
+            return {
+                "task_id": task_id,
+                "status": "failed",
+                "error": str(e),
+                "operation": operation
+            }
 
     async def _analyze_code(self, task_data: Dict[str, Any]) -> Dict[str, Any]:
         """Analyze code for metrics and patterns."""
@@ -424,6 +568,40 @@ class GeneratedClass {{
         return "Hello from generated class";
     }}
 }}'''
+    
+    async def self_evaluate(self) -> Dict[str, Any]:
+        """Evaluate Code agent performance."""
+        metrics = await self.report_metrics()
+        
+        performance_score = metrics["success_rate"]
+        
+        strengths = []
+        if performance_score > 0.9:
+            strengths.append("High success rate")
+        if len(self.supported_languages) >= 7:
+            strengths.append("Multi-language support")
+        if len(self.supported_operations) >= 5:
+            strengths.append("Comprehensive code operations")
+        
+        weaknesses = []
+        if performance_score < 0.7:
+            weaknesses.append("Low success rate")
+        if metrics["avg_task_duration"] > 5.0:
+            weaknesses.append("Slow code processing")
+        
+        improvement_suggestions = []
+        if performance_score < 0.9:
+            improvement_suggestions.append("Integrate AST parsers for better code analysis")
+        improvement_suggestions.append("Add support for more languages (Rust, Go)")
+        
+        return {
+            "agent_id": self.agent_id,
+            "performance_score": performance_score,
+            "strengths": strengths,
+            "weaknesses": weaknesses,
+            "improvement_suggestions": improvement_suggestions,
+            "metrics": metrics
+        }
 
 
 class DataAgent(BaseAgent):
@@ -438,41 +616,75 @@ class DataAgent(BaseAgent):
         self.capabilities = [
             AgentCapability.DATA_PROCESSING,
             AgentCapability.DATA_ANALYSIS,
-            AgentCapability.DATA_VISUALIZATION,
-            AgentCapability.STATISTICAL_ANALYSIS
+            AgentCapability.ANALYSIS  # Data analysis
+        ]
+        self.supported_operations = [
+            "data_analysis", "data_processing", "data_transformation",
+            "statistical_analysis", "data_validation", "data_cleaning"
         ]
 
-    async def execute(self, task_envelope: TaskEnvelope) -> TaskResultEnvelope:
-        """Execute data-related tasks."""
-        task_data = task_envelope.payload
-        operation = task_data.get("operation", "")
-
+    async def bootstrap_and_validate(self) -> BootstrapResult:
+        """Bootstrap and validate Data agent."""
+        result = BootstrapResult()
+        
+        result.add_validation("configuration", True, "Configuration valid")
+        result.add_validation("capabilities", len(self.capabilities) > 0, f"Agent has {len(self.capabilities)} capabilities")
+        
+        # Self-test: Try a simple data analysis
         try:
-            if operation == "analyze_dataset":
-                result = await self._analyze_dataset(task_data)
-            elif operation == "clean_data":
-                result = await self._clean_data(task_data)
-            elif operation == "transform_data":
-                result = await self._transform_data(task_data)
-            elif operation == "generate_statistics":
-                result = await self._generate_statistics(task_data)
-            else:
-                result = {"error": f"Unsupported data operation: {operation}"}
-
-            return create_task_result_envelope(
-                task_id=task_envelope.task_id,
-                result=result,
-                status="completed"
-            )
-
+            test_data = [1, 2, 3, 4, 5]
+            test_result = await self._generate_statistics({"data": test_data})
+            result.add_validation("self_test", test_result.get("count", 0) > 0, "Self-test passed")
         except Exception as e:
-            logger.error(f"Data task failed: {e}")
-            return create_task_result_envelope(
-                task_id=task_envelope.task_id,
-                result=None,
-                status="failed",
-                error=str(e)
-            )
+            result.add_validation("self_test", False, f"Self-test failed: {e}")
+        
+        if all(result.validations.values()):
+            result.success = True
+            self.status = AgentStatus.IDLE
+        else:
+            result.success = False
+            self.status = AgentStatus.ERROR
+        
+        return result
+
+    async def execute_task(self, task: Dict[str, Any]) -> Dict[str, Any]:
+        """Execute data task."""
+        task_id = task.get("task_id", "unknown")
+        operation = task.get("operation", "")
+        parameters = task.get("parameters", {})
+        
+        try:
+            if operation == "data_analysis" or operation == "analyze_dataset":
+                result_data = await self._analyze_dataset(parameters)
+            elif operation == "data_cleaning" or operation == "clean_data":
+                result_data = await self._clean_data(parameters)
+            elif operation == "data_transformation" or operation == "transform_data":
+                result_data = await self._transform_data(parameters)
+            elif operation == "statistical_analysis" or operation == "generate_statistics":
+                result_data = await self._generate_statistics(parameters)
+            else:
+                return {
+                    "task_id": task_id,
+                    "status": "failed",
+                    "error": f"Unsupported data operation: {operation}",
+                    "supported_operations": self.supported_operations
+                }
+            
+            return {
+                "task_id": task_id,
+                "status": "completed",
+                "result": result_data,
+                "operation": operation
+            }
+            
+        except Exception as e:
+            logger.error(f"Data task {task_id} failed: {e}")
+            return {
+                "task_id": task_id,
+                "status": "failed",
+                "error": str(e),
+                "operation": operation
+            }
 
     async def _analyze_dataset(self, task_data: Dict[str, Any]) -> Dict[str, Any]:
         """Analyze dataset structure and characteristics."""
@@ -618,6 +830,37 @@ class DataAgent(BaseAgent):
         }
 
         return stats
+    
+    async def self_evaluate(self) -> Dict[str, Any]:
+        """Evaluate Data agent performance."""
+        metrics = await self.report_metrics()
+        
+        performance_score = metrics["success_rate"]
+        
+        strengths = []
+        if performance_score > 0.9:
+            strengths.append("High success rate")
+        if len(self.supported_operations) >= 6:
+            strengths.append("Comprehensive data operations")
+        if metrics["avg_task_duration"] < 2.0:
+            strengths.append("Fast data processing")
+        
+        weaknesses = []
+        if performance_score < 0.7:
+            weaknesses.append("Low success rate")
+        
+        improvement_suggestions = []
+        improvement_suggestions.append("Integrate pandas/numpy for advanced data processing")
+        improvement_suggestions.append("Add data visualization capabilities")
+        
+        return {
+            "agent_id": self.agent_id,
+            "performance_score": performance_score,
+            "strengths": strengths,
+            "weaknesses": weaknesses,
+            "improvement_suggestions": improvement_suggestions,
+            "metrics": metrics
+        }
 
 
 class ResearchAgent(BaseAgent):
@@ -632,42 +875,76 @@ class ResearchAgent(BaseAgent):
         super().__init__(agent_id=agent_id, agent_type="research_specialist", config=config)
         self.capabilities = [
             AgentCapability.RESEARCH,
-            AgentCapability.INFORMATION_SYNTHESIS,
-            AgentCapability.KNOWLEDGE_DISCOVERY,
-            AgentCapability.HYPOTHESIS_GENERATION
+            AgentCapability.ANALYSIS  # Research involves analysis
+        ]
+        self.supported_operations = [
+            "research", "search", "synthesize_information",
+            "generate_hypotheses", "analyze_trends", "fact_check"
         ]
 
-    async def execute(self, task_envelope: TaskEnvelope) -> TaskResultEnvelope:
-        """Execute research-related tasks."""
-        task_data = task_envelope.payload
-        operation = task_data.get("operation", "")
-
+    async def bootstrap_and_validate(self) -> BootstrapResult:
+        """Bootstrap and validate Research agent."""
+        result = BootstrapResult()
+        
+        result.add_validation("configuration", True, "Configuration valid")
+        result.add_validation("capabilities", len(self.capabilities) > 0, f"Agent has {len(self.capabilities)} capabilities")
+        
+        # Self-test: Try a simple research
         try:
-            if operation == "research_topic":
-                result = await self._research_topic(task_data)
-            elif operation == "synthesize_information":
-                result = await self._synthesize_information(task_data)
-            elif operation == "generate_hypotheses":
-                result = await self._generate_hypotheses(task_data)
-            elif operation == "analyze_trends":
-                result = await self._analyze_trends(task_data)
-            else:
-                result = {"error": f"Unsupported research operation: {operation}"}
-
-            return create_task_result_envelope(
-                task_id=task_envelope.task_id,
-                result=result,
-                status="completed"
-            )
-
+            test_result = await self._research_topic({"topic": "test", "depth": "basic"})
+            result.add_validation("self_test", "key_findings" in test_result, "Self-test passed")
         except Exception as e:
-            logger.error(f"Research task failed: {e}")
-            return create_task_result_envelope(
-                task_id=task_envelope.task_id,
-                result=None,
-                status="failed",
-                error=str(e)
-            )
+            result.add_validation("self_test", False, f"Self-test failed: {e}")
+        
+        if all(result.validations.values()):
+            result.success = True
+            self.status = AgentStatus.IDLE
+        else:
+            result.success = False
+            self.status = AgentStatus.ERROR
+        
+        return result
+
+    async def execute_task(self, task: Dict[str, Any]) -> Dict[str, Any]:
+        """Execute research task."""
+        task_id = task.get("task_id", "unknown")
+        operation = task.get("operation", "")
+        parameters = task.get("parameters", {})
+        
+        try:
+            if operation == "research" or operation == "research_topic":
+                result_data = await self._research_topic(parameters)
+            elif operation == "synthesize" or operation == "synthesize_information":
+                result_data = await self._synthesize_information(parameters)
+            elif operation == "generate_hypotheses":
+                result_data = await self._generate_hypotheses(parameters)
+            elif operation == "analyze_trends":
+                result_data = await self._analyze_trends(parameters)
+            elif operation == "fact_check":
+                result_data = await self._fact_check(parameters)
+            else:
+                return {
+                    "task_id": task_id,
+                    "status": "failed",
+                    "error": f"Unsupported research operation: {operation}",
+                    "supported_operations": self.supported_operations
+                }
+            
+            return {
+                "task_id": task_id,
+                "status": "completed",
+                "result": result_data,
+                "operation": operation
+            }
+            
+        except Exception as e:
+            logger.error(f"Research task {task_id} failed: {e}")
+            return {
+                "task_id": task_id,
+                "status": "failed",
+                "error": str(e),
+                "operation": operation
+            }
 
     async def _research_topic(self, task_data: Dict[str, Any]) -> Dict[str, Any]:
         """Research a given topic and gather information."""
@@ -792,3 +1069,46 @@ class ResearchAgent(BaseAgent):
         }
 
         return trends
+    
+    async def _fact_check(self, task_data: Dict[str, Any]) -> Dict[str, Any]:
+        """Fact check a claim."""
+        claim = task_data.get("claim", "")
+        
+        # Simple fact checking (would use knowledge bases in production)
+        return {
+            "claim": claim,
+            "verdict": "unverified",
+            "confidence": 0.5,
+            "sources_checked": 0,
+            "notes": "Fact checking requires knowledge base integration"
+        }
+    
+    async def self_evaluate(self) -> Dict[str, Any]:
+        """Evaluate Research agent performance."""
+        metrics = await self.report_metrics()
+        
+        performance_score = metrics["success_rate"]
+        
+        strengths = []
+        if performance_score > 0.9:
+            strengths.append("High success rate")
+        if len(self.supported_operations) >= 6:
+            strengths.append("Comprehensive research operations")
+        
+        weaknesses = []
+        if performance_score < 0.7:
+            weaknesses.append("Low success rate")
+        
+        improvement_suggestions = []
+        improvement_suggestions.append("Integrate with knowledge graphs (Neo4j)")
+        improvement_suggestions.append("Add web search API integration")
+        improvement_suggestions.append("Implement citation tracking")
+        
+        return {
+            "agent_id": self.agent_id,
+            "performance_score": performance_score,
+            "strengths": strengths,
+            "weaknesses": weaknesses,
+            "improvement_suggestions": improvement_suggestions,
+            "metrics": metrics
+        }

@@ -11,7 +11,7 @@ import time
 from contextlib import asynccontextmanager
 from typing import Dict, Any
 
-from fastapi import FastAPI, HTTPException, Depends, Request
+from fastapi import FastAPI, HTTPException, Depends, Request, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import JSONResponse
@@ -53,6 +53,20 @@ async def lifespan(app: FastAPI):
     try:
         await init_db()
         logger.info("✅ Database initialized successfully")
+        
+        # Seed default prompts and templates
+        try:
+            from app.services.prompt_seed_service import get_prompt_seed_service
+            from app.database.connection import AsyncSessionLocal
+            
+            seed_service = get_prompt_seed_service()
+            async with AsyncSessionLocal() as db:
+                seed_result = await seed_service.seed_all(db)
+                logger.info(f"✅ Prompts/Templates seeded: {seed_result['total_seeded']} new, {seed_result['total_skipped']} existing")
+                if seed_result['total_errors'] > 0:
+                    logger.warning(f"⚠️ Seeding had {seed_result['total_errors']} errors")
+        except Exception as e:
+            logger.warning(f"⚠️ Prompt/template seeding failed (non-critical): {e}")
     except Exception as e:
         logger.error(f"❌ Database initialization failed: {e}")
         raise
@@ -65,6 +79,24 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.error(f"❌ Compression engine initialization failed: {e}")
         raise
+
+    # Initialize API Agent and register agents
+    try:
+        from app.agents.api.fastapi_app import api_agent
+        logger.info("🚀 Initializing API Agent and registering agents...")
+        bootstrap_result = await api_agent.bootstrap_and_validate()
+        if bootstrap_result.success:
+            logger.info(f"✅ API Agent bootstrap successful - {len(api_agent.agent_registry)} agents registered")
+            for agent_id, agent in api_agent.agent_registry.items():
+                agent_type = getattr(agent, 'agent_type', 'unknown')
+                logger.info(f"  ✓ Agent {agent_id}: {agent_type}")
+        else:
+            logger.warning(f"⚠️ API Agent bootstrap had issues: {bootstrap_result.errors}")
+            logger.warning(f"   Registered agents: {len(api_agent.agent_registry)}")
+    except Exception as e:
+        logger.error(f"❌ API Agent initialization failed: {e}")
+        import traceback
+        logger.error(traceback.format_exc())
 
     logger.info("🎉 Backend startup completed successfully")
     yield
@@ -117,7 +149,98 @@ app.include_router(algorithm_docs.router, tags=["Algorithm Documentation"])
 app.include_router(uploads.router, prefix="/api/v1/upload", tags=["Uploads"])
 
 # Include Agent API Layer (Agent 04)
-app.include_router(api_agent_app.router, prefix="", tags=["Agent API"])
+# Define key agent endpoints directly in main app
+from app.agents.api.api_agent import APIAgent
+from app.agents.api.fastapi_app import app as agents_api_app
+
+# Initialize API agent
+api_agent = APIAgent()
+
+# Mount the agents API app
+app.mount("/api/v1", agents_api_app)
+
+@app.get("/agents")
+async def list_agents():
+    """List all registered agents."""
+    try:
+        agents = await api_agent.get_registered_agents()
+        return {"agents": agents, "count": len(agents)}
+    except Exception as e:
+        logger.error(f"Error listing agents: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# WebSocket endpoints must be defined directly on the main app
+# Copy WebSocket endpoints from api_agent_app to main app
+from app.agents.api.fastapi_app import websocket_clients
+
+@app.websocket("/ws/agent-updates")
+async def websocket_agent_updates(websocket: WebSocket):
+    """WebSocket endpoint for real-time agent updates."""
+    client_id = f"ws_{int(datetime.now().timestamp())}_{id(websocket)}"
+    websocket_clients[client_id] = websocket
+
+    logger.info(f"WebSocket client connected: {client_id}")
+
+    try:
+        # Send initial system status
+        from app.agents.api.fastapi_app import api_agent
+        system_status = await api_agent.get_system_status()
+        await websocket.send_json({
+            "event_type": "system_status",
+            "data": system_status
+        })
+
+        # Keep connection alive and listen for messages
+        while True:
+            try:
+                # Receive message from client (if any) - timeout after 30 seconds
+                try:
+                    data = await websocket.receive_text()
+                    # Process client messages if needed
+                    logger.debug(f"Received WebSocket message from {client_id}: {data}")
+                except Exception:
+                    # No message received, send periodic updates
+                    pass
+
+                # Send periodic status updates (every 30 seconds)
+                await asyncio.sleep(30)
+                current_status = await api_agent.get_system_status()
+                await websocket.send_json({
+                    "event_type": "status_update",
+                    "data": current_status
+                })
+
+            except WebSocketDisconnect:
+                break
+            except Exception as e:
+                logger.error(f"WebSocket message handling error for {client_id}: {e}")
+                break
+
+    except WebSocketDisconnect:
+        logger.info(f"WebSocket client {client_id} disconnected")
+    except Exception as e:
+        logger.error(f"WebSocket error for {client_id}: {e}")
+    finally:
+        # Clean up WebSocket client
+        if client_id in websocket_clients:
+            del websocket_clients[client_id]
+            logger.debug(f"Cleaned up WebSocket client {client_id}")
+
+@app.websocket("/ws/debate-updates")
+async def websocket_debate_updates(websocket: WebSocket):
+    """WebSocket endpoint for real-time debate updates."""
+    await websocket.accept()
+
+    try:
+        while True:
+            try:
+                # Keep connection alive for debate updates
+                await asyncio.wait_for(websocket.receive_text(), timeout=30.0)
+            except asyncio.TimeoutError:
+                await websocket.send_json({"type": "heartbeat"})
+    except Exception as e:
+        logger.error(f"Debate WebSocket error: {e}")
 
 # Mount static files for media serving
 # In Docker, media is at /app/media
@@ -177,9 +300,9 @@ async def health_check():
 if __name__ == "__main__":
     uvicorn.run(
         "main:app",
-        host=settings.api_host,
-        port=settings.api_port,
-        reload=settings.debug,
+        host=settings.api.host,
+        port=settings.api.port,
+        reload=settings.api.debug,
         log_level="info"
     )
 

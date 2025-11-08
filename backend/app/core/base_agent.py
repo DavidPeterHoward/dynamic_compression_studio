@@ -40,9 +40,18 @@ class AgentCapability(Enum):
     ANALYSIS = "analysis"
     OPTIMIZATION = "optimization"
     LEARNING = "learning"
+    META_LEARNING = "meta_learning"
     CODE_GENERATION = "code_generation"
+    CODE_ANALYSIS = "code_analysis"
+    DATA_PROCESSING = "data_processing"
+    DATA_ANALYSIS = "data_analysis"
+    RESEARCH = "research"
     MONITORING = "monitoring"
     ORCHESTRATION = "orchestration"
+    STRATEGY_ADAPTATION = "strategy_adaptation"
+    INSIGHT_GENERATION = "insight_generation"
+    SELF_IMPROVEMENT = "self_improvement"
+    PREDICTIVE_ANALYSIS = "predictive_analysis"
 
 
 class BootstrapResult:
@@ -139,6 +148,9 @@ class BaseAgent(ABC):
         self.task_count = 0
         self.error_count = 0
         self.success_count = 0
+        
+        # Registry reference (set when registered)
+        self.registry = None
         
         logger.info(f"Agent {self.agent_id} ({self.agent_type}) initializing...")
     
@@ -386,11 +398,32 @@ class BaseAgent(ABC):
         """
         Graceful shutdown.
         
-        Performs cleanup and reports final metrics.
+        Performs cleanup, saves state, closes connections,
+        unregisters from registry, and reports final metrics.
         """
         logger.info(f"Agent {self.agent_id} shutting down...")
         
         self.status = AgentStatus.SHUTDOWN
+        
+        # Save state if needed
+        try:
+            await self._save_state()
+        except Exception as e:
+            logger.warning(f"Failed to save agent state: {e}")
+        
+        # Close connections
+        try:
+            await self._close_connections()
+        except Exception as e:
+            logger.warning(f"Error closing connections: {e}")
+        
+        # Unregister from registry
+        if self.registry:
+            try:
+                await self.registry.unregister(self.agent_id)
+                logger.info(f"Agent {self.agent_id} unregistered from registry")
+            except Exception as e:
+                logger.warning(f"Failed to unregister agent: {e}")
         
         # Report final metrics
         final_metrics = await self.report_metrics()
@@ -405,6 +438,223 @@ class BaseAgent(ABC):
         
         Override in subclasses to clean up specific resources.
         """
+        pass
+    
+    async def heartbeat(self) -> Dict[str, Any]:
+        """
+        Update heartbeat and check agent health.
+        
+        Returns health status for monitoring.
+        
+        Returns:
+            Health status dictionary with:
+                - agent_id: Agent identifier
+                - status: Current status
+                - health: Health check results
+                - timestamp: Heartbeat timestamp
+        """
+        self.last_active_at = datetime.now()
+        health = await self._check_health()
+        
+        # Update registry if registered
+        if self.registry:
+            try:
+                await self.registry.update_health(self.agent_id, health)
+            except Exception as e:
+                logger.warning(f"Failed to update registry health: {e}")
+        
+        return {
+            "agent_id": self.agent_id,
+            "status": self.status.value,
+            "health": health,
+            "timestamp": datetime.now().isoformat()
+        }
+    
+    async def _check_health(self) -> Dict[str, Any]:
+        """
+        Check agent health status.
+        
+        Returns:
+            Health information dictionary
+        """
+        uptime = (datetime.now() - self.created_at).total_seconds()
+        last_active_ago = (datetime.now() - self.last_active_at).total_seconds()
+        
+        # Calculate success rate
+        success_rate = (
+            self.success_count / self.task_count
+            if self.task_count > 0
+            else 0.0
+        )
+        
+        # Determine health status
+        healthy = (
+            self.status != AgentStatus.ERROR and
+            self.status != AgentStatus.SHUTDOWN and
+            last_active_ago < 300  # Active in last 5 minutes
+        )
+        
+        return {
+            "healthy": healthy,
+            "uptime_seconds": uptime,
+            "last_active_seconds_ago": last_active_ago,
+            "task_count": self.task_count,
+            "success_rate": success_rate,
+            "error_rate": (
+                self.error_count / self.task_count
+                if self.task_count > 0
+                else 0.0
+            )
+        }
+    
+    def can_handle(self, task_type: str, task_requirements: Optional[Dict[str, Any]] = None) -> bool:
+        """
+        Check if agent can handle a task type.
+        
+        Enhanced with capability matching and requirements checking.
+        
+        Args:
+            task_type: Type of task to check
+            task_requirements: Optional requirements dictionary with:
+                - require_idle: Require agent to be idle
+                - min_success_rate: Minimum success rate required
+                - required_capabilities: List of required capabilities
+                
+        Returns:
+            True if agent can handle the task
+        """
+        # Extract required capabilities from task type
+        required_capabilities = self._extract_required_capabilities(task_type)
+        
+        # Check capability matching
+        agent_capability_values = [cap.value for cap in self.capabilities]
+        has_capability = any(
+            cap in agent_capability_values
+            for cap in required_capabilities
+        )
+        
+        if not has_capability:
+            return False
+        
+        # Check explicit requirements if provided
+        if task_requirements:
+            if not self._meets_requirements(task_requirements):
+                return False
+        
+        return True
+    
+    def _extract_required_capabilities(self, task_type: str) -> List[str]:
+        """
+        Extract required capabilities from task type.
+        
+        Maps common task types to required capabilities.
+        
+        Args:
+            task_type: Type of task
+            
+        Returns:
+            List of required capability values
+        """
+        task_lower = task_type.lower()
+        
+        # Map task types to capabilities
+        capability_map = {
+            "compression": ["compression"],
+            "decompression": ["decompression"],
+            "text_analysis": ["analysis"],
+            "sentiment_analysis": ["analysis"],
+            "entity_extraction": ["analysis"],
+            "code_generation": ["code_generation"],
+            "code_analysis": ["code_analysis"],
+            "data_processing": ["data_processing"],
+            "data_analysis": ["data_analysis"],
+            "statistical_analysis": ["data_analysis"],
+            "research": ["research"],
+            "search": ["research"],
+            "meta_learning": ["meta_learning"],
+            "learn_from_experience": ["meta_learning", "learning"],
+            "optimize_parameters": ["optimization", "meta_learning"],
+            "orchestrate": ["orchestration"],
+            "monitor": ["monitoring"],
+        }
+        
+        # Check for exact match
+        if task_lower in capability_map:
+            return capability_map[task_lower]
+        
+        # Check for partial matches
+        for task_pattern, caps in capability_map.items():
+            if task_pattern in task_lower:
+                return caps
+        
+        # Default: return empty list (agent must explicitly support)
+        return []
+    
+    def _meets_requirements(self, requirements: Dict[str, Any]) -> bool:
+        """
+        Check if agent meets task requirements.
+        
+        Args:
+            requirements: Requirements dictionary
+            
+        Returns:
+            True if agent meets all requirements
+        """
+        # Check status requirement
+        if requirements.get("require_idle"):
+            if self.status != AgentStatus.IDLE:
+                return False
+        
+        # Check minimum success rate
+        if requirements.get("min_success_rate"):
+            success_rate = (
+                self.success_count / self.task_count
+                if self.task_count > 0
+                else 0.0
+            )
+            if success_rate < requirements["min_success_rate"]:
+                return False
+        
+        # Check required capabilities
+        if requirements.get("required_capabilities"):
+            agent_cap_values = [cap.value for cap in self.capabilities]
+            required_caps = requirements["required_capabilities"]
+            if not all(cap in agent_cap_values for cap in required_caps):
+                return False
+        
+        return True
+    
+    async def register_with_registry(self, registry):
+        """
+        Register agent with the global registry.
+        
+        Args:
+            registry: AgentRegistry instance
+        """
+        self.registry = registry
+        try:
+            await registry.register(self)
+            logger.info(f"Agent {self.agent_id} registered with registry")
+        except Exception as e:
+            logger.error(f"Failed to register agent {self.agent_id}: {e}")
+            self.registry = None
+    
+    async def _save_state(self):
+        """
+        Save agent state for recovery.
+        
+        Override in subclasses to implement persistence strategy.
+        """
+        # Default: no-op (can be overridden)
+        pass
+    
+    async def _close_connections(self):
+        """
+        Close all agent connections.
+        
+        Override in subclasses to close specific connections.
+        """
+        # Default: no-op (can be overridden)
         pass
     
     def __repr__(self) -> str:

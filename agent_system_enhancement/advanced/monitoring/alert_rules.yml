@@ -1,0 +1,324 @@
+# Enhanced Alert Rules for Multi-Agent System
+# Comprehensive alerting for agents, debates, circuit breakers, and system health
+
+groups:
+  - name: agent_system_alerts
+    rules:
+      # Backend Service Alerts
+      - alert: BackendDown
+        expr: up{job="backend"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: backend
+        annotations:
+          summary: "Backend service is down"
+          description: "Backend service has been down for more than 1 minute"
+          runbook_url: "https://agent-system.example.com/runbooks/backend-down"
+
+      - alert: BackendHighCPU
+        expr: rate(container_cpu_usage_seconds_total{pod=~"backend-.*"}[5m]) > 0.8
+        for: 5m
+        labels:
+          severity: warning
+          service: backend
+        annotations:
+          summary: "Backend high CPU usage"
+          description: "Backend CPU usage is above 80% for 5 minutes"
+          value: "{{ $value }}"
+
+      - alert: BackendHighMemory
+        expr: (container_memory_usage_bytes{pod=~"backend-.*"} / container_spec_memory_limit_bytes) > 0.9
+        for: 3m
+        labels:
+          severity: warning
+          service: backend
+        annotations:
+          summary: "Backend high memory usage"
+          description: "Backend memory usage is above 90% for 3 minutes"
+          value: "{{ $value }}"
+
+      - alert: BackendHighErrorRate
+        expr: (rate(http_requests_total{job="backend", status=~"5.."}[5m]) / rate(http_requests_total{job="backend"}[5m])) > 0.05
+        for: 5m
+        labels:
+          severity: critical
+          service: backend
+        annotations:
+          summary: "Backend high error rate"
+          description: "Backend error rate is above 5% for 5 minutes"
+          value: "{{ $value }}"
+
+      # Frontend Service Alerts
+      - alert: FrontendDown
+        expr: up{job="frontend"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: frontend
+        annotations:
+          summary: "Frontend service is down"
+          description: "Frontend service has been down for more than 1 minute"
+
+      # Database Alerts
+      - alert: DatabaseDown
+        expr: pg_up == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: database
+        annotations:
+          summary: "Database is down"
+          description: "PostgreSQL database is not responding"
+
+      - alert: DatabaseHighConnections
+        expr: pg_stat_activity_count > 80
+        for: 5m
+        labels:
+          severity: warning
+          service: database
+        annotations:
+          summary: "Database high connection count"
+          description: "Database has more than 80 active connections"
+          value: "{{ $value }}"
+
+      - alert: DatabaseSlowQueries
+        expr: rate(pg_stat_statements_total_time_seconds[5m]) / rate(pg_stat_statements_calls[5m]) > 1
+        for: 5m
+        labels:
+          severity: warning
+          service: database
+        annotations:
+          summary: "Database slow queries detected"
+          description: "Average query execution time is above 1 second"
+
+      # Redis Cache Alerts
+      - alert: RedisDown
+        expr: redis_up == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: redis
+        annotations:
+          summary: "Redis cache is down"
+          description: "Redis cache service is not responding"
+
+      - alert: RedisHighMemoryUsage
+        expr: redis_memory_used_bytes / redis_memory_max_bytes > 0.9
+        for: 5m
+        labels:
+          severity: warning
+          service: redis
+        annotations:
+          summary: "Redis high memory usage"
+          description: "Redis memory usage is above 90%"
+
+      # Ollama Service Alerts
+      - alert: OllamaDown
+        expr: up{job="ollama"} == 0
+        for: 2m
+        labels:
+          severity: warning
+          service: ollama
+        annotations:
+          summary: "Ollama service is down"
+          description: "Ollama LLM service has been down for more than 2 minutes"
+
+      - alert: OllamaHighQueueLength
+        expr: ollama_queue_length > 100
+        for: 2m
+        labels:
+          severity: warning
+          service: ollama
+        annotations:
+          summary: "Ollama high queue length"
+          description: "Ollama has more than 100 requests in queue"
+
+      # Agent-Specific Alerts
+      - alert: AgentUnhealthy
+        expr: agent_health_status{status="unhealthy"} > 0
+        for: 5m
+        labels:
+          severity: warning
+          service: agents
+        annotations:
+          summary: "Agent is unhealthy"
+          description: "One or more agents are reporting unhealthy status"
+
+      - alert: AgentHighErrorRate
+        expr: rate(agent_task_errors_total[5m]) / rate(agent_tasks_total[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+          service: agents
+        annotations:
+          summary: "Agent high error rate"
+          description: "Agent error rate is above 10% for 5 minutes"
+
+      - alert: AgentTaskQueueGrowing
+        expr: increase(agent_task_queue_length[10m]) > 50
+        for: 5m
+        labels:
+          severity: warning
+          service: agents
+        annotations:
+          summary: "Agent task queue growing rapidly"
+          description: "Agent task queue has grown by more than 50 items in 10 minutes"
+
+      # Debate System Alerts
+      - alert: DebateSystemStalled
+        expr: debate_active_sessions == 0 AND increase(debate_completed_total[1h]) == 0
+        for: 1h
+        labels:
+          severity: info
+          service: debates
+        annotations:
+          summary: "Debate system appears idle"
+          description: "No active debates and no debates completed in the last hour"
+
+      - alert: DebateHighFailureRate
+        expr: rate(debate_failed_total[5m]) / rate(debate_started_total[5m]) > 0.2
+        for: 10m
+        labels:
+          severity: warning
+          service: debates
+        annotations:
+          summary: "Debate system high failure rate"
+          description: "Debate failure rate is above 20% for 10 minutes"
+
+      # Circuit Breaker Alerts
+      - alert: CircuitBreakerTripped
+        expr: agent_circuit_breaker_state{state="open"} > 0
+        for: 1m
+        labels:
+          severity: critical
+          service: circuit_breaker
+        annotations:
+          summary: "Circuit breaker has tripped"
+          description: "One or more circuit breakers are in OPEN state"
+
+      - alert: CircuitBreakerHighFailureRate
+        expr: rate(circuit_breaker_failures_total[5m]) > 10
+        for: 5m
+        labels:
+          severity: warning
+          service: circuit_breaker
+        annotations:
+          summary: "Circuit breaker high failure rate"
+          description: "Circuit breaker is seeing more than 10 failures per minute"
+
+      # System Resource Alerts
+      - alert: NodeHighCPU
+        expr: (1 - rate(node_cpu_seconds_total{mode="idle"}[5m])) > 0.9
+        for: 5m
+        labels:
+          severity: warning
+          service: system
+        annotations:
+          summary: "Node high CPU usage"
+          description: "Node CPU usage is above 90% for 5 minutes"
+
+      - alert: NodeHighMemory
+        expr: (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) > 0.9
+        for: 5m
+        labels:
+          severity: warning
+          service: system
+        annotations:
+          summary: "Node high memory usage"
+          description: "Node memory usage is above 90% for 5 minutes"
+
+      - alert: NodeHighDiskUsage
+        expr: (node_filesystem_size_bytes - node_filesystem_free_bytes) / node_filesystem_size_bytes > 0.9
+        for: 5m
+        labels:
+          severity: warning
+          service: system
+        annotations:
+          summary: "Node high disk usage"
+          description: "Node disk usage is above 90% for 5 minutes"
+
+      # Network and Connectivity Alerts
+      - alert: HighNetworkErrors
+        expr: rate(node_network_receive_errs_total[5m]) > 100 OR rate(node_network_transmit_errs_total[5m]) > 100
+        for: 5m
+        labels:
+          severity: warning
+          service: network
+        annotations:
+          summary: "High network error rate"
+          description: "Network interface is experiencing high error rates"
+
+      # Application Performance Alerts
+      - alert: SlowAPIResponse
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job="backend"}[5m])) > 2
+        for: 5m
+        labels:
+          severity: warning
+          service: backend
+        annotations:
+          summary: "Slow API response times"
+          description: "95th percentile API response time is above 2 seconds"
+
+      - alert: HighWebSocketConnections
+        expr: websocket_active_connections > 1000
+        for: 5m
+        labels:
+          severity: info
+          service: websocket
+        annotations:
+          summary: "High WebSocket connection count"
+          description: "More than 1000 active WebSocket connections"
+
+  - name: business_logic_alerts
+    rules:
+      # Business Logic Specific Alerts
+      - alert: NoActiveAgents
+        expr: count(agent_status{status="active"}) == 0
+        for: 5m
+        labels:
+          severity: critical
+          service: agents
+        annotations:
+          summary: "No active agents available"
+          description: "All agents are currently inactive or unavailable"
+
+      - alert: LowAgentUtilization
+        expr: rate(agent_tasks_completed_total[1h]) < 1
+        for: 1h
+        labels:
+          severity: info
+          service: agents
+        annotations:
+          summary: "Low agent utilization"
+          description: "Agents are processing fewer than 1 task per hour on average"
+
+      - alert: DebateConsensusFailure
+        expr: increase(debate_consensus_failed_total[1h]) > 5
+        for: 10m
+        labels:
+          severity: warning
+          service: debates
+        annotations:
+          summary: "Multiple debate consensus failures"
+          description: "More than 5 debates have failed to reach consensus in the last hour"
+
+      - alert: TaskQueueBacklog
+        expr: agent_task_queue_length > 1000
+        for: 10m
+        labels:
+          severity: warning
+          service: tasks
+        annotations:
+          summary: "Large task queue backlog"
+          description: "Task queue has grown to over 1000 pending tasks"
+
+      - alert: ModelLoadingFailures
+        expr: increase(ollama_model_load_failures_total[1h]) > 3
+        for: 30m
+        labels:
+          severity: warning
+          service: ollama
+        annotations:
+          summary: "Multiple model loading failures"
+          description: "More than 3 Ollama model loading failures in the last hour"

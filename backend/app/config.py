@@ -98,13 +98,15 @@ class CompressionSettings(BaseSettings):
 
 class APISettings(BaseSettings):
     """API configuration settings."""
-    
+
     model_config = {"extra": "ignore"}
-    
+
     title: str = Field(default="Dynamic Compression Algorithms API")
     description: str = Field(default="Advanced compression optimization with AI")
     version: str = Field(default="1.0.0")
     debug: bool = Field(default=True, env="DEBUG")  # Enable debug mode by default for documentation
+    host: str = Field(default="0.0.0.0", env="API_HOST")
+    port: int = Field(default=8000, env="API_PORT")
     cors_origins: str = Field(default="*", env="CORS_ORIGINS")
     cors_methods: str = Field(default="*", env="CORS_METHODS")
     cors_headers: str = Field(default="*", env="CORS_HEADERS")

@@ -44,60 +44,121 @@ const AgentStatusDashboard: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Connect to native WebSocket (not Socket.io)
-    const wsUrl = process.env.NEXT_PUBLIC_API_URL?.replace('http', 'ws') || 'ws://localhost:8000';
-    const socketInstance = new WebSocket(`${wsUrl}/ws/agent-updates`);
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8441';
+    const wsUrl = apiUrl.replace('http', 'ws');
+    
+    // Connect to WebSocket with error handling
+    let socketInstance: WebSocket | null = null;
+    let reconnectTimeout: NodeJS.Timeout | null = null;
+    let reconnectAttempts = 0;
+    const maxReconnectAttempts = 5;
+    const reconnectDelay = 3000; // 3 seconds
 
-    socketInstance.onopen = () => {
-      setIsConnected(true);
-      console.log('Connected to agent updates');
-    };
-
-    socketInstance.onclose = () => {
-      setIsConnected(false);
-      console.log('Disconnected from agent updates');
-    };
-
-    socketInstance.onmessage = (event) => {
+    const connectWebSocket = () => {
       try {
-        const message = JSON.parse(event.data);
-        
-        if (message.event_type === 'system_status') {
-          setSystemStatus(message.data as SystemStatus);
-          setIsLoading(false);
-        } else if (message.event_type === 'status_update') {
-          setSystemStatus(message.data as SystemStatus);
-        } else if (message.event_type === 'task_completed') {
-          console.log('Task completed:', message.data);
-          setRecentTasks(prev => [message.data as TaskResult, ...prev.slice(0, 9)]);
-        }
+        socketInstance = new WebSocket(`${wsUrl}/ws/agent-updates`);
+
+        socketInstance.onopen = () => {
+          setIsConnected(true);
+          reconnectAttempts = 0;
+          console.log('Connected to agent updates');
+        };
+
+        socketInstance.onclose = () => {
+          setIsConnected(false);
+          console.log('Disconnected from agent updates');
+          
+          // Attempt reconnection if not manually closed
+          if (reconnectAttempts < maxReconnectAttempts) {
+            reconnectAttempts++;
+            reconnectTimeout = setTimeout(() => {
+              console.log(`Reconnecting to WebSocket (attempt ${reconnectAttempts}/${maxReconnectAttempts})...`);
+              connectWebSocket();
+            }, reconnectDelay);
+          } else {
+            console.warn('Max WebSocket reconnection attempts reached');
+          }
+        };
+
+        socketInstance.onmessage = (event) => {
+          try {
+            const message = JSON.parse(event.data);
+            
+            if (message.event_type === 'system_status') {
+              setSystemStatus(message.data as SystemStatus);
+              setIsLoading(false);
+            } else if (message.event_type === 'status_update') {
+              setSystemStatus(message.data as SystemStatus);
+            } else if (message.event_type === 'task_completed') {
+              console.log('Task completed:', message.data);
+              setRecentTasks(prev => [message.data as TaskResult, ...prev.slice(0, 9)]);
+            }
+          } catch (error) {
+            console.error('Error parsing WebSocket message:', error);
+          }
+        };
+
+        socketInstance.onerror = (error) => {
+          console.error('WebSocket connection error:', error);
+          setIsConnected(false);
+          // Don't set isLoading to false here - let HTTP fetch handle it
+        };
+
+        setSocket(socketInstance);
       } catch (error) {
-        console.error('Error parsing WebSocket message:', error);
+        console.error('Error creating WebSocket connection:', error);
+        setIsConnected(false);
       }
     };
 
-    socketInstance.onerror = (error) => {
-      console.error('WebSocket connection error:', error);
-      setIsConnected(false);
-      setIsLoading(false);
+    // Initial WebSocket connection
+    connectWebSocket();
+
+    // Fetch initial status via HTTP with retry logic
+    const fetchInitialStatus = async (retries = 3) => {
+      for (let i = 0; i < retries; i++) {
+        try {
+          const response = await fetch(`${apiUrl}/system/status`, {
+            signal: AbortSignal.timeout(5000), // 5 second timeout
+          });
+          
+          if (response.ok) {
+            const data = await response.json();
+            setSystemStatus(data);
+            setIsLoading(false);
+            return;
+          } else {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+          }
+        } catch (error) {
+          console.error(`Error fetching initial status (attempt ${i + 1}/${retries}):`, error);
+          
+          if (i < retries - 1) {
+            await new Promise(resolve => setTimeout(resolve, 2000)); // Wait 2 seconds before retry
+          } else {
+            setIsLoading(false);
+            // Set a default status to show error state
+            setSystemStatus({
+              system_status: 'error',
+              timestamp: new Date().toISOString(),
+              agents: {},
+              api_metrics: {
+                total_requests: 0,
+                websocket_connections: 0
+              }
+            });
+          }
+        }
+      }
     };
 
-    setSocket(socketInstance);
-
-    // Fetch initial status via HTTP
-    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/system/status`)
-      .then(res => res.json())
-      .then(data => {
-        setSystemStatus(data);
-        setIsLoading(false);
-      })
-      .catch(error => {
-        console.error('Error fetching initial status:', error);
-        setIsLoading(false);
-      });
+    fetchInitialStatus();
 
     return () => {
-      if (socketInstance.readyState === WebSocket.OPEN) {
+      if (reconnectTimeout) {
+        clearTimeout(reconnectTimeout);
+      }
+      if (socketInstance && socketInstance.readyState === WebSocket.OPEN) {
         socketInstance.close();
       }
     };

@@ -4,7 +4,7 @@ System Metrics Model
 Based on COMPLETE-SCHEMA-DESIGN-ALIGNMENT.md
 """
 
-from sqlalchemy import Column, String, Integer, DECIMAL, TIMESTAMP, BIGINT, JSON
+from sqlalchemy import Column, String, Integer, DECIMAL, TIMESTAMP, BIGINT, JSON, PrimaryKeyConstraint
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.sql import func
 from app.database.base import Base
@@ -20,10 +20,13 @@ class SystemMetrics(Base):
     """
 
     __tablename__ = "system_monitoring_metrics"
-    __table_args__ = {'postgresql_partition_by': 'RANGE (recorded_at)'}
+    __table_args__ = (
+        PrimaryKeyConstraint('id', 'recorded_at', name='pk_system_monitoring_metrics'),
+        {'postgresql_partition_by': 'RANGE (recorded_at)'}
+    )
 
     # Identity
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    id = Column(UUID(as_uuid=True), default=uuid.uuid4)
     recorded_at = Column(TIMESTAMP, nullable=False, index=True)
     metric_type = Column(String(50), nullable=False)
 

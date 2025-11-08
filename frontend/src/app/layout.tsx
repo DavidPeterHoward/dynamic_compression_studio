@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   keywords: 'compression, AI, machine learning, quantum computing, algorithms, optimization',
   authors: [{ name: 'Dynamic Compression Team' }],
   robots: 'index, follow',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8449'),
   openGraph: {
     title: 'Dynamic Compression Algorithms',
     description: 'Advanced AI-powered compression system with meta-recursive learning',

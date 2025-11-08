@@ -1,0 +1,2460 @@
+{
+  "config": {
+    "configFile": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\playwright.config.ts",
+    "rootDir": "D:/python_data/250812_dynamic_compression_algorithms/frontend/tests/e2e",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 6
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "playwright-report"
+        }
+      ],
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "D:/python_data/250812_dynamic_compression_algorithms/frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 6
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "D:/python_data/250812_dynamic_compression_algorithms/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.55.1",
+    "workers": 6,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "agent-debate-construction.spec.ts",
+      "file": "agent-debate-construction.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Agent Management System - Ollama Integration",
+          "file": "agent-debate-construction.spec.ts",
+          "line": 128,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should verify Ollama service connectivity and model availability",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 22358,
+                      "error": {
+                        "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"agents-tab\"]')\u001b[22m\n",
+                        "stack": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"agents-tab\"]')\u001b[22m\n\n    at AgentDebateTestHelper.navigateToAgentsTab (D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\helpers\\agent-debate-test-helper.ts:62:21)\n    at D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\e2e\\agent-debate-construction.spec.ts:130:5",
+                        "location": {
+                          "file": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\helpers\\agent-debate-test-helper.ts",
+                          "column": 21,
+                          "line": 62
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39m..\\helpers\\agent-debate-test-helper.ts:62\n\n\u001b[0m \u001b[90m 60 |\u001b[39m   \u001b[36masync\u001b[39m navigateToAgentsTab()\u001b[33m:\u001b[39m \u001b[33mPromise\u001b[39m\u001b[33m<\u001b[39m\u001b[36mvoid\u001b[39m\u001b[33m>\u001b[39m {\n \u001b[90m 61 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mgoto(process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mTEST_BASE_URL\u001b[39m \u001b[33m||\u001b[39m \u001b[32m'http://localhost:8449'\u001b[39m)\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 62 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mclick(\u001b[32m'[data-testid=\"agents-tab\"]'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\n \u001b[90m    |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 63 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mwaitForSelector(\u001b[32m'[data-testid=\"agents-content\"]'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\n \u001b[90m 64 |\u001b[39m   }\n \u001b[90m 65 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\helpers\\agent-debate-test-helper.ts",
+                            "column": 21,
+                            "line": 62
+                          },
+                          "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"agents-tab\"]')\u001b[22m\n\n\n\u001b[90m   at \u001b[39m..\\helpers\\agent-debate-test-helper.ts:62\n\n\u001b[0m \u001b[90m 60 |\u001b[39m   \u001b[36masync\u001b[39m navigateToAgentsTab()\u001b[33m:\u001b[39m \u001b[33mPromise\u001b[39m\u001b[33m<\u001b[39m\u001b[36mvoid\u001b[39m\u001b[33m>\u001b[39m {\n \u001b[90m 61 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mgoto(process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mTEST_BASE_URL\u001b[39m \u001b[33m||\u001b[39m \u001b[32m'http://localhost:8449'\u001b[39m)\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 62 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mclick(\u001b[32m'[data-testid=\"agents-tab\"]'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\n \u001b[90m    |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 63 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mwaitForSelector(\u001b[32m'[data-testid=\"agents-content\"]'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\n \u001b[90m 64 |\u001b[39m   }\n \u001b[90m 65 |\u001b[39m\u001b[0m\n\u001b[2m    at AgentDebateTestHelper.navigateToAgentsTab (D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\helpers\\agent-debate-test-helper.ts:62:21)\u001b[22m\n\u001b[2m    at D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\e2e\\agent-debate-construction.spec.ts:130:5\u001b[22m"
+                        },
+                        {
+                          "message": "Error: \"context\" and \"page\" fixtures are not supported in \"afterAll\" since they are created on a per-test basis.\nIf you would like to reuse a single page between tests, create context manually with browser.newContext(). See https://aka.ms/playwright/reuse-page for details.\nIf you would like to configure your page before each test, do that in beforeEach hook instead."
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:16:31.793Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\agent-debate-construction--1f553-vity-and-model-availability-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\agent-debate-construction--1f553-vity-and-model-availability-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\agent-debate-construction--1f553-vity-and-model-availability-chromium\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\agent-debate-construction--1f553-vity-and-model-availability-chromium\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\helpers\\agent-debate-test-helper.ts",
+                        "column": 21,
+                        "line": 62
+                      }
+                    },
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 23403,
+                      "error": {
+                        "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"agents-tab\"]')\u001b[22m\n",
+                        "stack": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"agents-tab\"]')\u001b[22m\n\n    at AgentDebateTestHelper.navigateToAgentsTab (D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\helpers\\agent-debate-test-helper.ts:62:21)\n    at D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\e2e\\agent-debate-construction.spec.ts:130:5",
+                        "location": {
+                          "file": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\helpers\\agent-debate-test-helper.ts",
+                          "column": 21,
+                          "line": 62
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39m..\\helpers\\agent-debate-test-helper.ts:62\n\n\u001b[0m \u001b[90m 60 |\u001b[39m   \u001b[36masync\u001b[39m navigateToAgentsTab()\u001b[33m:\u001b[39m \u001b[33mPromise\u001b[39m\u001b[33m<\u001b[39m\u001b[36mvoid\u001b[39m\u001b[33m>\u001b[39m {\n \u001b[90m 61 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mgoto(process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mTEST_BASE_URL\u001b[39m \u001b[33m||\u001b[39m \u001b[32m'http://localhost:8449'\u001b[39m)\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 62 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mclick(\u001b[32m'[data-testid=\"agents-tab\"]'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\n \u001b[90m    |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 63 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mwaitForSelector(\u001b[32m'[data-testid=\"agents-content\"]'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\n \u001b[90m 64 |\u001b[39m   }\n \u001b[90m 65 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\helpers\\agent-debate-test-helper.ts",
+                            "column": 21,
+                            "line": 62
+                          },
+                          "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"agents-tab\"]')\u001b[22m\n\n\n\u001b[90m   at \u001b[39m..\\helpers\\agent-debate-test-helper.ts:62\n\n\u001b[0m \u001b[90m 60 |\u001b[39m   \u001b[36masync\u001b[39m navigateToAgentsTab()\u001b[33m:\u001b[39m \u001b[33mPromise\u001b[39m\u001b[33m<\u001b[39m\u001b[36mvoid\u001b[39m\u001b[33m>\u001b[39m {\n \u001b[90m 61 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mgoto(process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mTEST_BASE_URL\u001b[39m \u001b[33m||\u001b[39m \u001b[32m'http://localhost:8449'\u001b[39m)\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 62 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mclick(\u001b[32m'[data-testid=\"agents-tab\"]'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\n \u001b[90m    |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 63 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mwaitForSelector(\u001b[32m'[data-testid=\"agents-content\"]'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\n \u001b[90m 64 |\u001b[39m   }\n \u001b[90m 65 |\u001b[39m\u001b[0m\n\u001b[2m    at AgentDebateTestHelper.navigateToAgentsTab (D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\helpers\\agent-debate-test-helper.ts:62:21)\u001b[22m\n\u001b[2m    at D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\e2e\\agent-debate-construction.spec.ts:130:5\u001b[22m"
+                        },
+                        {
+                          "message": "Error: \"context\" and \"page\" fixtures are not supported in \"afterAll\" since they are created on a per-test basis.\nIf you would like to reuse a single page between tests, create context manually with browser.newContext(). See https://aka.ms/playwright/reuse-page for details.\nIf you would like to configure your page before each test, do that in beforeEach hook instead."
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2025-11-08T04:17:04.822Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\agent-debate-construction--1f553-vity-and-model-availability-chromium-retry1\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\agent-debate-construction--1f553-vity-and-model-availability-chromium-retry1\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\agent-debate-construction--1f553-vity-and-model-availability-chromium-retry1\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\agent-debate-construction--1f553-vity-and-model-availability-chromium-retry1\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\helpers\\agent-debate-test-helper.ts",
+                        "column": 21,
+                        "line": 62
+                      }
+                    },
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 16895,
+                      "error": {
+                        "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"agents-tab\"]')\u001b[22m\n",
+                        "stack": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"agents-tab\"]')\u001b[22m\n\n    at AgentDebateTestHelper.navigateToAgentsTab (D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\helpers\\agent-debate-test-helper.ts:62:21)\n    at D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\e2e\\agent-debate-construction.spec.ts:130:5",
+                        "location": {
+                          "file": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\helpers\\agent-debate-test-helper.ts",
+                          "column": 21,
+                          "line": 62
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39m..\\helpers\\agent-debate-test-helper.ts:62\n\n\u001b[0m \u001b[90m 60 |\u001b[39m   \u001b[36masync\u001b[39m navigateToAgentsTab()\u001b[33m:\u001b[39m \u001b[33mPromise\u001b[39m\u001b[33m<\u001b[39m\u001b[36mvoid\u001b[39m\u001b[33m>\u001b[39m {\n \u001b[90m 61 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mgoto(process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mTEST_BASE_URL\u001b[39m \u001b[33m||\u001b[39m \u001b[32m'http://localhost:8449'\u001b[39m)\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 62 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mclick(\u001b[32m'[data-testid=\"agents-tab\"]'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\n \u001b[90m    |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 63 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mwaitForSelector(\u001b[32m'[data-testid=\"agents-content\"]'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\n \u001b[90m 64 |\u001b[39m   }\n \u001b[90m 65 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\helpers\\agent-debate-test-helper.ts",
+                            "column": 21,
+                            "line": 62
+                          },
+                          "message": "TimeoutError: page.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"agents-tab\"]')\u001b[22m\n\n\n\u001b[90m   at \u001b[39m..\\helpers\\agent-debate-test-helper.ts:62\n\n\u001b[0m \u001b[90m 60 |\u001b[39m   \u001b[36masync\u001b[39m navigateToAgentsTab()\u001b[33m:\u001b[39m \u001b[33mPromise\u001b[39m\u001b[33m<\u001b[39m\u001b[36mvoid\u001b[39m\u001b[33m>\u001b[39m {\n \u001b[90m 61 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mgoto(process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mTEST_BASE_URL\u001b[39m \u001b[33m||\u001b[39m \u001b[32m'http://localhost:8449'\u001b[39m)\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 62 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mclick(\u001b[32m'[data-testid=\"agents-tab\"]'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\n \u001b[90m    |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 63 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mwaitForSelector(\u001b[32m'[data-testid=\"agents-content\"]'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\n \u001b[90m 64 |\u001b[39m   }\n \u001b[90m 65 |\u001b[39m\u001b[0m\n\u001b[2m    at AgentDebateTestHelper.navigateToAgentsTab (D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\helpers\\agent-debate-test-helper.ts:62:21)\u001b[22m\n\u001b[2m    at D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\e2e\\agent-debate-construction.spec.ts:130:5\u001b[22m"
+                        },
+                        {
+                          "message": "Error: \"context\" and \"page\" fixtures are not supported in \"afterAll\" since they are created on a per-test basis.\nIf you would like to reuse a single page between tests, create context manually with browser.newContext(). See https://aka.ms/playwright/reuse-page for details.\nIf you would like to configure your page before each test, do that in beforeEach hook instead."
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-11-08T04:17:38.528Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\agent-debate-construction--1f553-vity-and-model-availability-chromium-retry2\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\agent-debate-construction--1f553-vity-and-model-availability-chromium-retry2\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\agent-debate-construction--1f553-vity-and-model-availability-chromium-retry2\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\agent-debate-construction--1f553-vity-and-model-availability-chromium-retry2\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\helpers\\agent-debate-test-helper.ts",
+                        "column": 21,
+                        "line": 62
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "793e0eb228bf834fb21a-1d0f688311849bb800c6",
+              "file": "agent-debate-construction.spec.ts",
+              "line": 129,
+              "column": 7
+            },
+            {
+              "title": "should handle Ollama service disconnection gracefully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:16:59.769Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2025-11-08T04:17:32.902Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-11-08T04:17:57.338Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "793e0eb228bf834fb21a-dea2afbff7bee58aa65f",
+              "file": "agent-debate-construction.spec.ts",
+              "line": 148,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Agent Creation Workflow",
+          "file": "agent-debate-construction.spec.ts",
+          "line": 173,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should create a logical analyst agent successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:16:59.795Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2025-11-08T04:17:32.926Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-11-08T04:17:57.356Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "793e0eb228bf834fb21a-2a419411d45a5211fe0f",
+              "file": "agent-debate-construction.spec.ts",
+              "line": 174,
+              "column": 7
+            },
+            {
+              "title": "should create a creative innovator agent successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:16:59.837Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2025-11-08T04:17:32.957Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-11-08T04:17:57.373Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "793e0eb228bf834fb21a-b8b9c5c2f853e9661b1b",
+              "file": "agent-debate-construction.spec.ts",
+              "line": 192,
+              "column": 7
+            },
+            {
+              "title": "should validate agent creation form inputs",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:16:59.881Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2025-11-08T04:17:32.983Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-11-08T04:17:57.392Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "793e0eb228bf834fb21a-01310a38feddaf0466f6",
+              "file": "agent-debate-construction.spec.ts",
+              "line": 209,
+              "column": 7
+            },
+            {
+              "title": "should handle agent creation errors gracefully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:16:59.928Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2025-11-08T04:17:33.011Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-11-08T04:17:57.414Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "793e0eb228bf834fb21a-4b5974de8243788fcf60",
+              "file": "agent-debate-construction.spec.ts",
+              "line": 231,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Debate Construction and Execution",
+          "file": "agent-debate-construction.spec.ts",
+          "line": 259,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should configure debate with custom rules and agents",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:16:59.970Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2025-11-08T04:17:33.047Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-11-08T04:17:57.432Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "793e0eb228bf834fb21a-3c0b150649dc4028d11f",
+              "file": "agent-debate-construction.spec.ts",
+              "line": 271,
+              "column": 7
+            },
+            {
+              "title": "should initialize debate session successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:17:00.013Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2025-11-08T04:17:33.131Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-11-08T04:17:57.461Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "793e0eb228bf834fb21a-ccaa33dbdfe1a5fabcca",
+              "file": "agent-debate-construction.spec.ts",
+              "line": 291,
+              "column": 7
+            },
+            {
+              "title": "should execute debate rounds with agent interactions",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:17:00.117Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2025-11-08T04:17:33.179Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-11-08T04:17:57.481Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "793e0eb228bf834fb21a-263b83f6ada7c3b16126",
+              "file": "agent-debate-construction.spec.ts",
+              "line": 312,
+              "column": 7
+            },
+            {
+              "title": "should display real-time debate analytics",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:17:00.153Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2025-11-08T04:17:33.208Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-11-08T04:17:57.504Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "793e0eb228bf834fb21a-ec77ffc95c6eab87acbe",
+              "file": "agent-debate-construction.spec.ts",
+              "line": 336,
+              "column": 7
+            },
+            {
+              "title": "should handle debate interruption and recovery",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:17:00.220Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2025-11-08T04:17:33.236Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-11-08T04:17:57.528Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "793e0eb228bf834fb21a-fdbbfc1891c6bd1044cf",
+              "file": "agent-debate-construction.spec.ts",
+              "line": 359,
+              "column": 7
+            },
+            {
+              "title": "should complete debate and show final results",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:17:00.263Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2025-11-08T04:17:33.273Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-11-08T04:17:57.549Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "793e0eb228bf834fb21a-ab65f1ffd94a8353db8b",
+              "file": "agent-debate-construction.spec.ts",
+              "line": 373,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Accessibility and Keyboard Navigation",
+          "file": "agent-debate-construction.spec.ts",
+          "line": 393,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should support full keyboard navigation for agent creation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:17:00.296Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2025-11-08T04:17:33.322Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-11-08T04:17:57.574Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "793e0eb228bf834fb21a-ee83dfb6040e3fed7971",
+              "file": "agent-debate-construction.spec.ts",
+              "line": 394,
+              "column": 7
+            },
+            {
+              "title": "should support keyboard navigation for debate setup",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:17:00.319Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2025-11-08T04:17:33.353Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-11-08T04:17:57.588Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "793e0eb228bf834fb21a-5a0f978d1e6e6e08309a",
+              "file": "agent-debate-construction.spec.ts",
+              "line": 427,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Performance and Error Handling",
+          "file": "agent-debate-construction.spec.ts",
+          "line": 456,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should handle network timeouts gracefully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:17:00.346Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2025-11-08T04:17:33.382Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-11-08T04:17:57.606Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "793e0eb228bf834fb21a-7c2025ab431b12c5aef5",
+              "file": "agent-debate-construction.spec.ts",
+              "line": 457,
+              "column": 7
+            },
+            {
+              "title": "should handle WebSocket reconnection",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:17:00.375Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2025-11-08T04:17:33.408Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-11-08T04:17:57.629Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "793e0eb228bf834fb21a-58180cbdbd77a0eed86c",
+              "file": "agent-debate-construction.spec.ts",
+              "line": 479,
+              "column": 7
+            },
+            {
+              "title": "should maintain state during page refresh",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:17:00.418Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2025-11-08T04:17:33.433Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-11-08T04:17:57.648Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "793e0eb228bf834fb21a-57e6478d13e539d63e13",
+              "file": "agent-debate-construction.spec.ts",
+              "line": 500,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Cross-browser Compatibility",
+          "file": "agent-debate-construction.spec.ts",
+          "line": 516,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should work correctly in different browsers",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:17:00.480Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2025-11-08T04:17:33.459Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-11-08T04:17:57.674Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "793e0eb228bf834fb21a-522ef77c920202d3859b",
+              "file": "agent-debate-construction.spec.ts",
+              "line": 517,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Performance Tests",
+          "file": "agent-debate-construction.spec.ts",
+          "line": 538,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should load agent management interface within performance budget",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:17:00.532Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2025-11-08T04:17:33.487Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-11-08T04:17:57.690Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "793e0eb228bf834fb21a-7720d62764d268e5a2a5",
+              "file": "agent-debate-construction.spec.ts",
+              "line": 539,
+              "column": 7
+            },
+            {
+              "title": "should handle multiple concurrent agent operations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:17:00.570Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2025-11-08T04:17:33.514Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-11-08T04:17:57.705Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "793e0eb228bf834fb21a-0f0bc3eae169c144f8dd",
+              "file": "agent-debate-construction.spec.ts",
+              "line": 552,
+              "column": 7
+            },
+            {
+              "title": "should maintain smooth debate execution performance",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:17:00.600Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2025-11-08T04:17:33.552Z",
+                      "annotations": [],
+                      "attachments": []
+                    },
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-11-08T04:17:57.723Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "793e0eb228bf834fb21a-04be060422ffee9e2ce7",
+              "file": "agent-debate-construction.spec.ts",
+              "line": 576,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "comprehensive.spec.ts",
+      "file": "comprehensive.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Bootstrap Fail-Pass Methodology Tests",
+          "file": "comprehensive.spec.ts",
+          "line": 32,
+          "column": 6,
+          "specs": [
+            {
+              "title": "1. Application loads and displays main interface",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "timedOut",
+                      "duration": 33574,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n    at D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\e2e\\comprehensive.spec.ts:55:8",
+                        "location": {
+                          "file": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\e2e\\comprehensive.spec.ts",
+                          "column": 8,
+                          "line": 55
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 53 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 54 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 55 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeEach(\u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m    |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 56 |\u001b[39m     \u001b[90m// Navigate to frontend\u001b[39m\n \u001b[90m 57 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[33mBASE_URL\u001b[39m\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'networkidle'\u001b[39m\u001b[33m,\u001b[39m timeout\u001b[33m:\u001b[39m \u001b[33mTIMEOUT\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 58 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2000\u001b[39m)\u001b[33m;\u001b[39m \u001b[90m// Wait for React hydration\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\e2e\\comprehensive.spec.ts",
+                            "column": 8,
+                            "line": 55
+                          },
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n\n\u001b[0m \u001b[90m 53 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 54 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 55 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeEach(\u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m    |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 56 |\u001b[39m     \u001b[90m// Navigate to frontend\u001b[39m\n \u001b[90m 57 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[33mBASE_URL\u001b[39m\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'networkidle'\u001b[39m\u001b[33m,\u001b[39m timeout\u001b[33m:\u001b[39m \u001b[33mTIMEOUT\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 58 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2000\u001b[39m)\u001b[33m;\u001b[39m \u001b[90m// Wait for React hydration\u001b[39m\u001b[0m\n\u001b[2m    at D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\e2e\\comprehensive.spec.ts:55:8\u001b[22m"
+                        },
+                        {
+                          "location": {
+                            "file": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\e2e\\comprehensive.spec.ts",
+                            "column": 16,
+                            "line": 57
+                          },
+                          "message": "Error: page.goto: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:8449/\", waiting until \"networkidle\"\u001b[22m\n\n\n\u001b[0m \u001b[90m 55 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeEach(\u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m 56 |\u001b[39m     \u001b[90m// Navigate to frontend\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 57 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[33mBASE_URL\u001b[39m\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'networkidle'\u001b[39m\u001b[33m,\u001b[39m timeout\u001b[33m:\u001b[39m \u001b[33mTIMEOUT\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 58 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2000\u001b[39m)\u001b[33m;\u001b[39m \u001b[90m// Wait for React hydration\u001b[39m\n \u001b[90m 59 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 60 |\u001b[39m\u001b[0m\n\u001b[2m    at D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\e2e\\comprehensive.spec.ts:57:16\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "❌ Bootstrap: Backend Health - FAILED\n"
+                        },
+                        {
+                          "text": "✅ Bootstrap: Frontend Accessibility - PASSED\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:16:31.928Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\comprehensive-Bootstrap-Fa-8b69d-and-displays-main-interface-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\comprehensive-Bootstrap-Fa-8b69d-and-displays-main-interface-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\comprehensive-Bootstrap-Fa-8b69d-and-displays-main-interface-chromium\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\comprehensive-Bootstrap-Fa-8b69d-and-displays-main-interface-chromium\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\e2e\\comprehensive.spec.ts",
+                        "column": 8,
+                        "line": 55
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-6dd34370683fe1be8b43",
+              "file": "comprehensive.spec.ts",
+              "line": 61,
+              "column": 7
+            },
+            {
+              "title": "2. Agent Dashboard functionality",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 23687,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "❌ Bootstrap: Backend Health - FAILED\n"
+                        },
+                        {
+                          "text": "✅ Bootstrap: Frontend Accessibility - PASSED\n"
+                        },
+                        {
+                          "text": "✅ Found 3/4 dashboard elements\n"
+                        },
+                        {
+                          "text": "📊 Found 22 agent status indicators\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Navigate to Agents tab",
+                          "duration": 2168
+                        },
+                        {
+                          "title": "Verify Agent Dashboard loads",
+                          "duration": 10123
+                        },
+                        {
+                          "title": "Verify agent status cards",
+                          "duration": 34
+                        }
+                      ],
+                      "startTime": "2025-11-08T04:17:18.317Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\comprehensive-Bootstrap-Fa-9cdb9-ent-Dashboard-functionality-chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-602c28b37b8e047ecf90",
+              "file": "comprehensive.spec.ts",
+              "line": 84,
+              "column": 7
+            },
+            {
+              "title": "3. Task Submission functionality",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 5,
+                      "status": "timedOut",
+                      "duration": 32740,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n    at D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\e2e\\comprehensive.spec.ts:55:8",
+                        "location": {
+                          "file": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\e2e\\comprehensive.spec.ts",
+                          "column": 8,
+                          "line": 55
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 53 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 54 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 55 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeEach(\u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m    |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 56 |\u001b[39m     \u001b[90m// Navigate to frontend\u001b[39m\n \u001b[90m 57 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[33mBASE_URL\u001b[39m\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'networkidle'\u001b[39m\u001b[33m,\u001b[39m timeout\u001b[33m:\u001b[39m \u001b[33mTIMEOUT\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 58 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2000\u001b[39m)\u001b[33m;\u001b[39m \u001b[90m// Wait for React hydration\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\e2e\\comprehensive.spec.ts",
+                            "column": 8,
+                            "line": 55
+                          },
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n\n\u001b[0m \u001b[90m 53 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 54 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 55 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeEach(\u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m    |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 56 |\u001b[39m     \u001b[90m// Navigate to frontend\u001b[39m\n \u001b[90m 57 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[33mBASE_URL\u001b[39m\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'networkidle'\u001b[39m\u001b[33m,\u001b[39m timeout\u001b[33m:\u001b[39m \u001b[33mTIMEOUT\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 58 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2000\u001b[39m)\u001b[33m;\u001b[39m \u001b[90m// Wait for React hydration\u001b[39m\u001b[0m\n\u001b[2m    at D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\e2e\\comprehensive.spec.ts:55:8\u001b[22m"
+                        },
+                        {
+                          "location": {
+                            "file": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\e2e\\comprehensive.spec.ts",
+                            "column": 16,
+                            "line": 57
+                          },
+                          "message": "Error: page.goto: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:8449/\", waiting until \"networkidle\"\u001b[22m\n\n\n\u001b[0m \u001b[90m 55 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeEach(\u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m 56 |\u001b[39m     \u001b[90m// Navigate to frontend\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 57 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[33mBASE_URL\u001b[39m\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'networkidle'\u001b[39m\u001b[33m,\u001b[39m timeout\u001b[33m:\u001b[39m \u001b[33mTIMEOUT\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 58 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2000\u001b[39m)\u001b[33m;\u001b[39m \u001b[90m// Wait for React hydration\u001b[39m\n \u001b[90m 59 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 60 |\u001b[39m\u001b[0m\n\u001b[2m    at D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\e2e\\comprehensive.spec.ts:57:16\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "❌ Bootstrap: Backend Health - FAILED\n"
+                        },
+                        {
+                          "text": "✅ Bootstrap: Frontend Accessibility - PASSED\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:16:31.862Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\comprehensive-Bootstrap-Fa-31f5c-sk-Submission-functionality-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\comprehensive-Bootstrap-Fa-31f5c-sk-Submission-functionality-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\comprehensive-Bootstrap-Fa-31f5c-sk-Submission-functionality-chromium\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\comprehensive-Bootstrap-Fa-31f5c-sk-Submission-functionality-chromium\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\tests\\e2e\\comprehensive.spec.ts",
+                        "column": 8,
+                        "line": 55
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-5fa8c1822c9d7658b338",
+              "file": "comprehensive.spec.ts",
+              "line": 123,
+              "column": 7
+            },
+            {
+              "title": "4. Compression functionality",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 5,
+                      "status": "timedOut",
+                      "duration": 31882,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "❌ Bootstrap: Backend Health - FAILED\n"
+                        },
+                        {
+                          "text": "✅ Bootstrap: Frontend Accessibility - PASSED\n"
+                        },
+                        {
+                          "text": "✅ Found 2/3 compression interface elements\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Navigate to Compression tab",
+                          "duration": 2138
+                        },
+                        {
+                          "title": "Verify compression interface elements",
+                          "duration": 5043
+                        }
+                      ],
+                      "startTime": "2025-11-08T04:17:17.899Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\comprehensive-Bootstrap-Fa-8664b-4-Compression-functionality-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\comprehensive-Bootstrap-Fa-8664b-4-Compression-functionality-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\comprehensive-Bootstrap-Fa-8664b-4-Compression-functionality-chromium\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\comprehensive-Bootstrap-Fa-8664b-4-Compression-functionality-chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-2f0846bee0bb540b70fd",
+              "file": "comprehensive.spec.ts",
+              "line": 178,
+              "column": 7
+            },
+            {
+              "title": "5. Metrics and monitoring",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 20308,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "❌ Bootstrap: Backend Health - FAILED\n"
+                        },
+                        {
+                          "text": "✅ Bootstrap: Frontend Accessibility - PASSED\n"
+                        },
+                        {
+                          "text": "✅ Found 1/2 metrics elements\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Navigate to Metrics tab",
+                          "duration": 2241
+                        },
+                        {
+                          "title": "Verify metrics display",
+                          "duration": 5105
+                        }
+                      ],
+                      "startTime": "2025-11-08T04:16:32.711Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\comprehensive-Bootstrap-Fa-5b715-ts-5-Metrics-and-monitoring-chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-2821474b8534b34f3152",
+              "file": "comprehensive.spec.ts",
+              "line": 227,
+              "column": 7
+            },
+            {
+              "title": "6. System health and status",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 29997,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "✅ System health indicators found\n"
+                        },
+                        {
+                          "text": "⚠️ Found 12 console errors\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Check system health indicators",
+                          "duration": 88
+                        },
+                        {
+                          "title": "Verify API connectivity",
+                          "duration": 15628
+                        }
+                      ],
+                      "startTime": "2025-11-08T04:16:58.710Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\comprehensive-Bootstrap-Fa-eeb20--6-System-health-and-status-chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-435ddecb76d9b95639c1",
+              "file": "comprehensive.spec.ts",
+              "line": 253,
+              "column": 7
+            },
+            {
+              "title": "7. Navigation and routing",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 22638,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "❌ Bootstrap: Backend Health - FAILED\n"
+                        },
+                        {
+                          "text": "✅ Bootstrap: Frontend Accessibility - PASSED\n"
+                        },
+                        {
+                          "text": "✅ Navigation to \"Agents\" tab successful\n"
+                        },
+                        {
+                          "text": "✅ Navigation to \"Compression\" tab successful\n"
+                        },
+                        {
+                          "text": "✅ Navigation to \"Experiments\" tab successful\n"
+                        },
+                        {
+                          "text": "✅ Navigation to \"Metrics\" tab successful\n"
+                        },
+                        {
+                          "text": "✅ Page stability verified\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Test all navigation tabs",
+                          "duration": 4915
+                        },
+                        {
+                          "title": "Verify page stability after navigation",
+                          "duration": 4010
+                        }
+                      ],
+                      "startTime": "2025-11-08T04:16:32.777Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\comprehensive-Bootstrap-Fa-91af0-ts-7-Navigation-and-routing-chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-586e2291a388ec155aca",
+              "file": "comprehensive.spec.ts",
+              "line": 301,
+              "column": 7
+            },
+            {
+              "title": "8. Responsive design and UI elements",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 18878,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "✅ Viewport 1920x1080 - Page visible\n"
+                        },
+                        {
+                          "text": "✅ Viewport 1366x768 - Page visible\n"
+                        },
+                        {
+                          "text": "✅ Viewport 768x1024 - Page visible\n"
+                        },
+                        {
+                          "text": "✅ Found 33 interactive elements\n"
+                        },
+                        {
+                          "text": "✅ Interactive elements are accessible: true\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Verify responsive layout",
+                          "duration": 2368
+                        },
+                        {
+                          "title": "Verify interactive elements",
+                          "duration": 144
+                        }
+                      ],
+                      "startTime": "2025-11-08T04:17:00.828Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\comprehensive-Bootstrap-Fa-f4fe7-sive-design-and-UI-elements-chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-275c06c2915b9863bb4a",
+              "file": "comprehensive.spec.ts",
+              "line": 333,
+              "column": 7
+            },
+            {
+              "title": "9. Error handling and validation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 17435,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "❌ Bootstrap: Backend Health - FAILED\n"
+                        },
+                        {
+                          "text": "✅ Bootstrap: Frontend Accessibility - PASSED\n"
+                        },
+                        {
+                          "text": "⚠️ Found 1 error message containers\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Test form validation",
+                          "duration": 2227
+                        },
+                        {
+                          "title": "Test error message display",
+                          "duration": 58
+                        }
+                      ],
+                      "startTime": "2025-11-08T04:17:00.678Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\comprehensive-Bootstrap-Fa-6a2be-ror-handling-and-validation-chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-12cb0f83d03a9f9c9153",
+              "file": "comprehensive.spec.ts",
+              "line": 372,
+              "column": 7
+            },
+            {
+              "title": "10. Performance and load time",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 16412,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "⏱️ Page load time: 4166ms\n"
+                        },
+                        {
+                          "text": "✅ Page load time acceptable\n"
+                        },
+                        {
+                          "text": "⏱️ Navigation response time: 1897ms\n"
+                        },
+                        {
+                          "text": "✅ Navigation response time acceptable\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Measure page load time",
+                          "duration": 4168
+                        },
+                        {
+                          "title": "Measure navigation response time",
+                          "duration": 1897
+                        }
+                      ],
+                      "startTime": "2025-11-08T04:17:21.054Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\comprehensive-Bootstrap-Fa-7e2bd-0-Performance-and-load-time-chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-eb6bcdc76430987d29cc",
+              "file": "comprehensive.spec.ts",
+              "line": 400,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "API Integration Tests",
+          "file": "comprehensive.spec.ts",
+          "line": 430,
+          "column": 6,
+          "specs": [
+            {
+              "title": "11. Backend API health check",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 587,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "⚠️ Backend API health check failed: 404\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:16:31.798Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\comprehensive-API-Integrat-ed2b7-11-Backend-API-health-check-chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-9b2ebd68c8a8e313bcd4",
+              "file": "comprehensive.spec.ts",
+              "line": 431,
+              "column": 7
+            },
+            {
+              "title": "12. Agent API endpoints",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 704,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "✅ System status endpoint accessible (status: 404)\n"
+                        },
+                        {
+                          "text": "✅ Agents list endpoint accessible (status: 404)\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Test system status endpoint",
+                          "duration": 60
+                        },
+                        {
+                          "title": "Test agents list endpoint",
+                          "duration": 20
+                        }
+                      ],
+                      "startTime": "2025-11-08T04:16:31.791Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\comprehensive-API-Integration-Tests-12-Agent-API-endpoints-chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-a241f6e50eca3a0135bf",
+              "file": "comprehensive.spec.ts",
+              "line": 449,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Bootstrap Validation Suite",
+          "file": "comprehensive.spec.ts",
+          "line": 484,
+          "column": 6,
+          "specs": [
+            {
+              "title": "13. Complete bootstrap validation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 24867,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\n📊 BOOTSTRAP VALIDATION RESULTS:\n"
+                        },
+                        {
+                          "text": "==================================================\n"
+                        },
+                        {
+                          "text": "✅ Frontend Load: PASSED\n"
+                        },
+                        {
+                          "text": "✅ React Hydration: PASSED\n"
+                        },
+                        {
+                          "text": "✅ Navigation: PASSED\n"
+                        },
+                        {
+                          "text": "❌ No Critical Errors: FAILED\n"
+                        },
+                        {
+                          "text": "   Error: 5 errors found\n"
+                        },
+                        {
+                          "text": "\n🎯 Bootstrap Score: 3/4 (75.0%)\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-08T04:16:31.826Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "D:\\python_data\\250812_dynamic_compression_algorithms\\frontend\\test-results\\comprehensive-Bootstrap-Va-a065d-mplete-bootstrap-validation-chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ee7a9684fd9fecf71bb2-2364ad8f8431f513c2ec",
+              "file": "comprehensive.spec.ts",
+              "line": 485,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-11-08T04:16:29.055Z",
+    "duration": 93264.98599999999,
+    "expected": 10,
+    "skipped": 20,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}

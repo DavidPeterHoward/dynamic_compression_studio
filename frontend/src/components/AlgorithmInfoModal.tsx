@@ -102,7 +102,7 @@ const algorithmData: Record<string, AlgorithmInfo> = {
       { name: 'quantum_qubits', description: 'Number of simulated quantum qubits', defaultValue: 8, range: '4-12' },
       { name: 'population_size', description: 'Genetic algorithm population size', defaultValue: 50, range: '20-200' },
       { name: 'grover_iterations', description: 'Grover algorithm iterations', defaultValue: 3, range: '1-10' },
-      { name: 'dna_encoding_enabled', description: 'Enable DNA-inspired encoding', defaultValue: true },
+      { name: 'dna_encoding_enabled', description: 'Enable DNA-inspired encoding', defaultValue: 'true' },
       { name: 'entanglement_threshold', description: 'Correlation threshold for entanglement', defaultValue: 0.1, range: '0.0-1.0' }
     ],
     references: [

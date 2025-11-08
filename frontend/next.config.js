@@ -5,18 +5,15 @@ const nextConfig = {
     domains: ['localhost', '127.0.0.1'],
   },
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8443',
-    NEXT_PUBLIC_GRAPHQL_URL: process.env.NEXT_PUBLIC_GRAPHQL_URL || 'http://localhost:8443/graphql',
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8441',
+    NEXT_PUBLIC_GRAPHQL_URL: process.env.NEXT_PUBLIC_GRAPHQL_URL || 'http://localhost:8441/graphql',
   },
   async rewrites() {
-    // Use localhost for browser access (frontend is already in Docker)
-    // The browser needs to access the backend on localhost:8443
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8443';
-
-    // In Docker, use backend service name
-    const backendUrl = process.env.NODE_ENV === 'production'
-      ? 'http://backend:8000'
-      : apiUrl;
+    // API proxy configuration
+    // Next.js rewrites run server-side, so we use Docker service name
+    // For client-side requests, the browser will use NEXT_PUBLIC_API_URL directly
+    // Server-side rewrites (SSR/getServerSideProps) use backend service in Docker
+    const backendUrl = process.env.BACKEND_URL || 'http://backend:8000';
 
     return [
       {
@@ -35,9 +32,15 @@ const nextConfig = {
   experimental: {
     outputFileTracingRoot: undefined,
   },
-  // Ensure static files are included in standalone build
-  distDir: '.next',
+  // Reduce webpack memory usage
   webpack: (config, { isServer }) => {
+    // Add path aliases
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': require('path').resolve(__dirname, 'src'),
+    };
+
+    // Optimize for memory usage
     if (!isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,
@@ -46,8 +49,28 @@ const nextConfig = {
         tls: false,
       };
     }
+
+    // Reduce bundle size and memory usage
+    config.optimization = {
+      ...config.optimization,
+      splitChunks: {
+        ...config.optimization.splitChunks,
+        cacheGroups: {
+          ...config.optimization.splitChunks?.cacheGroups,
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all',
+            priority: 10,
+          },
+        },
+      },
+    };
+
     return config;
   },
+  // Ensure static files are included in standalone build
+  distDir: '.next',
 };
 
 module.exports = nextConfig;

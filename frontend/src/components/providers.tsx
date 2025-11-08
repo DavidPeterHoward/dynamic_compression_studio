@@ -1,5 +1,6 @@
 'use client'
 
+import { NotificationProvider } from '@/components/NotificationSystem'
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
@@ -514,13 +515,27 @@ export function Providers({ children }: { children: ReactNode }) {
     }, 1000)
   }
 
-  // System metrics polling
+  // System metrics polling with error handling
   useEffect(() => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8441';
+    let pollInterval: NodeJS.Timeout | null = null;
+    let consecutiveErrors = 0;
+    const maxConsecutiveErrors = 3;
+    
     const pollMetrics = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8443'}/api/v1/health/detailed`)
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+        
+        const response = await fetch(`${apiUrl}/api/v1/health/detailed`, {
+          signal: controller.signal,
+        });
+        
+        clearTimeout(timeoutId);
+        
         if (response.ok) {
-          const data = await response.json()
+          const data = await response.json();
+          consecutiveErrors = 0; // Reset error count on success
           
           updateSystemMetrics({
             cpu: data.performance_metrics?.cpu_usage_total || 0,
@@ -529,17 +544,44 @@ export function Providers({ children }: { children: ReactNode }) {
             network: 0,
             systemHealth: data.status === 'healthy' ? 'healthy' : 
                          data.status === 'warning' ? 'warning' : 'error'
-          })
+          });
+        } else {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
       } catch (error) {
-        console.error('Failed to fetch system metrics:', error)
+        consecutiveErrors++;
+        console.error(`Failed to fetch system metrics (${consecutiveErrors}/${maxConsecutiveErrors}):`, error);
+        
+        // If too many consecutive errors, set error state
+        if (consecutiveErrors >= maxConsecutiveErrors) {
+          updateSystemMetrics({
+            cpu: 0,
+            memory: 0,
+            disk: 0,
+            network: 0,
+            systemHealth: 'error'
+          });
+          
+          // Reduce polling frequency on persistent errors
+          if (pollInterval) {
+            clearInterval(pollInterval);
+            pollInterval = setInterval(pollMetrics, 30000); // Poll every 30 seconds instead of 10
+          }
+        }
       }
-    }
+    };
     
-    const interval = setInterval(pollMetrics, 10000)
-    pollMetrics()
+    // Initial poll
+    pollMetrics();
     
-    return () => clearInterval(interval)
+    // Set up polling interval (10 seconds, or 30 if errors persist)
+    pollInterval = setInterval(pollMetrics, 10000);
+    
+    return () => {
+      if (pollInterval) {
+        clearInterval(pollInterval);
+      }
+    };
   }, [])
 
   // Auto-cleanup notifications
@@ -575,9 +617,11 @@ export function Providers({ children }: { children: ReactNode }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AppContext.Provider value={contextValue}>
-        {children}
-      </AppContext.Provider>
+      <NotificationProvider>
+        <AppContext.Provider value={contextValue}>
+          {children}
+        </AppContext.Provider>
+      </NotificationProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
