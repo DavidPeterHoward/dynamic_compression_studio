@@ -1,49 +1,80 @@
 # =============================================================================
-# Dynamic Compression Algorithms Backend - Dockerfile
-# Optimized for Windows 10, Intel 5820K, NVIDIA 4080Ti, Docker
+# Dynamic Compression Algorithms Backend - Optimized Dockerfile
+# Multi-stage build with BuildKit optimizations for maximum performance
 # =============================================================================
 
-# Use Python 3.11 slim image as base
-FROM python:3.11-slim
+# Build stage - optimized for dependency installation
+FROM python:3.11-alpine AS builder
+
+# Enable BuildKit mount cache for pip
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip config set global.cache-dir /root/.cache/pip
+
+# Set environment variables for build optimization
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# Set work directory
+WORKDIR /app
+
+# Install build dependencies in a single layer
+RUN apk add --no-cache \
+    gcc \
+    g++ \
+    musl-dev \
+    postgresql-dev \
+    && rm -rf /var/cache/apk/*
+
+# Copy requirements first for optimal caching
+COPY requirements.txt .
+
+# Install Python dependencies with cache mount
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install --no-cache-dir --user -r requirements.txt
+
+# Runtime stage - optimized for production
+FROM python:3.11-alpine AS runtime
+
+# Install minimal runtime dependencies
+RUN apk add --no-cache \
+    curl \
+    postgresql-client \
+    && rm -rf /var/cache/apk/*
+
+# Create non-root user for security
+RUN addgroup -g 1001 -S python && \
+    adduser -S python -u 1001
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONPATH=/app
+ENV PATH="/home/python/.local/bin:$PATH"
 
 # Set work directory
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    gcc \
-    g++ \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
+# Copy installed dependencies from builder stage
+COPY --from=builder --chown=python:python /root/.local /home/python/.local
 
-# Copy requirements first for better caching
-COPY requirements.txt .
+# Copy project files
+COPY --chown=python:python . .
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Create necessary directories with proper permissions
+RUN mkdir -p /app/logs /app/uploads && \
+    chown -R python:python /app/logs /app/uploads
 
-# Copy project
-COPY . .
-
-# Install additional dependencies for metrics and monitoring
-RUN pip install --no-cache-dir psutil
-
-# Create necessary directories
-RUN mkdir -p /app/logs /app/uploads
+# Switch to non-root user
+USER python
 
 # Expose port
 EXPOSE 8000
 
-# Health check (give app more time to start on cold boot)
-HEALTHCHECK --interval=30s --timeout=30s --start-period=30s --retries=5 \
+# Optimized health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
     CMD curl -f http://localhost:8000/health || exit 1
 
-# Run the application (no --reload in container to prevent watcher-related restarts)
+# Run the application
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 
 # =============================================================================

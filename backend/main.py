@@ -10,6 +10,7 @@ import sys
 import time
 from contextlib import asynccontextmanager
 from typing import Dict, Any
+from datetime import datetime
 
 from fastapi import FastAPI, HTTPException, Depends, Request, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
@@ -41,6 +42,9 @@ def setup_logging():
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     )
     return logging.getLogger(__name__)
+
+# Create module-level logger for WebSocket functions
+logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -177,6 +181,8 @@ from app.agents.api.fastapi_app import websocket_clients
 @app.websocket("/ws/agent-updates")
 async def websocket_agent_updates(websocket: WebSocket):
     """WebSocket endpoint for real-time agent updates."""
+    await websocket.accept()
+
     client_id = f"ws_{int(datetime.now().timestamp())}_{id(websocket)}"
     websocket_clients[client_id] = websocket
 

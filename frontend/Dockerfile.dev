@@ -1,47 +1,115 @@
 # =============================================================================
-# Dynamic Compression Algorithms Frontend - Development Dockerfile
-# Optimized for development with hot reload and auto-updates
+# Dynamic Compression Algorithms Frontend - Optimized Development Dockerfile
+# Multi-stage build with BuildKit optimizations for maximum build speed
 # =============================================================================
 
-# Use Node.js 18 alpine image for better memory efficiency
-FROM node:18-alpine
+# Build stage - optimized for dependency installation and caching
+FROM node:20-alpine AS builder
+
+# Enable BuildKit mount cache for npm dependencies
+RUN --mount=type=cache,target=/root/.npm \
+    npm config set cache /root/.npm
 
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies
+# Install system dependencies in a single layer for better caching
 RUN apk add --no-cache \
     curl \
-    git
+    git \
+    python3 \
+    make \
+    g++ \
+    && rm -rf /var/cache/apk/*
+
+# Copy package files first for optimal layer caching
+COPY package.json package-lock.json* ./
+
+# Install all dependencies in one go (both prod and dev) with cache mount
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci --prefer-offline --no-audit && \
+    npm cache clean --force
+
+# Production dependencies stage - for smaller runtime image
+FROM node:20-alpine AS deps
+
+# Enable npm cache
+RUN --mount=type=cache,target=/root/.npm \
+    npm config set cache /root/.npm
+
+WORKDIR /app
 
 # Copy package files
 COPY package.json package-lock.json* ./
 
-# Install all dependencies (including dev dependencies)
-RUN npm ci
+# Install only production dependencies
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci --prefer-offline --no-audit --only=production && \
+    npm cache clean --force
 
-# Copy source code
-COPY . .
+# Runtime stage - optimized for development
+FROM node:20-alpine AS runtime
 
-# Set environment variables for development
+# Install minimal runtime dependencies
+RUN apk add --no-cache \
+    curl \
+    && rm -rf /var/cache/apk/*
+
+# Create non-root user for security
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S nextjs -u 1001
+
+# Set working directory
+WORKDIR /app
+
+# Copy production dependencies from deps stage
+COPY --from=deps --chown=nextjs:nodejs /app/node_modules ./node_modules
+
+# Copy package files for dev dependencies reference
+COPY --chown=nextjs:nodejs package.json package-lock.json* ./
+
+# Install dev dependencies (will use cache if available)
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci --prefer-offline --no-audit && \
+    npm cache clean --force
+
+# Copy source code with proper ownership
+COPY --chown=nextjs:nodejs . .
+
+# Create necessary directories with proper permissions
+RUN mkdir -p .next && chown -R nextjs:nodejs .next
+
+# Set optimized environment variables for development
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=development
-ENV WATCHPACK_POLLING=false
 ENV NODE_OPTIONS="--max-old-space-size=8192"
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
+
+# File watching optimizations for better performance
+ENV WATCHPACK_POLLING=false
 ENV CHOKIDAR_USEPOLLING=false
-ENV CHOKIDAR_INTERVAL=1000
+ENV CHOKIDAR_INTERVAL=300
 ENV CHOKIDAR_USE_FS_EVENTS=true
+
+# Next.js development optimizations
+ENV NEXT_WEBPACK_USEPOLLING=false
+ENV NEXT_FAST_REFRESH=true
+ENV NEXT_IGNORE_ESLINT=true
+ENV NEXT_IGNORE_TYPESCRIPT_ERRORS=true
+
+# Webpack memory optimizations (simplified)
+ENV WEBPACK_MEMORY_CACHE=false
 
 # Expose port
 EXPOSE 3000
 
-# Set environment variables for runtime
-ENV PORT=3000
-ENV HOSTNAME="0.0.0.0"
+# Switch to non-root user
+USER nextjs
 
-# Health check
-HEALTHCHECK --interval=10s --timeout=5s --start-period=10s --retries=3 \
-    CMD curl -f http://localhost:3000 || exit 1
+# Optimized health check
+HEALTHCHECK --interval=20s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:3000/api/health || exit 1
 
-# Start the development server with hot reload
+# Start development server with optimized settings
 CMD ["npm", "run", "dev"]

@@ -9,11 +9,12 @@ from sqlalchemy import Column, Integer, String, Text, Float, Boolean, DateTime, 
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.asyncio import AsyncAttrs
 from sqlalchemy.sql import func
+from enum import Enum as PyEnum
 
 from app.database.base import AsyncBase, TimestampMixin
 
 
-class DebateStatus(str, Enum):
+class DebateStatus(PyEnum):
     """Debate session status enumeration."""
     INITIALIZED = "initialized"
     ACTIVE = "active"
@@ -22,7 +23,7 @@ class DebateStatus(str, Enum):
     CONSENSUS_REACHED = "consensus_reached"
 
 
-class DebateMode(str, Enum):
+class DebateMode(PyEnum):
     """Debate execution mode enumeration."""
     STRUCTURED = "structured"
     FREEFORM = "freeform"

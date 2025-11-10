@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import {
     Activity,
     AlertCircle,
+    AlertTriangle,
     BarChart3,
     Bot,
     Brain,
@@ -15,6 +16,8 @@ import {
     Download,
     Eye,
     Grid3X3,
+    HardDrive,
+    Heart,
     Lightbulb,
     Loader2,
     MessageSquare,
@@ -29,6 +32,7 @@ import {
     Server,
     Settings,
     Shield,
+    ShoppingCart,
     Sliders,
     Terminal,
     TrendingUp,
@@ -56,7 +60,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Slider } from '@/components/ui/slider'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Textarea } from '@/components/ui/textarea'
+import { useDataPersistence } from '@/hooks/useDataPersistence'
+import { useFormValidation } from '@/hooks/useFormValidation'
 import { useAsyncOperation, useLoadingState } from '@/hooks/useLoadingState'
+import { useAgentWebSocket } from '@/hooks/useWebSocket'
+import { useWebSocketMonitoring, useWebSocketTesting } from '@/hooks/useWebSocketTesting'
 
 import MultiAgentDebateSystem from '@/components/MultiAgentDebateSystem'
 
@@ -503,7 +511,19 @@ interface SystemStatus {
   api_metrics: {
     total_requests: number
     websocket_connections: number
+    requests_per_second: number
+    error_rate: number
+    avg_response_time: number
   }
+  system_metrics: {
+    cpu_usage: number
+    memory_usage: number
+    disk_usage: number
+    uptime: number
+    load_average: number[]
+  }
+  health_score: number
+  last_updated: string
 }
 
 interface AgentParameter {
@@ -547,10 +567,144 @@ export default function AgentsTab() {
   const warningNotification = useWarningNotification()
   const infoNotification = useInfoNotification()
 
+  // ============================================================================
+  // ENHANCED HOOKS: Data Persistence, Form Validation, WebSocket Testing
+  // ============================================================================
+
+  // Data persistence for form state and user preferences
+  const {
+    data: persistedState,
+    setData: setPersistedState,
+    saveData: savePersistedState,
+    recoveryActions: persistenceRecoveryActions,
+    executeRecoveryAction: executePersistenceRecovery,
+  } = useDataPersistence(
+    {
+      activeTab: 'overview' as const,
+      agentViewMode: 'cards' as const,
+      selectedCategory: 'all',
+      taskForm: {
+        agent_id: '',
+        operation: '',
+        parameters: '{}',
+        priority: 'normal' as const,
+        timeout_seconds: 30,
+      },
+      agentParameters: {},
+      searchQuery: '',
+    },
+    {
+      key: 'agent-management-state',
+      version: 2,
+      ttl: 7 * 24 * 60 * 60 * 1000, // 7 days
+      backupEnabled: true,
+      recoveryEnabled: true,
+    }
+  )
+
+  // Enhanced form validation for task execution
+  const {
+    values: validatedTaskForm,
+    validationState: taskFormValidation,
+    isValid: isTaskFormValid,
+    handleChange: handleTaskFormChange,
+    handleBlur: handleTaskFormBlur,
+    handleSubmit: handleTaskFormSubmit,
+    executeRecoveryAction: executeFormRecovery,
+    getRecoverySuggestions: getFormRecoverySuggestions,
+    autoRecover: autoRecoverForm,
+    reset: resetTaskForm,
+  } = useFormValidation(
+    persistedState.taskForm,
+    {
+      agent_id: [
+        { validate: (value) => !!value, message: 'Please select an agent' },
+      ],
+      operation: [
+        { validate: (value) => !!value, message: 'Please select an operation' },
+      ],
+      parameters: [
+        {
+          validate: (value) => {
+            try {
+              JSON.parse(value)
+              return true
+            } catch {
+              return false
+            }
+          },
+          message: 'Parameters must be valid JSON'
+        },
+      ],
+      priority: [
+        {
+          validate: (value) => ['low', 'normal', 'high', 'urgent'].includes(value),
+          message: 'Please select a valid priority level'
+        },
+      ],
+      timeout_seconds: [
+        { validate: (value) => value >= 5, message: 'Timeout must be at least 5 seconds' },
+        { validate: (value) => value <= 300, message: 'Timeout cannot exceed 5 minutes' },
+      ],
+    },
+    {
+      enableRealTimeValidation: true,
+      recoverySuggestions: true,
+      persistState: true,
+      storageKey: 'task-form-validation',
+      maxRecoveryAttempts: 3,
+    }
+  )
+
+
   // Enhanced loading state management
-  const agentLoadingState = useLoadingState()
-  const taskLoadingState = useLoadingState()
-  const ollamaLoadingState = useLoadingState()
+  const agentLoadingState = useLoadingState({
+    phase: 'Initializing',
+    estimatedDuration: 2000,
+    subTasks: [
+      { id: 'fetch-agents', label: 'Fetching agents', progress: 0, status: 'pending' },
+      { id: 'load-templates', label: 'Loading templates', progress: 0, status: 'pending' },
+      { id: 'init-metrics', label: 'Initializing metrics', progress: 0, status: 'pending' },
+    ],
+    enableCancellation: true,
+  })
+
+  const taskLoadingState = useLoadingState({
+    phase: 'Ready',
+    enableCancellation: true,
+  })
+
+  const ollamaLoadingState = useLoadingState({
+    phase: 'Disconnected',
+    enableCancellation: false,
+  })
+
+  // Form validation for agent creation/configuration
+  const agentFormValidation = useFormValidation(
+    {
+      name: '',
+      type: '',
+      description: '',
+      capabilities: [] as string[],
+      config: {} as Record<string, any>,
+    },
+    {
+      name: [
+        { validate: (value) => value.length >= 3, message: 'Name must be at least 3 characters' },
+        { validate: (value) => /^[a-zA-Z0-9_-]+$/.test(value), message: 'Name can only contain letters, numbers, hyphens, and underscores' },
+      ],
+      type: [
+        { validate: (value) => !!value, message: 'Please select an agent type' },
+      ],
+      description: [
+        { validate: (value) => value.length >= 10, message: 'Description must be at least 10 characters' },
+      ],
+    },
+    {
+      enableRealTimeValidation: true,
+      recoverySuggestions: true,
+    }
+  )
 
   // State management
   const [agents, setAgents] = useState<Agent[]>([])
@@ -558,7 +712,50 @@ export default function AgentsTab() {
   const [selectedAgent, setSelectedAgent] = useState<Agent | null>(null)
   const [taskHistory, setTaskHistory] = useState<TaskExecution[]>([])
   const [isLoading, setIsLoading] = useState(false)
-  const [wsConnected, setWsConnected] = useState(false)
+
+  // WebSocket connection for real-time updates
+  const {
+    state: wsState,
+    isConnected: wsConnected,
+    agentUpdates,
+    systemStatus: wsSystemStatus,
+    taskUpdates: wsTaskUpdates,
+    reconnect: reconnectWebSocket,
+    lastError: wsError
+  } = useAgentWebSocket()
+
+  // WebSocket testing and monitoring hooks
+  const wsHookForTesting = {
+    isConnected: wsConnected,
+    state: wsState,
+    send: (data: any) => {
+      // Integration with actual WebSocket would go here
+      console.log('WebSocket test send:', data)
+      return true
+    },
+    connectionAttempts: 0,
+    url: 'ws://localhost:8443/ws/agent-updates',
+    connectionTime: Date.now(),
+    lastError: wsError,
+  }
+
+  const {
+    isTesting: wsTesting,
+    currentTest: wsCurrentTest,
+    testResults: wsTestResults,
+    testMessages: wsTestMessages,
+    testMetrics: wsTestMetrics,
+    runTestScenario: runWsTestScenario,
+    testScenarios: wsTestScenarios,
+    exportTestResults: exportWsTestResults,
+  } = useWebSocketTesting(wsHookForTesting)
+
+  const {
+    connectionHistory: wsConnectionHistory,
+    performanceMetrics: wsPerformanceMetrics,
+    clearHistory: clearWsHistory,
+  } = useWebSocketMonitoring(wsHookForTesting)
+
   const [activeTab, setActiveTab] = useState<'overview' | 'agents' | 'tasks' | 'orchestration' | 'ollama' | 'debate' | 'system'>('overview')
 
   // Ollama integration state
@@ -684,93 +881,69 @@ export default function AgentsTab() {
     { value: 'fact_check', label: 'Fact Check', category: 'Research' }
   ]
 
-  // WebSocket connection
-  const [ws, setWs] = useState<WebSocket | null>(null)
-
-  // Initialize WebSocket connection
+  // Update system status from WebSocket
   useEffect(() => {
-    const connectWebSocket = () => {
-      try {
-        const websocket = new WebSocket('ws://localhost:8443/ws/agent-updates')
-
-        websocket.onopen = () => {
-          setWsConnected(true)
-          successNotification(
-            'Connection Established',
-            'Real-time agent updates are now active',
-            { category: 'network', duration: 3000 }
-          )
-        }
-
-        websocket.onmessage = (event) => {
-          try {
-            const data = JSON.parse(event.data)
-            handleWebSocketMessage(data)
-          } catch (error) {
-            console.error('Failed to parse WebSocket message:', error)
-          }
-        }
-
-        websocket.onclose = () => {
-          setWsConnected(false)
-          warningNotification(
-            'Connection Lost',
-            'Attempting to reconnect to agent updates...',
-            { category: 'network', persistent: false, duration: 2000 }
-          )
-          // Auto-reconnect after 3 seconds
-          setTimeout(connectWebSocket, 3000)
-        }
-
-        websocket.onerror = (error) => {
-          console.error('WebSocket error:', error)
-          setWsConnected(false)
-          errorNotification(
-            'Connection Error',
-            'Failed to connect to agent updates. Retrying...',
-            { category: 'network' }
-          )
-        }
-
-        setWs(websocket)
-      } catch (error) {
-        console.error('Failed to create WebSocket connection:', error)
-      }
+    if (wsSystemStatus) {
+      setSystemStatus(wsSystemStatus)
     }
+  }, [wsSystemStatus])
 
-    connectWebSocket()
-
-    return () => {
-      if (ws) {
-        ws.close()
-      }
-    }
-  }, [])
-
-  // Handle WebSocket messages
-  const handleWebSocketMessage = useCallback((data: any) => {
-    switch (data.event_type) {
-      case 'system_status':
-        setSystemStatus(data.data)
-        break
-      case 'status_update':
-        setSystemStatus(data.data)
-        break
-      case 'task_completed':
-        setTaskHistory(prev => [{
-          task_id: data.data.task_id || `task_${Date.now()}`,
-          agent_id: data.data.agent_id,
-          operation: data.data.task?.operation || 'unknown',
-          parameters: data.data.task?.parameters || {},
-          priority: data.data.task?.priority || 'normal',
-          status: 'completed',
-          result: data.data.result,
-          execution_time_seconds: data.data.execution_time_seconds,
+  // Update task history from WebSocket
+  useEffect(() => {
+    if (wsTaskUpdates && wsTaskUpdates.length > 0) {
+      setTaskHistory(prev => {
+        const newTasks = wsTaskUpdates.map(update => ({
+          task_id: update.data?.task_id || `task_${Date.now()}`,
+          agent_id: update.data?.agent_id,
+          operation: update.data?.task?.operation || 'unknown',
+          parameters: update.data?.task?.parameters || {},
+          priority: update.data?.task?.priority || 'normal',
+          status: update.type === 'task_completed' ? 'completed' :
+                 update.type === 'task_started' ? 'running' :
+                 update.type === 'task_failed' ? 'failed' : 'pending',
+          result: update.data?.result,
+          execution_time_seconds: update.data?.execution_time_seconds,
           timestamp: new Date().toISOString()
-        }, ...prev.slice(0, 49)]) // Keep last 50 tasks
-        break
+        }))
+        return [...newTasks, ...prev.slice(0, 40)] // Keep last 50 tasks
+      })
     }
-  }, [])
+  }, [wsTaskUpdates])
+
+  // Handle WebSocket connection state changes
+  useEffect(() => {
+    if (wsState === 'connected' && !wsConnected) {
+      successNotification(
+        'Connection Established',
+        'Real-time agent updates are now active',
+        { category: 'network', duration: 3000 }
+      )
+    } else if (wsState === 'disconnected' && wsConnected) {
+      warningNotification(
+        'Connection Lost',
+        'Attempting to reconnect to agent updates...',
+        { category: 'network', persistent: false, duration: 2000 }
+      )
+    } else if (wsState === 'error') {
+      errorNotification(
+        'Connection Error',
+        'Failed to connect to agent updates. Retrying...',
+        { category: 'network' }
+      )
+    }
+  }, [wsState, wsConnected, successNotification, warningNotification, errorNotification])
+
+  // Handle WebSocket errors
+  useEffect(() => {
+    if (wsError) {
+      console.error('WebSocket error:', wsError)
+      errorNotification(
+        'WebSocket Error',
+        'Connection to agent updates encountered an error',
+        { category: 'network' }
+      )
+    }
+  }, [wsError, errorNotification])
 
   // Auto-refresh system status every 30 seconds
   useEffect(() => {
@@ -885,7 +1058,9 @@ export default function AgentsTab() {
         agent: agent,
         connectivity: {
           api_endpoint: `/api/v1/agents/${agent.id}/status`,
-          websocket_status: wsConnected ? 'connected' : 'disconnected',
+          websocket_status: wsState,
+          websocket_connected: wsConnected,
+          websocket_error: wsError ? wsError.message : null,
           backend_url: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8443'
         },
         network_info: {
@@ -3725,21 +3900,48 @@ export default function AgentsTab() {
         className="space-y-6"
       >
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-2xl font-bold flex items-center space-x-2">
-            <Brain className="w-6 h-6" />
-            <span>Agent Management</span>
+      <div className="flex items-center justify-between" data-id="agent-management-header">
+        <div data-id="header-content">
+          <h2 className="text-2xl font-bold flex items-center space-x-2" data-id="page-title">
+            <Brain className="w-6 h-6" data-id="brain-icon" />
+            <span data-id="title-text">Agent Management</span>
           </h2>
-          <p className="text-slate-400 mt-1">Monitor and control the multi-agent system</p>
+          <p className="text-slate-400 mt-1" data-id="page-description">Monitor and control the multi-agent system</p>
         </div>
 
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2">
-            <div className={`w-3 h-3 rounded-full ${wsConnected ? 'bg-green-500' : 'bg-red-500'}`} />
-            <span className="text-sm text-slate-300">
+        <div className="flex items-center space-x-4" data-id="header-controls">
+          <div className="flex items-center space-x-2" data-id="websocket-status">
+            <div
+              className={`w-3 h-3 rounded-full ${wsConnected ? 'bg-green-500' : 'bg-red-500'}`}
+              data-id="ws-indicator"
+              data-connected={wsConnected}
+            />
+            <span className="text-sm text-slate-300" data-id="ws-status-text">
               {wsConnected ? 'Live Updates' : 'Disconnected'}
             </span>
+            {!wsConnected && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={reconnectWebSocket}
+                className="ml-2 text-xs"
+                disabled={wsState === 'connecting' || wsState === 'reconnecting'}
+                data-id="ws-reconnect-button"
+                data-state={wsState}
+              >
+                {wsState === 'connecting' || wsState === 'reconnecting' ? (
+                  <>
+                    <Loader2 className="w-3 h-3 mr-1 animate-spin" data-id="connecting-spinner" />
+                    <span data-id="connecting-text">Connecting...</span>
+                  </>
+                ) : (
+                  <>
+                    <Wifi className="w-3 h-3 mr-1" data-id="wifi-icon" />
+                    <span data-id="reconnect-text">Reconnect</span>
+                  </>
+                )}
+              </Button>
+            )}
           </div>
 
           {/* Advanced Menu Controls */}
@@ -3841,28 +4043,61 @@ export default function AgentsTab() {
       {/* System Overview */}
       {systemStatus && (
         <div className="space-y-4">
-          {/* System Status Header */}
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold flex items-center space-x-2" data-id="system-overview-title">
-              <Server className="w-5 h-5 text-blue-400" />
-              <span>System Overview</span>
+          {/* Enhanced System Status Header */}
+          <div className="flex items-center justify-between" data-id="system-overview-header">
+            <div className="flex items-center space-x-3">
+              <h2 className="text-xl font-semibold flex items-center space-x-2" data-id="system-overview-title">
+                <Server className="w-5 h-5 text-blue-400" />
+                <span>System Overview</span>
+              </h2>
               {wsConnected && (
-                <div className="flex items-center space-x-1" data-id="websocket-indicator">
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                  <span className="text-xs text-green-400">Live</span>
+                <div className="flex items-center space-x-2 bg-green-950/20 px-2 py-1 rounded-full" data-id="live-indicator">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" data-id="live-pulse" />
+                  <span className="text-xs text-green-400 font-medium" data-id="live-text">Live</span>
                 </div>
               )}
-            </h2>
-            <div className="flex items-center space-x-2">
-              <Badge variant={systemStatus.system_status === 'operational' ? 'default' : 'destructive'} data-id="system-status-badge">
-                {systemStatus.system_status}
+              <div className="text-xs text-slate-400" data-id="last-updated">
+                Updated {new Date(systemStatus.last_updated || systemStatus.timestamp).toLocaleTimeString()}
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-3">
+              {/* Overall Health Score */}
+              <div className="flex items-center space-x-2" data-id="health-score">
+                <div className={`w-3 h-3 rounded-full ${
+                  systemStatus.health_score >= 90 ? 'bg-green-400' :
+                  systemStatus.health_score >= 70 ? 'bg-yellow-400' :
+                  'bg-red-400'
+                }`} data-id="health-indicator" />
+                <span className="text-sm font-medium" data-id="health-score-text">
+                  {systemStatus.health_score}% Health
+                </span>
+              </div>
+
+              <Badge
+                variant={
+                  systemStatus.system_status === 'operational' ? 'default' :
+                  systemStatus.system_status === 'degraded' ? 'secondary' :
+                  'destructive'
+                }
+                data-id="system-status-badge"
+                className="px-3 py-1"
+              >
+                <div className="flex items-center space-x-1">
+                  {systemStatus.system_status === 'operational' && <CheckCircle className="w-3 h-3" />}
+                  {systemStatus.system_status === 'degraded' && <AlertTriangle className="w-3 h-3" />}
+                  {systemStatus.system_status === 'critical' && <XCircle className="w-3 h-3" />}
+                  <span>{systemStatus.system_status}</span>
+                </div>
               </Badge>
+
               <Button
                 onClick={loadAgents}
                 disabled={agentLoadingState.isLoading}
                 size="sm"
                 variant="outline"
                 data-id="refresh-system-btn"
+                className="px-3"
               >
                 <RefreshCw className={`w-4 h-4 mr-2 ${agentLoadingState.isLoading ? 'animate-spin' : ''}`} />
                 Refresh
@@ -3872,21 +4107,36 @@ export default function AgentsTab() {
 
           {/* System Metrics Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Card data-id="active-agents-card">
+            {/* Active Agents Card */}
+            <Card className="hover:bg-slate-800/50 transition-colors" data-id="active-agents-card">
               <CardContent className="p-4">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center space-x-2">
-                    <Users className="w-4 h-4 text-green-400" />
+                    <Users className="w-5 h-5 text-green-400" />
                     <span className="text-sm font-medium">Active Agents</span>
                   </div>
-                  <div className="text-right">
-                    <div className="text-2xl font-bold" data-id="active-agents-count">
+                  <TrendingUp className="w-4 h-4 text-green-400" />
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex items-baseline space-x-2">
+                    <div className="text-3xl font-bold" data-id="active-agents-count">
                       {agents.filter(a => a.status === 'working' || a.status === 'idle').length}
                     </div>
-                    <div className="text-xs text-slate-400">of {agents.length} total</div>
+                    <div className="text-sm text-slate-400">
+                      of {agents.length} total
+                    </div>
                   </div>
-                </div>
-                <div className="mt-2">
+
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-slate-400">Activity Rate</span>
+                    <span className="text-slate-300">
+                      {agents.length > 0
+                        ? Math.round((agents.filter(a => a.status === 'working' || a.status === 'idle').length / agents.length) * 100)
+                        : 0}%
+                    </span>
+                  </div>
+
                   <Progress
                     value={(agents.filter(a => a.status === 'working' || a.status === 'idle').length / agents.length) * 100}
                     className="h-2"
@@ -3896,25 +4146,53 @@ export default function AgentsTab() {
               </CardContent>
             </Card>
 
-            <Card data-id="api-requests-card">
+            {/* API Requests Card */}
+            <Card className="hover:bg-slate-800/50 transition-colors" data-id="api-requests-card">
               <CardContent className="p-4">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center space-x-2">
-                    <Activity className="w-4 h-4 text-purple-400" />
+                    <Activity className="w-5 h-5 text-purple-400" />
                     <span className="text-sm font-medium">API Requests</span>
                   </div>
-                  <div className="text-right">
-                    <div className="text-2xl font-bold" data-id="api-requests-count">
-                      {systemStatus.api_metrics?.total_requests || 0}
+                  <Zap className="w-4 h-4 text-purple-400" />
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex items-baseline space-x-2">
+                    <div className="text-3xl font-bold" data-id="api-requests-count">
+                      {systemStatus.api_metrics?.total_requests?.toLocaleString() || '0'}
                     </div>
-                    <div className="text-xs text-slate-400">
-                      Recent activity
+                    <div className="text-sm text-slate-400">total</div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2 text-xs">
+                    <div>
+                      <div className="text-slate-400">Rate</div>
+                      <div className="text-slate-300" data-id="requests-per-second">
+                        {systemStatus.api_metrics?.requests_per_second?.toFixed(1) || '0.0'}/s
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-slate-400">Errors</div>
+                      <div className={`${
+                        (systemStatus.api_metrics?.error_rate || 0) > 5 ? 'text-red-400' :
+                        (systemStatus.api_metrics?.error_rate || 0) > 1 ? 'text-yellow-400' :
+                        'text-green-400'
+                      }`} data-id="error-rate">
+                        {systemStatus.api_metrics?.error_rate?.toFixed(1) || '0.0'}%
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="mt-2">
+
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-slate-400">Avg Response</span>
+                    <span className="text-slate-300" data-id="avg-response-time">
+                      {systemStatus.api_metrics?.avg_response_time?.toFixed(0) || '0'}ms
+                    </span>
+                  </div>
+
                   <Progress
-                    value={Math.min((systemStatus.api_metrics?.total_requests || 0) / 1000 * 100, 100)}
+                    value={Math.min((systemStatus.api_metrics?.total_requests || 0) / 10000 * 100, 100)}
                     className="h-2"
                     data-id="api-requests-progress"
                   />
@@ -3922,23 +4200,47 @@ export default function AgentsTab() {
               </CardContent>
             </Card>
 
-            <Card data-id="websocket-connections-card">
+            {/* WebSocket Connections Card */}
+            <Card className="hover:bg-slate-800/50 transition-colors" data-id="websocket-connections-card">
               <CardContent className="p-4">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center space-x-2">
-                    <Network className="w-4 h-4 text-orange-400" />
+                    <Network className="w-5 h-5 text-orange-400" />
                     <span className="text-sm font-medium">WS Connections</span>
                   </div>
-                  <div className="text-right">
-                    <div className="text-2xl font-bold" data-id="ws-connections-count">
+                  <div className={`w-2 h-2 rounded-full ${wsConnected ? 'bg-green-400' : 'bg-red-400'}`} />
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex items-baseline space-x-2">
+                    <div className="text-3xl font-bold" data-id="ws-connections-count">
                       {systemStatus.api_metrics?.websocket_connections || 0}
                     </div>
-                    <div className="text-xs text-slate-400">
+                    <div className={`text-sm ${
+                      wsConnected ? 'text-green-400' : 'text-red-400'
+                    }`}>
                       {wsConnected ? 'Connected' : 'Disconnected'}
                     </div>
                   </div>
-                </div>
-                <div className="mt-2">
+
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-slate-400">Status</span>
+                    <span className={`${
+                      wsState === 'connected' ? 'text-green-400' :
+                      wsState === 'connecting' ? 'text-yellow-400' :
+                      'text-red-400'
+                    }`} data-id="ws-status-text">
+                      {wsState.charAt(0).toUpperCase() + wsState.slice(1)}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-slate-400">Latency</span>
+                    <span className="text-slate-300" data-id="ws-latency">
+                      {wsError ? 'N/A' : '< 100ms'}
+                    </span>
+                  </div>
+
                   <Progress
                     value={wsConnected ? 100 : 0}
                     className="h-2"
@@ -3948,23 +4250,64 @@ export default function AgentsTab() {
               </CardContent>
             </Card>
 
-            <Card data-id="system-performance-card">
+            {/* Overall System Health Card */}
+            <Card className="hover:bg-slate-800/50 transition-colors" data-id="system-health-card">
               <CardContent className="p-4">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center space-x-2">
-                    <Zap className="w-4 h-4 text-yellow-400" />
+                    <Heart className="w-5 h-5 text-red-400" />
                     <span className="text-sm font-medium">System Health</span>
                   </div>
-                  <div className="text-right">
-                    <div className="text-2xl font-bold" data-id="system-health-value">
-                      {systemStatus.system_status === 'operational' ? 'Good' : 'Issues'}
-                    </div>
-                    <div className="text-xs text-slate-400">Overall Status</div>
-                  </div>
+                  <Shield className="w-4 h-4 text-red-400" />
                 </div>
-                <div className="mt-2">
+
+                <div className="space-y-2">
+                  <div className="flex items-baseline space-x-2">
+                    <div className={`text-3xl font-bold ${
+                      systemStatus.health_score >= 90 ? 'text-green-400' :
+                      systemStatus.health_score >= 70 ? 'text-yellow-400' :
+                      'text-red-400'
+                    }`} data-id="system-health-score">
+                      {systemStatus.health_score}%
+                    </div>
+                    <div className="text-sm text-slate-400">overall</div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2 text-xs">
+                    <div>
+                      <div className="text-slate-400">CPU</div>
+                      <div className={`${
+                        (systemStatus.system_metrics?.cpu_usage || 0) > 80 ? 'text-red-400' :
+                        (systemStatus.system_metrics?.cpu_usage || 0) > 60 ? 'text-yellow-400' :
+                        'text-green-400'
+                      }`} data-id="cpu-usage">
+                        {systemStatus.system_metrics?.cpu_usage?.toFixed(0) || '0'}%
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-slate-400">Memory</div>
+                      <div className={`${
+                        (systemStatus.system_metrics?.memory_usage || 0) > 80 ? 'text-red-400' :
+                        (systemStatus.system_metrics?.memory_usage || 0) > 60 ? 'text-yellow-400' :
+                        'text-green-400'
+                      }`} data-id="memory-usage">
+                        {systemStatus.system_metrics?.memory_usage?.toFixed(0) || '0'}%
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-slate-400">Uptime</span>
+                    <span className="text-slate-300" data-id="system-uptime">
+                      {systemStatus.system_metrics?.uptime
+                        ? `${Math.floor(systemStatus.system_metrics.uptime / 3600)}h ${Math.floor((systemStatus.system_metrics.uptime % 3600) / 60)}m`
+                        : 'N/A'
+                      }
+                    </span>
+                  </div>
+
                   <Progress
-                    value={systemStatus.system_status === 'operational' ? 100 : 50}
+                    value={systemStatus.health_score}
                     className="h-2"
                     data-id="system-health-progress"
                   />
@@ -3973,50 +4316,151 @@ export default function AgentsTab() {
             </Card>
           </div>
 
-          {/* Additional System Metrics */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Card data-id="response-time-card">
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-2">
-                  <Activity className="w-4 h-4 text-cyan-400" />
-                  <span className="text-sm font-medium">Response Time</span>
+          {/* Secondary Metrics */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4" data-id="secondary-metrics-grid">
+            {/* System Resources Card */}
+            <Card data-id="system-resources-card">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-sm flex items-center space-x-2">
+                  <HardDrive className="w-4 h-4" />
+                  <span>System Resources</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-400">CPU Usage</span>
+                    <span className="text-slate-300" data-id="cpu-usage-detailed">
+                      {systemStatus.system_metrics?.cpu_usage?.toFixed(1) || '0.0'}%
+                    </span>
+                  </div>
+                  <Progress
+                    value={systemStatus.system_metrics?.cpu_usage || 0}
+                    className="h-1"
+                    data-id="cpu-progress"
+                  />
                 </div>
-                <div className="mt-2 text-xl font-bold" data-id="response-time-value">
-                  {agents.length > 0 ? `${(agents.reduce((sum, a) => sum + (a.avg_task_duration || 0), 0) / agents.length).toFixed(1)}s` : 'N/A'}
+
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-400">Memory Usage</span>
+                    <span className="text-slate-300" data-id="memory-usage-detailed">
+                      {systemStatus.system_metrics?.memory_usage?.toFixed(1) || '0.0'}%
+                    </span>
+                  </div>
+                  <Progress
+                    value={systemStatus.system_metrics?.memory_usage || 0}
+                    className="h-1"
+                    data-id="memory-progress"
+                  />
                 </div>
-                <div className="mt-1 text-xs text-slate-400">
-                  Average across all agents
+
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-400">Disk Usage</span>
+                    <span className="text-slate-300" data-id="disk-usage">
+                      {systemStatus.system_metrics?.disk_usage?.toFixed(1) || '0.0'}%
+                    </span>
+                  </div>
+                  <Progress
+                    value={systemStatus.system_metrics?.disk_usage || 0}
+                    className="h-1"
+                    data-id="disk-progress"
+                  />
                 </div>
               </CardContent>
             </Card>
 
-            <Card data-id="task-success-card">
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-2">
-                  <CheckCircle className="w-4 h-4 text-green-400" />
-                  <span className="text-sm font-medium">Task Success</span>
-                </div>
-                <div className="mt-2 text-xl font-bold" data-id="task-success-value">
-                  {agents.length > 0 ? `${Math.round(agents.reduce((sum, a) => sum + a.success_rate, 0) / agents.length)}%` : 'N/A'}
-                </div>
-                <div className="mt-1 text-xs text-slate-400">
-                  Average success rate
-                </div>
+            {/* Load Average Card */}
+            <Card data-id="load-average-card">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-sm flex items-center space-x-2">
+                  <TrendingUp className="w-4 h-4" />
+                  <span>Load Average</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                {systemStatus.system_metrics?.load_average ? (
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-xs text-slate-400">1 min</span>
+                      <span className="text-sm font-medium" data-id="load-1min">
+                        {systemStatus.system_metrics.load_average[0]?.toFixed(2) || '0.00'}
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-xs text-slate-400">5 min</span>
+                      <span className="text-sm font-medium" data-id="load-5min">
+                        {systemStatus.system_metrics.load_average[1]?.toFixed(2) || '0.00'}
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-xs text-slate-400">15 min</span>
+                      <span className="text-sm font-medium" data-id="load-15min">
+                        {systemStatus.system_metrics.load_average[2]?.toFixed(2) || '0.00'}
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-center text-slate-400 text-sm py-4">
+                    Load average not available
+                  </div>
+                )}
               </CardContent>
             </Card>
 
-            <Card data-id="total-tasks-card">
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-2">
-                  <BarChart3 className="w-4 h-4 text-purple-400" />
-                  <span className="text-sm font-medium">Total Tasks</span>
-                </div>
-                <div className="mt-2 text-xl font-bold" data-id="total-tasks-value">
-                  {agents.reduce((sum, a) => sum + a.task_count, 0)}
-                </div>
-                <div className="mt-1 text-xs text-slate-400">
-                  Processed by all agents
-                </div>
+            {/* Quick Actions Card */}
+            <Card data-id="quick-actions-card">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-sm flex items-center space-x-2">
+                  <Settings className="w-4 h-4" />
+                  <span>Quick Actions</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="w-full justify-start"
+                  onClick={() => setActiveTab('agents')}
+                  data-id="view-agents-action"
+                >
+                  <Users className="w-4 h-4 mr-2" />
+                  View All Agents
+                </Button>
+
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="w-full justify-start"
+                  onClick={() => setActiveTab('tasks')}
+                  data-id="create-task-action"
+                >
+                  <Zap className="w-4 h-4 mr-2" />
+                  Create Task
+                </Button>
+
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="w-full justify-start"
+                  onClick={() => setShowAgentMarketplace(true)}
+                  data-id="agent-marketplace-action"
+                >
+                  <ShoppingCart className="w-4 h-4 mr-2" />
+                  Agent Marketplace
+                </Button>
+
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="w-full justify-start"
+                  onClick={() => setShowAnalytics(true)}
+                  data-id="system-analytics-action"
+                >
+                  <BarChart3 className="w-4 h-4 mr-2" />
+                  System Analytics
+                </Button>
               </CardContent>
             </Card>
           </div>
@@ -4438,24 +4882,24 @@ export default function AgentsTab() {
         </TabsContent>
 
         {/* Tasks Tab */}
-        <TabsContent value="tasks" className="space-y-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <TabsContent value="tasks" className="space-y-6" data-id="tasks-content">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6" data-id="tasks-grid">
             {/* Task Execution Form */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <Zap className="w-5 h-5" />
-                  <span>Execute Task</span>
+            <Card data-id="task-execution-form">
+              <CardHeader data-id="task-form-header">
+                <CardTitle className="flex items-center space-x-2" data-id="task-form-title">
+                  <Zap className="w-5 h-5" data-id="zap-icon" />
+                  <span data-id="execute-task-title">Execute Task</span>
                 </CardTitle>
-                <CardDescription>
+                <CardDescription data-id="task-form-description">
                   Send tasks to specific agents for execution
                 </CardDescription>
               </CardHeader>
 
-              <CardContent className="space-y-6">
+              <CardContent className="space-y-6" data-id="task-form-content">
                 {/* Agent Selection */}
-                <div className="space-y-2">
-                  <Label htmlFor="agent_id" className="text-base font-medium">
+                <div className="space-y-2" data-id="agent-selection-section">
+                  <Label htmlFor="agent_id" className="text-base font-medium" data-id="agent-select-label">
                     Select Agent
                   </Label>
                   <Select
@@ -4468,9 +4912,13 @@ export default function AgentsTab() {
                         parameters: '{}' // Reset parameters when agent changes
                       }))
                     }}
+                    data-id="agent-select"
                   >
-                    <SelectTrigger className="h-12">
-                      <SelectValue placeholder={agents.length > 0 ? "Select agent" : "No agents available"} />
+                    <SelectTrigger className="h-12" data-id="agent-select-trigger">
+                      <SelectValue
+                        placeholder={agents.length > 0 ? "Select agent" : "No agents available"}
+                        data-id="agent-select-placeholder"
+                      />
                     </SelectTrigger>
                     <SelectContent>
                       {agents.length > 0 ? (

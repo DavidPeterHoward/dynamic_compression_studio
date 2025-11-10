@@ -1,10 +1,23 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 export interface LoadingState {
   isLoading: boolean
   error: Error | null
   progress?: number
   message?: string
+  phase?: string
+  startTime?: number
+  estimatedDuration?: number
+  subTasks?: Array<{
+    id: string
+    label: string
+    progress: number
+    status: 'pending' | 'running' | 'completed' | 'failed'
+    startTime?: number
+    duration?: number
+  }>
+  retryCount?: number
+  canCancel?: boolean
 }
 
 export interface LoadingOptions {
@@ -19,18 +32,34 @@ export const useLoadingState = (initialState: Partial<LoadingState> = {}) => {
     error: null,
     progress: 0,
     message: '',
+    phase: '',
+    startTime: undefined,
+    estimatedDuration: undefined,
+    subTasks: [],
+    retryCount: 0,
+    canCancel: false,
     ...initialState,
   })
 
   const timeoutRef = useRef<NodeJS.Timeout>()
+  const abortControllerRef = useRef<AbortController>()
 
   const startLoading = useCallback((options: LoadingOptions = {}) => {
+    // Create abort controller for cancellation
+    abortControllerRef.current = new AbortController()
+
     setState(prev => ({
       ...prev,
       isLoading: true,
       error: null,
       progress: options.showProgress ? 0 : undefined,
       message: options.message || prev.message,
+      phase: options.phase || prev.phase || 'Initializing',
+      startTime: Date.now(),
+      estimatedDuration: options.estimatedDuration,
+      subTasks: options.subTasks || prev.subTasks || [],
+      retryCount: 0,
+      canCancel: options.enableCancellation !== false,
     }))
 
     // Set timeout to prevent infinite loading
@@ -41,18 +70,148 @@ export const useLoadingState = (initialState: Partial<LoadingState> = {}) => {
     }
   }, [])
 
+  // Enhanced loading options interface
+  interface EnhancedLoadingOptions extends LoadingOptions {
+    phase?: string
+    estimatedDuration?: number
+    subTasks?: LoadingState['subTasks']
+    enableCancellation?: boolean
+    onCancel?: () => void
+  }
+
   const stopLoading = useCallback(() => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current)
       timeoutRef.current = undefined
     }
 
+    // Abort any ongoing operations
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort()
+      abortControllerRef.current = undefined
+    }
+
     setState(prev => ({
       ...prev,
       isLoading: false,
       progress: undefined,
+      phase: 'Completed',
+      canCancel: false,
     }))
   }, [])
+
+  const cancelOperation = useCallback(() => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort()
+    }
+
+    setState(prev => ({
+      ...prev,
+      isLoading: false,
+      error: new Error('Operation cancelled by user'),
+      message: 'Operation cancelled',
+      phase: 'Cancelled',
+      canCancel: false,
+    }))
+  }, [])
+
+  const setPhase = useCallback((phase: string, message?: string) => {
+    setState(prev => ({
+      ...prev,
+      phase,
+      message: message || prev.message,
+    }))
+  }, [])
+
+  const updateSubTask = useCallback((
+    taskId: string,
+    updates: Partial<LoadingState['subTasks'][0]>
+  ) => {
+    setState(prev => {
+      if (!prev.subTasks) return prev
+
+      const updatedTasks = prev.subTasks.map(task => {
+        if (task.id === taskId) {
+          const updatedTask = { ...task, ...updates }
+
+          // Calculate duration if task completed
+          if (updates.status === 'completed' && task.startTime && !updatedTask.duration) {
+            updatedTask.duration = Date.now() - task.startTime
+          }
+
+          return updatedTask
+        }
+        return task
+      })
+
+      // Calculate overall progress from sub-tasks
+      const completedTasks = updatedTasks.filter(task => task.status === 'completed').length
+      const totalProgress = updatedTasks.length > 0 ? (completedTasks / updatedTasks.length) * 100 : 0
+
+      return {
+        ...prev,
+        subTasks: updatedTasks,
+        progress: Math.round(totalProgress),
+      }
+    })
+  }, [])
+
+  const addSubTask = useCallback((
+    task: Omit<LoadingState['subTasks'][0], 'startTime'>
+  ) => {
+    setState(prev => ({
+      ...prev,
+      subTasks: [
+        ...(prev.subTasks || []),
+        {
+          ...task,
+          startTime: Date.now(),
+        }
+      ]
+    }))
+  }, [])
+
+  const retryOperation = useCallback((maxRetries: number = 3) => {
+    setState(prev => {
+      if ((prev.retryCount || 0) >= maxRetries) {
+        return {
+          ...prev,
+          error: new Error(`Maximum retry attempts (${maxRetries}) exceeded`),
+        }
+      }
+
+      return {
+        ...prev,
+        error: null,
+        isLoading: true,
+        retryCount: (prev.retryCount || 0) + 1,
+        message: `Retrying... (attempt ${(prev.retryCount || 0) + 1}/${maxRetries})`,
+        phase: 'Retrying',
+      }
+    })
+  }, [])
+
+  const getElapsedTime = useCallback(() => {
+    return state.startTime ? Date.now() - state.startTime : 0
+  }, [state.startTime])
+
+  const getEstimatedTimeRemaining = useCallback(() => {
+    if (!state.isLoading || !state.progress || state.progress === 0) return 0
+
+    const elapsed = getElapsedTime()
+    const totalEstimated = elapsed / (state.progress / 100)
+    return Math.max(0, totalEstimated - elapsed)
+  }, [state.isLoading, state.progress, getElapsedTime])
+
+  const getCompletionPercentage = useCallback(() => {
+    if (!state.subTasks || state.subTasks.length === 0) {
+      return state.progress || 0
+    }
+
+    const totalTasks = state.subTasks.length
+    const completedTasks = state.subTasks.filter(task => task.status === 'completed').length
+    return Math.round((completedTasks / totalTasks) * 100)
+  }, [state.subTasks, state.progress])
 
   const setError = useCallback((error: Error | string) => {
     const errorObj = typeof error === 'string' ? new Error(error) : error
@@ -99,14 +258,34 @@ export const useLoadingState = (initialState: Partial<LoadingState> = {}) => {
     })
   }, [])
 
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort()
+      }
+    }
+  }, [])
+
   return {
     ...state,
     startLoading,
     stopLoading,
+    cancelOperation,
+    setPhase,
+    updateSubTask,
+    addSubTask,
+    retryOperation,
     setError,
     clearError,
     updateProgress,
     reset,
+    getElapsedTime,
+    getEstimatedTimeRemaining,
+    getCompletionPercentage,
   }
 }
 

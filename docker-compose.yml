@@ -3,6 +3,8 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+      args:
+        BUILDKIT_INLINE_CACHE: 1
     container_name: compression_backend
     ports:
       - "8443:8000"
@@ -60,18 +62,27 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
+      target: runtime
+      args:
+        BUILDKIT_INLINE_CACHE: 1
     container_name: compression_frontend
     ports:
       - "8449:3000"
     environment:
-      - NODE_OPTIONS=--max-old-space-size=8192
+      - NODE_OPTIONS=--max-old-space-size=12288
       - NEXT_TELEMETRY_DISABLED=1
       - NEXT_PUBLIC_API_URL=http://localhost:8443
       - NEXT_PUBLIC_API_URL_LOCAL=http://localhost:8443
+      # File watching optimizations
       - WATCHPACK_POLLING=false
       - CHOKIDAR_USEPOLLING=false
-      - CHOKIDAR_INTERVAL=1000
+      - CHOKIDAR_INTERVAL=300
       - CHOKIDAR_USE_FS_EVENTS=true
+      # Webpack memory optimizations
+      - WEBPACK_MEMORY_CACHE=false
+      - WEBPACK_DEV_SERVER_MEMORY_CACHE=false
+      # Next.js development optimizations
+      - NEXT_FAST_REFRESH=true
       - NODE_ENV=development
     develop:
       watch:
@@ -81,26 +92,31 @@ services:
         - action: sync
           path: ./frontend/public
           target: /app/public
+        - action: sync
+          path: ./frontend/next.config.js
+          target: /app/next.config.js
         - action: rebuild
           path: ./frontend/package.json
+        - action: rebuild
+          path: ./frontend/package-lock.json
     depends_on:
       backend:
         condition: service_healthy
     deploy:
       resources:
         limits:
+          memory: 12G
+          cpus: "3.0"
+        reservations:
           memory: 8G
           cpus: "2.0"
-        reservations:
-          memory: 4G
-          cpus: "1.0"
-    # Temporarily disable health check - app is working correctly
-    # healthcheck:
-    #   test: ["CMD", "curl", "-f", "http://localhost:3000"]
-    #   interval: 30s
-    #   timeout: 10s
-    #   retries: 3
-    #   start_period: 60s
+    # Enhanced health check
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 15s
+      retries: 3
+      start_period: 120s
     restart: unless-stopped
 
   postgres:

@@ -1,10 +1,26 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 export type ValidationRule<T = any> = {
   validate: (value: T, formData?: Record<string, any>) => boolean | Promise<boolean>
   message: string
   type?: 'error' | 'warning' | 'info'
   priority?: number
+  field?: string // For cross-field validation
+  debounceMs?: number // Individual field debounce
+}
+
+export type ValidationResult = {
+  isValid: boolean
+  message: string
+  type: 'error' | 'warning' | 'info'
+  field?: string
+}
+
+export type FormRecoveryAction = {
+  type: 'clear' | 'reset' | 'restore' | 'retry'
+  field?: string
+  value?: any
+  description: string
 }
 
 export type FieldValidation = {
@@ -14,6 +30,9 @@ export type FieldValidation = {
   errors: string[]
   warnings: string[]
   infos: string[]
+  recoveryActions: FormRecoveryAction[]
+  lastValidated: Date | null
+  validationAttempts: number
 }
 
 export type FormValidationState = Record<string, FieldValidation>
@@ -26,10 +45,18 @@ export type ValidationOptions = {
   showMultipleErrors?: boolean
 }
 
+export interface EnhancedValidationOptions extends ValidationOptions {
+  enableRealTimeValidation?: boolean
+  recoverySuggestions?: boolean
+  persistState?: boolean
+  storageKey?: string
+  maxRecoveryAttempts?: number
+}
+
 export const useFormValidation = <T extends Record<string, any>>(
   initialValues: T,
   validationRules: Record<keyof T, ValidationRule[]>,
-  options: ValidationOptions = {}
+  options: EnhancedValidationOptions = {}
 ) => {
   const {
     validateOnChange = true,
@@ -37,11 +64,34 @@ export const useFormValidation = <T extends Record<string, any>>(
     validateOnSubmit = true,
     debounceMs = 300,
     showMultipleErrors = true,
+    enableRealTimeValidation = true,
+    recoverySuggestions = true,
+    persistState = false,
+    storageKey,
+    maxRecoveryAttempts = 3,
   } = options
 
-  const [values, setValues] = useState<T>(initialValues)
-  const [validationState, setValidationState] = useState<FormValidationState>(() =>
-    Object.keys(initialValues).reduce((acc, key) => ({
+  // Load persisted state
+  const getPersistedState = useCallback(() => {
+    if (persistState && storageKey && typeof window !== 'undefined') {
+      try {
+        const stored = localStorage.getItem(storageKey)
+        return stored ? JSON.parse(stored) : null
+      } catch {
+        return null
+      }
+    }
+    return null
+  }, [persistState, storageKey])
+
+  const [values, setValues] = useState<T>(() => {
+    const persisted = getPersistedState()
+    return persisted?.values || initialValues
+  })
+
+  const [validationState, setValidationState] = useState<FormValidationState>(() => {
+    const persisted = getPersistedState()
+    return persisted?.validationState || Object.keys(initialValues).reduce((acc, key) => ({
       ...acc,
       [key]: {
         isValid: true,
@@ -50,12 +100,67 @@ export const useFormValidation = <T extends Record<string, any>>(
         errors: [],
         warnings: [],
         infos: [],
+        recoveryActions: [],
+        lastValidated: null,
+        validationAttempts: 0,
       }
     }), {})
-  )
+  })
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitCount, setSubmitCount] = useState(0)
+  const [recoveryHistory, setRecoveryHistory] = useState<FormRecoveryAction[]>([])
+
+  // Generate recovery suggestions based on validation errors
+  const generateRecoveryActions = useCallback((
+    fieldName: keyof T,
+    value: any,
+    errors: string[]
+  ): FormRecoveryAction[] => {
+    const actions: FormRecoveryAction[] = []
+
+    // Common recovery patterns
+    if (errors.some(e => e.includes('required'))) {
+      actions.push({
+        type: 'clear',
+        field: String(fieldName),
+        description: 'Clear field and start over'
+      })
+    }
+
+    if (errors.some(e => e.includes('email'))) {
+      actions.push({
+        type: 'restore',
+        field: String(fieldName),
+        value: value?.replace(/[^a-zA-Z0-9@._-]/g, '') || '',
+        description: 'Remove special characters from email'
+      })
+    }
+
+    if (errors.some(e => e.includes('JSON'))) {
+      actions.push({
+        type: 'reset',
+        field: String(fieldName),
+        value: '{}',
+        description: 'Reset to valid JSON structure'
+      })
+    }
+
+    if (errors.some(e => e.includes('length') || e.includes('characters'))) {
+      const fieldRules = validationRules[fieldName] || []
+      const minLengthRule = fieldRules.find(r => r.message.includes('at least'))
+      if (minLengthRule) {
+        actions.push({
+          type: 'restore',
+          field: String(fieldName),
+          value: value || '',
+          description: 'Field requires minimum length - please add more content'
+        })
+      }
+    }
+
+    return actions.slice(0, 3) // Limit to 3 suggestions
+  }, [validationRules])
 
   // Validate a single field
   const validateField = useCallback(async (fieldName: keyof T, value: any, formData: T = values) => {
@@ -63,6 +168,8 @@ export const useFormValidation = <T extends Record<string, any>>(
     const errors: string[] = []
     const warnings: string[] = []
     const infos: string[] = []
+
+    const startTime = Date.now()
 
     for (const rule of rules) {
       try {
@@ -92,6 +199,9 @@ export const useFormValidation = <T extends Record<string, any>>(
     }
 
     const isValid = errors.length === 0
+    const recoveryActions = recoverySuggestions && errors.length > 0
+      ? generateRecoveryActions(fieldName, value, errors)
+      : []
 
     setValidationState(prev => ({
       ...prev,
@@ -102,11 +212,41 @@ export const useFormValidation = <T extends Record<string, any>>(
         errors,
         warnings,
         infos,
+        recoveryActions,
+        lastValidated: new Date(),
+        validationAttempts: ((prev as any)[fieldName]?.validationAttempts || 0) + 1,
       }
     }))
 
-    return { isValid, errors, warnings, infos }
-  }, [validationRules, values, showMultipleErrors])
+    // Persist state if enabled
+    if (persistState && storageKey) {
+      try {
+        const stateToPersist = {
+          values,
+          validationState: {
+            ...validationState,
+            [fieldName]: {
+              isValid,
+              isDirty: true,
+              isTouched: (validationState as any)[fieldName]?.isTouched || false,
+              errors,
+              warnings,
+              infos,
+              recoveryActions,
+              lastValidated: new Date(),
+              validationAttempts: ((validationState as any)[fieldName]?.validationAttempts || 0) + 1,
+            }
+          },
+          timestamp: Date.now()
+        }
+        localStorage.setItem(storageKey, JSON.stringify(stateToPersist))
+      } catch (error) {
+        console.warn('Failed to persist form state:', error)
+      }
+    }
+
+    return { isValid, errors, warnings, infos, recoveryActions }
+  }, [validationRules, values, showMultipleErrors, recoverySuggestions, generateRecoveryActions, persistState, storageKey, validationState])
 
   // Validate all fields
   const validateAll = useCallback(async () => {
@@ -183,6 +323,81 @@ export const useFormValidation = <T extends Record<string, any>>(
     }
   }, [validateOnSubmit, validateAll, values])
 
+  // Execute recovery action
+  const executeRecoveryAction = useCallback((action: FormRecoveryAction) => {
+    setRecoveryHistory(prev => [...prev, action])
+
+    switch (action.type) {
+      case 'clear':
+        if (action.field) {
+          setValues(prev => ({ ...prev, [action.field!]: '' }))
+          setValidationState(prev => ({
+            ...prev,
+            [action.field!]: {
+              ...prev[action.field!],
+              isDirty: true,
+              errors: [],
+              warnings: [],
+              infos: [],
+              recoveryActions: [],
+            }
+          }))
+        }
+        break
+
+      case 'reset':
+        if (action.field && action.value !== undefined) {
+          setValues(prev => ({ ...prev, [action.field!]: action.value }))
+        }
+        break
+
+      case 'restore':
+        if (action.field && action.value !== undefined) {
+          setValues(prev => ({ ...prev, [action.field!]: action.value }))
+        }
+        break
+
+      case 'retry':
+        // Re-validate the field
+        if (action.field) {
+          const fieldValue = values[action.field as keyof T]
+          validateField(action.field as keyof T, fieldValue)
+        }
+        break
+    }
+  }, [values, validateField])
+
+  // Get recovery suggestions for a field
+  const getRecoverySuggestions = useCallback((fieldName: keyof T) => {
+    return validationState[fieldName]?.recoveryActions || []
+  }, [validationState])
+
+  // Get all recovery suggestions
+  const getAllRecoverySuggestions = useCallback(() => {
+    const suggestions: Array<{ field: string, actions: FormRecoveryAction[] }> = []
+
+    Object.entries(validationState).forEach(([field, state]) => {
+      if (state.recoveryActions.length > 0) {
+        suggestions.push({ field, actions: state.recoveryActions })
+      }
+    })
+
+    return suggestions
+  }, [validationState])
+
+  // Auto-recover common issues
+  const autoRecover = useCallback(async () => {
+    const allSuggestions = getAllRecoverySuggestions()
+    const autoRecoverableActions = allSuggestions
+      .flatMap(s => s.actions)
+      .filter(action => ['clear', 'reset', 'restore'].includes(action.type))
+
+    for (const action of autoRecoverableActions.slice(0, maxRecoveryAttempts)) {
+      executeRecoveryAction(action)
+      await new Promise(resolve => setTimeout(resolve, 100)) // Small delay
+    }
+  }, [getAllRecoverySuggestions, executeRecoveryAction, maxRecoveryAttempts])
+
   // Reset form
   const reset = useCallback((newValues?: Partial<T>) => {
     setValues({ ...initialValues, ...newValues })
@@ -196,12 +411,34 @@ export const useFormValidation = <T extends Record<string, any>>(
           errors: [],
           warnings: [],
           infos: [],
+          recoveryActions: [],
+          lastValidated: null,
+          validationAttempts: 0,
         }
       }), {})
     )
     setSubmitCount(0)
     setIsSubmitting(false)
-  }, [initialValues])
+    setRecoveryHistory([])
+
+    // Clear persisted state
+    if (persistState && storageKey) {
+      try {
+        localStorage.removeItem(storageKey)
+      } catch {
+        // Ignore cleanup errors
+      }
+    }
+  }, [initialValues, persistState, storageKey])
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (persistState && storageKey) {
+        // Optional: Keep state on unmount for session recovery
+      }
+    }
+  }, [persistState, storageKey])
 
   // Computed values
   const isValid = useMemo(() =>
@@ -239,11 +476,16 @@ export const useFormValidation = <T extends Record<string, any>>(
     hasWarnings,
     isSubmitting,
     submitCount,
+    recoveryHistory,
     handleChange,
     handleBlur,
     handleSubmit,
     validateField,
     validateAll,
+    executeRecoveryAction,
+    getRecoverySuggestions,
+    getAllRecoverySuggestions,
+    autoRecover,
     reset,
     setValues,
   }
